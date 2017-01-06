@@ -1,0 +1,22 @@
+version: '2'
+services:
+    journeytothewest-app:
+        image: journeytothewest
+        external_links:
+            - journeytothewest-mariadb:mariadb
+            - journeytothewest-elasticsearch:elasticsearch
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/journeytothewest
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+        ports:
+            - 8080:8080
+    journeytothewest-mariadb:
+        extends:
+            file: mariadb.yml
+            service: journeytothewest-mariadb
+    journeytothewest-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: journeytothewest-elasticsearch
