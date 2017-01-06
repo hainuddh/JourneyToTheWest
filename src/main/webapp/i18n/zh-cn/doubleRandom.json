@@ -1,0 +1,36 @@
+{
+    "journeyToTheWestApp": {
+        "doubleRandom" : {
+            "home": {
+                "title": "Double Randoms",
+                "createLabel": "Create a new Double Random",
+                "createOrEditLabel": "Create or edit a Double Random",
+                "search": "Search for Double Random"
+            },
+            "created": "A new Double Random is created with identifier {{ param }}",
+            "updated": "A Double Random is updated with identifier {{ param }}",
+            "deleted": "A Double Random is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Double Random {{ id }}?"
+            },
+            "detail": {
+                "title": "Double Random"
+            },
+            "doubleRandomName": "Double Random Name",
+            "doubleRandomDate": "Double Random Date",
+            "doubleRandomNotary": "Double Random Notary",
+            "doubleRandomCompanyName": "Double Random Company Name",
+            "doubleRandomCompanyArea": "Double Random Company Area",
+            "doubleRandomCompanySupervisory": "Double Random Company Supervisory",
+            "doubleRandomCompanyType": "Double Random Company Type",
+            "doubleRandomCompanyIndustryType": "Double Random Company Industry Type",
+            "doubleRandomCompanyRatio": "Double Random Company Ratio",
+            "doubleRandomManagerName": "Double Random Manager Name",
+            "doubleRandomManagerNumber": "Double Random Manager Number",
+            "doubleRandomManagerDepartment": "Double Random Manager Department",
+            "doubleRandomManagerRatio": "Double Random Manager Ratio",
+            "task": "Task",
+            "doubleRandomResult": "Double Random Result"
+        }
+    }
+}

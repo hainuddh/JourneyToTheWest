@@ -1,0 +1,262 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCompanyLabel" data-translate="journeyToTheWestApp.company.home.createOrEditLabel">Create or edit a Company</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.company.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.company.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyName" for="field_companyName">Company Name</label>
+            <input type="text" class="form-control" name="companyName" id="field_companyName"
+                    ng-model="vm.company.companyName"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyRegisterId" for="field_companyRegisterId">Company Register Id</label>
+            <input type="text" class="form-control" name="companyRegisterId" id="field_companyRegisterId"
+                    ng-model="vm.company.companyRegisterId"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyRegisterId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyRegisterId.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyRegisterId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyCapital" for="field_companyCapital">Company Capital</label>
+            <input type="text" class="form-control" name="companyCapital" id="field_companyCapital"
+                    ng-model="vm.company.companyCapital"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyCapital.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyCapital.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyCapital.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyAddress" for="field_companyAddress">Company Address</label>
+            <input type="text" class="form-control" name="companyAddress" id="field_companyAddress"
+                    ng-model="vm.company.companyAddress"
+                    required ng-maxlength="256" />
+            <div ng-show="editForm.companyAddress.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyAddress.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyAddress.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="256">
+                    This field cannot be longer than 256 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.businessAddress" for="field_businessAddress">Business Address</label>
+            <input type="text" class="form-control" name="businessAddress" id="field_businessAddress"
+                    ng-model="vm.company.businessAddress"
+                    required ng-maxlength="256" />
+            <div ng-show="editForm.businessAddress.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.businessAddress.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.businessAddress.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="256">
+                    This field cannot be longer than 256 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.businessScope" for="field_businessScope">Business Scope</label>
+            <input type="text" class="form-control" name="businessScope" id="field_businessScope"
+                    ng-model="vm.company.businessScope"
+                    required ng-maxlength="4069" />
+            <div ng-show="editForm.businessScope.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.businessScope.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.businessScope.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4069">
+                    This field cannot be longer than 4069 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyOwner" for="field_companyOwner">Company Owner</label>
+            <input type="text" class="form-control" name="companyOwner" id="field_companyOwner"
+                    ng-model="vm.company.companyOwner"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyOwner.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyOwner.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyOwner.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyDate" for="field_companyDate">Company Date</label>
+            <input type="text" class="form-control" name="companyDate" id="field_companyDate"
+                    ng-model="vm.company.companyDate"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyDate.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyDate.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyPhone" for="field_companyPhone">Company Phone</label>
+            <input type="text" class="form-control" name="companyPhone" id="field_companyPhone"
+                    ng-model="vm.company.companyPhone"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyPhone.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyPhone.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyPhone.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.checkCount" for="field_checkCount">Check Count</label>
+            <input type="number" class="form-control" name="checkCount" id="field_checkCount"
+                    ng-model="vm.company.checkCount"
+                    max="10000" />
+            <div ng-show="editForm.checkCount.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.checkCount.$error.max" data-translate="entity.validation.max" translate-value-max="10000">
+                    This field cannot be more than 10000.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.checkCount.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyStatus" for="field_companyStatus">Company Status</label>
+            <input type="text" class="form-control" name="companyStatus" id="field_companyStatus"
+                    ng-model="vm.company.companyStatus"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyStatus.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyStatus.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyStatus.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.lastCheckDate" for="field_lastCheckDate">Last Check Date</label>
+            <input type="text" class="form-control" name="lastCheckDate" id="field_lastCheckDate"
+                    ng-model="vm.company.lastCheckDate"
+                    ng-maxlength="32" />
+            <div ng-show="editForm.lastCheckDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.lastCheckDate.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.abnormalInfo" for="field_abnormalInfo">Abnormal Info</label>
+            <input type="text" class="form-control" name="abnormalInfo" id="field_abnormalInfo"
+                    ng-model="vm.company.abnormalInfo"
+                    ng-maxlength="4069" />
+            <div ng-show="editForm.abnormalInfo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.abnormalInfo.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4069">
+                    This field cannot be longer than 4069 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.company.description"
+                    ng-maxlength="4069" />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="4069">
+                    This field cannot be longer than 4069 characters.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.company.companyType" for="field_companyType">Company Type</label>
+            <select class="form-control" id="field_companyType" name="companyType" ng-model="vm.company.companyType" ng-options="companyType as companyType.id for companyType in vm.companytypes track by companyType.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.company.industryType" for="field_industryType">Industry Type</label>
+            <select class="form-control" id="field_industryType" name="industryType" ng-model="vm.company.industryType" ng-options="industryType as industryType.id for industryType in vm.industrytypes track by industryType.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.company.companyArea" for="field_companyArea">Company Area</label>
+            <select class="form-control" id="field_companyArea" name="companyArea" ng-model="vm.company.companyArea" ng-options="lawenforceArea as lawenforceArea.id for lawenforceArea in vm.lawenforceareas track by lawenforceArea.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.company.companySupervisory" for="field_companySupervisory">Company Supervisory</label>
+            <select class="form-control" id="field_companySupervisory" name="companySupervisory" ng-model="vm.company.companySupervisory" ng-options="lawenforceDepartment as lawenforceDepartment.id for lawenforceDepartment in vm.lawenforcedepartments track by lawenforceDepartment.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

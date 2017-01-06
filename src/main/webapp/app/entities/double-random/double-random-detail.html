@@ -1,0 +1,71 @@
+
+<div>
+    <h2><span data-translate="journeyToTheWestApp.doubleRandom.detail.title">Double Random</span> {{vm.doubleRandom.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomName">Double Random Name</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomDate">Double Random Date</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomDate}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomNotary">Double Random Notary</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomNotary}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyName">Double Random Company Name</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomCompanyName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyArea">Double Random Company Area</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomCompanyArea}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanySupervisory">Double Random Company Supervisory</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomCompanySupervisory}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyType">Double Random Company Type</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomCompanyType}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyIndustryType">Double Random Company Industry Type</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomCompanyIndustryType}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyRatio">Double Random Company Ratio</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomCompanyRatio}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerName">Double Random Manager Name</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomManagerName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerNumber">Double Random Manager Number</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomManagerNumber}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerDepartment">Double Random Manager Department</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomManagerDepartment}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerRatio">Double Random Manager Ratio</span></dt>
+        <dd>
+            <span>{{vm.doubleRandom.doubleRandomManagerRatio}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="double-random-detail.edit({id:vm.doubleRandom.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,107 @@
+<div>
+    <h2 data-translate="journeyToTheWestApp.manager.home.title">Managers</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="manager.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="journeyToTheWestApp.manager.home.createLabel">
+                        Create new Manager
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'journeyToTheWestApp.manager.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerId">Manager Id</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerName">Manager Name</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerCardId">Manager Card Id</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerCardType">Manager Card Type</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerSex">Manager Sex</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerFlag">Manager Flag</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.checkCount">Check Count</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.description">Description</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerUser">Manager User</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerLawenforceDepartment">Manager Lawenforce Department</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.doubleRandomResult">Double Random Result</span></th>
+                    <th><span data-translate="journeyToTheWestApp.manager.managerLawenforceArea">Manager Lawenforce Area</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="manager in vm.managers track by manager.id">
+                    <td><a ui-sref="manager-detail({id:manager.id})">{{manager.id}}</a></td>
+                    <td>{{manager.managerId}}</td>
+                    <td>{{manager.managerName}}</td>
+                    <td>{{manager.managerCardId}}</td>
+                    <td>{{manager.managerCardType}}</td>
+                    <td>{{manager.managerSex}}</td>
+                    <td>{{manager.managerFlag}}</td>
+                    <td>{{manager.checkCount}}</td>
+                    <td>{{manager.description}}</td>
+                    <td>
+                        {{manager.managerUser.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="lawenforce-department-detail({id:manager.managerLawenforceDepartment.id})">{{manager.managerLawenforceDepartment.id}}</a>
+                    </td>
+                    <td>
+                        <span ng-repeat="doubleRandomResult in manager.doubleRandomResults">
+                            <a class="form-control-static" ui-sref="double-random-result-detail({id: doubleRandomResult.id})">{{doubleRandomResult.id}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td>
+                        <span ng-repeat="managerLawenforceArea in manager.managerLawenforceAreas">
+                            <a class="form-control-static" ui-sref="lawenforce-area-detail({id: managerLawenforceArea.id})">{{managerLawenforceArea.id}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="manager-detail({id:manager.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="manager.edit({id:manager.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="manager.delete({id:manager.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

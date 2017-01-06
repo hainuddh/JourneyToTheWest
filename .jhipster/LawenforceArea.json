@@ -1,0 +1,34 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityRelationshipName": "companyArea"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "manager",
+            "otherEntityName": "manager",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "managerLawenforceArea"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "areaName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        }
+    ],
+    "changelogDate": "20170106133147",
+    "entityTableName": "lawenforce_area",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

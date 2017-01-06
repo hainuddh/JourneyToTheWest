@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityRelationshipName": "companySupervisory"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "manager",
+            "otherEntityName": "manager",
+            "otherEntityRelationshipName": "managerLawenforceDepartment"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "departmentName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        },
+        {
+            "fieldName": "departmentAddress",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        }
+    ],
+    "changelogDate": "20170106133146",
+    "entityTableName": "lawenforce_department",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

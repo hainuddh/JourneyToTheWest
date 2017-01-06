@@ -1,0 +1,119 @@
+entity Manager {
+	managerId String required maxlength(32),
+    managerName String required maxlength(32),
+    managerCardId String required maxlength(32),
+    managerCardType String required maxlength(64),
+    managerSex String required maxlength(1),
+    managerFlag String maxlength(1),
+    checkCount Integer max(10000)
+    description String maxlength(4069)
+}
+
+entity LawenforceDepartment {
+	departmentName String required maxlength(32),
+    departmentAddress String required maxlength(32)
+}
+
+entity LawenforceArea {
+	areaName String required maxlength(32)
+}
+
+entity Company {
+	companyName String required maxlength(32),
+    companyRegisterId String required maxlength(32),
+    companyCapital String required maxlength(32),
+    companyAddress String required maxlength(256),
+    businessAddress String required maxlength(256),
+    businessScope String required maxlength(4069),
+    companyOwner String required maxlength(32),
+    companyDate String required maxlength(32),
+    companyPhone String required maxlength(32),
+	checkCount Integer max(10000),
+    companyStatus String required maxlength(32),
+    lastCheckDate String maxlength(32),
+    abnormalInfo String maxlength(4069),
+    description String maxlength(4069)
+}
+
+entity CompanyType {
+	typeName String required maxlength(32)
+}
+
+entity IndustryType {
+	typeName String required maxlength(32)
+}
+
+entity DoubleRandom {
+	doubleRandomName String required maxlength(32),
+    doubleRandomDate String required maxlength(32),
+    doubleRandomNotary String required maxlength(32),
+    doubleRandomCompanyName String required maxlength(64),
+    doubleRandomCompanyArea String required maxlength(64),
+    doubleRandomCompanySupervisory String required maxlength(64),
+    doubleRandomCompanyType String required maxlength(64),
+    doubleRandomCompanyIndustryType String required maxlength(64),
+    doubleRandomCompanyRatio String required maxlength(64),
+    doubleRandomManagerName String required maxlength(64),
+    doubleRandomManagerNumber String required maxlength(64),
+    doubleRandomManagerDepartment String required maxlength(64),
+    doubleRandomManagerRatio String required maxlength(64)
+}
+
+entity DoubleRandomResult {
+	companyName String required maxlength(32),
+    companyRegisterId String required maxlength(32),
+    people String required maxlength(32),
+    task String maxlength(1024)
+}
+
+entity Task {
+	taskContent String required maxlength(1024),
+}
+
+relationship OneToMany {
+	DoubleRandom{task} to Task{doubleRandom}
+}
+
+relationship ManyToMany {
+	Manager{doubleRandomResult} to DoubleRandomResult{manager}
+}
+
+relationship OneToMany {
+	DoubleRandom{doubleRandomResult} to DoubleRandomResult{doubleRandom}
+}
+
+relationship ManyToOne {
+	Company{companyType} to CompanyType{company}
+}
+
+relationship ManyToOne {
+	Company{industryType} to IndustryType{company}
+}
+
+relationship ManyToOne {
+	Company{companyArea} to LawenforceArea{company}
+}
+
+relationship ManyToOne {
+	Company{companySupervisory} to LawenforceDepartment{company}
+}
+
+relationship ManyToOne {
+	Manager{managerLawenforceDepartment} to LawenforceDepartment{manager}
+}
+
+relationship ManyToMany {
+	Manager{managerLawenforceArea} to LawenforceArea{manager}
+}
+
+relationship OneToOne {
+	Manager{managerUser} to User{manager}
+}
+
+service Manager with serviceClass
+
+service Task with serviceClass
+
+service Company with serviceClass
+
+paginate Company with pager

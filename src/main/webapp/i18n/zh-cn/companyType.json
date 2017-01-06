@@ -1,0 +1,23 @@
+{
+    "journeyToTheWestApp": {
+        "companyType" : {
+            "home": {
+                "title": "Company Types",
+                "createLabel": "Create a new Company Type",
+                "createOrEditLabel": "Create or edit a Company Type",
+                "search": "Search for Company Type"
+            },
+            "created": "A new Company Type is created with identifier {{ param }}",
+            "updated": "A Company Type is updated with identifier {{ param }}",
+            "deleted": "A Company Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Company Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Company Type"
+            },
+            "typeName": "Type Name",
+            "company": "Company"
+        }
+    }
+}

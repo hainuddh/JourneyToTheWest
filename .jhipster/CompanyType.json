@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityRelationshipName": "companyType"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "typeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        }
+    ],
+    "changelogDate": "20170106133149",
+    "entityTableName": "company_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

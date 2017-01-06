@@ -1,0 +1,71 @@
+
+<div>
+    <h2><span data-translate="journeyToTheWestApp.manager.detail.title">Manager</span> {{vm.manager.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="journeyToTheWestApp.manager.managerId">Manager Id</span></dt>
+        <dd>
+            <span>{{vm.manager.managerId}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerName">Manager Name</span></dt>
+        <dd>
+            <span>{{vm.manager.managerName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerCardId">Manager Card Id</span></dt>
+        <dd>
+            <span>{{vm.manager.managerCardId}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerCardType">Manager Card Type</span></dt>
+        <dd>
+            <span>{{vm.manager.managerCardType}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerSex">Manager Sex</span></dt>
+        <dd>
+            <span>{{vm.manager.managerSex}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerFlag">Manager Flag</span></dt>
+        <dd>
+            <span>{{vm.manager.managerFlag}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.checkCount">Check Count</span></dt>
+        <dd>
+            <span>{{vm.manager.checkCount}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.description">Description</span></dt>
+        <dd>
+            <span>{{vm.manager.description}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerUser">Manager User</span></dt>
+        <dd>
+            {{vm.manager.managerUser.id}}
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerLawenforceDepartment">Manager Lawenforce Department</span></dt>
+        <dd>
+            <a ui-sref="lawenforce-department-detail({id:vm.manager.managerLawenforceDepartment.id})">{{vm.manager.managerLawenforceDepartment.id}}</a>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.doubleRandomResult">Double Random Result</span></dt>
+        <dd>
+            <span ng-repeat="doubleRandomResult in vm.manager.doubleRandomResults">
+                <a ui-sref="double-random-result-detail({id: doubleRandomResult.id})">{{doubleRandomResult.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.managerLawenforceArea">Manager Lawenforce Area</span></dt>
+        <dd>
+            <span ng-repeat="managerLawenforceArea in vm.manager.managerLawenforceAreas">
+                <a ui-sref="lawenforce-area-detail({id: managerLawenforceArea.id})">{{managerLawenforceArea.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="manager-detail.edit({id:vm.manager.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

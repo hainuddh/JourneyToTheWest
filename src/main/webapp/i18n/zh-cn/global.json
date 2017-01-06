@@ -7,6 +7,15 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "数据",
+                "manager": "Manager",
+                "lawenforceDepartment": "Lawenforce Department",
+                "lawenforceArea": "Lawenforce Area",
+                "company": "Company",
+                "companyType": "Company Type",
+                "industryType": "Industry Type",
+                "doubleRandom": "Double Random",
+                "doubleRandomResult": "Double Random Result",
+                "task": "Task",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

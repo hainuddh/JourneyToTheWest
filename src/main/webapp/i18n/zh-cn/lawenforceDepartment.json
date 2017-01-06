@@ -1,0 +1,25 @@
+{
+    "journeyToTheWestApp": {
+        "lawenforceDepartment" : {
+            "home": {
+                "title": "Lawenforce Departments",
+                "createLabel": "Create a new Lawenforce Department",
+                "createOrEditLabel": "Create or edit a Lawenforce Department",
+                "search": "Search for Lawenforce Department"
+            },
+            "created": "A new Lawenforce Department is created with identifier {{ param }}",
+            "updated": "A Lawenforce Department is updated with identifier {{ param }}",
+            "deleted": "A Lawenforce Department is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lawenforce Department {{ id }}?"
+            },
+            "detail": {
+                "title": "Lawenforce Department"
+            },
+            "departmentName": "Department Name",
+            "departmentAddress": "Department Address",
+            "company": "Company",
+            "manager": "Manager"
+        }
+    }
+}

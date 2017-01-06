@@ -1,0 +1,119 @@
+<div>
+    <h2 data-translate="journeyToTheWestApp.company.home.title">Companies</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="company.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="journeyToTheWestApp.company.home.createLabel">
+                        Create new Company
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'journeyToTheWestApp.company.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyName"><span data-translate="journeyToTheWestApp.company.companyName">Company Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyRegisterId"><span data-translate="journeyToTheWestApp.company.companyRegisterId">Company Register Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyCapital"><span data-translate="journeyToTheWestApp.company.companyCapital">Company Capital</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyAddress"><span data-translate="journeyToTheWestApp.company.companyAddress">Company Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="businessAddress"><span data-translate="journeyToTheWestApp.company.businessAddress">Business Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="businessScope"><span data-translate="journeyToTheWestApp.company.businessScope">Business Scope</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyOwner"><span data-translate="journeyToTheWestApp.company.companyOwner">Company Owner</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyDate"><span data-translate="journeyToTheWestApp.company.companyDate">Company Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyPhone"><span data-translate="journeyToTheWestApp.company.companyPhone">Company Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="checkCount"><span data-translate="journeyToTheWestApp.company.checkCount">Check Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyStatus"><span data-translate="journeyToTheWestApp.company.companyStatus">Company Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastCheckDate"><span data-translate="journeyToTheWestApp.company.lastCheckDate">Last Check Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="abnormalInfo"><span data-translate="journeyToTheWestApp.company.abnormalInfo">Abnormal Info</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.company.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyType.id"><span data-translate="journeyToTheWestApp.company.companyType">Company Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="industryType.id"><span data-translate="journeyToTheWestApp.company.industryType">Industry Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyArea.id"><span data-translate="journeyToTheWestApp.company.companyArea">Company Area</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companySupervisory.id"><span data-translate="journeyToTheWestApp.company.companySupervisory">Company Supervisory</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="company in vm.companies track by company.id">
+                    <td><a ui-sref="company-detail({id:company.id})">{{company.id}}</a></td>
+                    <td>{{company.companyName}}</td>
+                    <td>{{company.companyRegisterId}}</td>
+                    <td>{{company.companyCapital}}</td>
+                    <td>{{company.companyAddress}}</td>
+                    <td>{{company.businessAddress}}</td>
+                    <td>{{company.businessScope}}</td>
+                    <td>{{company.companyOwner}}</td>
+                    <td>{{company.companyDate}}</td>
+                    <td>{{company.companyPhone}}</td>
+                    <td>{{company.checkCount}}</td>
+                    <td>{{company.companyStatus}}</td>
+                    <td>{{company.lastCheckDate}}</td>
+                    <td>{{company.abnormalInfo}}</td>
+                    <td>{{company.description}}</td>
+                    <td>
+                        <a ui-sref="company-type-detail({id:company.companyType.id})">{{company.companyType.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="industry-type-detail({id:company.industryType.id})">{{company.industryType.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lawenforce-area-detail({id:company.companyArea.id})">{{company.companyArea.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lawenforce-department-detail({id:company.companySupervisory.id})">{{company.companySupervisory.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="company-detail({id:company.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="company.edit({id:company.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="company.delete({id:company.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

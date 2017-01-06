@@ -1,0 +1,83 @@
+<div>
+    <h2 data-translate="journeyToTheWestApp.doubleRandomResult.home.title">Double Random Results</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="double-random-result.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="journeyToTheWestApp.doubleRandomResult.home.createLabel">
+                        Create new Double Random Result
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'journeyToTheWestApp.doubleRandomResult.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.companyName">Company Name</span></th>
+                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.companyRegisterId">Company Register Id</span></th>
+                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.people">People</span></th>
+                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.task">Task</span></th>
+                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom">Double Random</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="doubleRandomResult in vm.doubleRandomResults track by doubleRandomResult.id">
+                    <td><a ui-sref="double-random-result-detail({id:doubleRandomResult.id})">{{doubleRandomResult.id}}</a></td>
+                    <td>{{doubleRandomResult.companyName}}</td>
+                    <td>{{doubleRandomResult.companyRegisterId}}</td>
+                    <td>{{doubleRandomResult.people}}</td>
+                    <td>{{doubleRandomResult.task}}</td>
+                    <td>
+                        <a ui-sref="double-random-detail({id:doubleRandomResult.doubleRandom.id})">{{doubleRandomResult.doubleRandom.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="double-random-result-detail({id:doubleRandomResult.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="double-random-result.edit({id:doubleRandomResult.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="double-random-result.delete({id:doubleRandomResult.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

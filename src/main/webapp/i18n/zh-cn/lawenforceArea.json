@@ -1,0 +1,24 @@
+{
+    "journeyToTheWestApp": {
+        "lawenforceArea" : {
+            "home": {
+                "title": "Lawenforce Areas",
+                "createLabel": "Create a new Lawenforce Area",
+                "createOrEditLabel": "Create or edit a Lawenforce Area",
+                "search": "Search for Lawenforce Area"
+            },
+            "created": "A new Lawenforce Area is created with identifier {{ param }}",
+            "updated": "A Lawenforce Area is updated with identifier {{ param }}",
+            "deleted": "A Lawenforce Area is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lawenforce Area {{ id }}?"
+            },
+            "detail": {
+                "title": "Lawenforce Area"
+            },
+            "areaName": "Area Name",
+            "company": "Company",
+            "manager": "Manager"
+        }
+    }
+}

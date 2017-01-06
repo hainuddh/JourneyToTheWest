@@ -1,0 +1,23 @@
+{
+    "journeyToTheWestApp": {
+        "industryType" : {
+            "home": {
+                "title": "Industry Types",
+                "createLabel": "Create a new Industry Type",
+                "createOrEditLabel": "Create or edit a Industry Type",
+                "search": "Search for Industry Type"
+            },
+            "created": "A new Industry Type is created with identifier {{ param }}",
+            "updated": "A Industry Type is updated with identifier {{ param }}",
+            "deleted": "A Industry Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Industry Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Industry Type"
+            },
+            "typeName": "Type Name",
+            "company": "Company"
+        }
+    }
+}

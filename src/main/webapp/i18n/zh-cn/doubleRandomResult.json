@@ -1,0 +1,27 @@
+{
+    "journeyToTheWestApp": {
+        "doubleRandomResult" : {
+            "home": {
+                "title": "Double Random Results",
+                "createLabel": "Create a new Double Random Result",
+                "createOrEditLabel": "Create or edit a Double Random Result",
+                "search": "Search for Double Random Result"
+            },
+            "created": "A new Double Random Result is created with identifier {{ param }}",
+            "updated": "A Double Random Result is updated with identifier {{ param }}",
+            "deleted": "A Double Random Result is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Double Random Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Double Random Result"
+            },
+            "companyName": "Company Name",
+            "companyRegisterId": "Company Register Id",
+            "people": "People",
+            "task": "Task",
+            "doubleRandom": "Double Random",
+            "manager": "Manager"
+        }
+    }
+}

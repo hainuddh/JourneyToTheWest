@@ -1,0 +1,92 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDoubleRandomResultLabel" data-translate="journeyToTheWestApp.doubleRandomResult.home.createOrEditLabel">Create or edit a Double Random Result</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.doubleRandomResult.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.doubleRandomResult.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.companyName" for="field_companyName">Company Name</label>
+            <input type="text" class="form-control" name="companyName" id="field_companyName"
+                    ng-model="vm.doubleRandomResult.companyName"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.companyRegisterId" for="field_companyRegisterId">Company Register Id</label>
+            <input type="text" class="form-control" name="companyRegisterId" id="field_companyRegisterId"
+                    ng-model="vm.doubleRandomResult.companyRegisterId"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.companyRegisterId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyRegisterId.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.companyRegisterId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.people" for="field_people">People</label>
+            <input type="text" class="form-control" name="people" id="field_people"
+                    ng-model="vm.doubleRandomResult.people"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.people.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.people.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.people.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.task" for="field_task">Task</label>
+            <input type="text" class="form-control" name="task" id="field_task"
+                    ng-model="vm.doubleRandomResult.task"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.task.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.task.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom" for="field_doubleRandom">Double Random</label>
+            <select class="form-control" id="field_doubleRandom" name="doubleRandom" ng-model="vm.doubleRandomResult.doubleRandom" ng-options="doubleRandom as doubleRandom.id for doubleRandom in vm.doublerandoms track by doubleRandom.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
