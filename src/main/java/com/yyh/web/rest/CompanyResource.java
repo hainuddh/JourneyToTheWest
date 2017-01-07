@@ -21,7 +21,9 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -107,12 +109,15 @@ public class CompanyResource {
      */
     @GetMapping("/companies")
     @Timed
-    public ResponseEntity<List<Company>> getAllCompanies(@ApiParam Pageable pageable)
+    public ResponseEntity<?> getAllCompanies(@ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Companies");
+        Map result = new HashMap<>();
         Page<Company> page = companyService.findAll(pageable);
+        result.put("companies", page.getContent());
+        result.put("totalPages", page.getTotalPages());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
     }
 
     /**
