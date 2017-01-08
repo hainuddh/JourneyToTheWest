@@ -66,8 +66,30 @@ entity DoubleRandomResult {
     task String maxlength(1024)
 }
 
+entity TaskProject {
+	taskProjectName String required maxlength(64),
+    taskProjectCheckDepartment String required maxlength(256),
+    description String maxlength(1024)
+}
+
 entity Task {
+	taskName String required maxlength(64),
 	taskContent String required maxlength(1024),
+    description String maxlength(1024)
+}
+
+entity Law {
+	lawName String required maxlength(64),
+	lawContent String required maxlength(4096),
+    description String maxlength(1024)
+}
+
+relationship ManyToMany {
+	Task{law} to Law{task}
+}
+
+relationship OneToMany {
+	TaskProject{task} to Task{taskProject}
 }
 
 relationship OneToMany {

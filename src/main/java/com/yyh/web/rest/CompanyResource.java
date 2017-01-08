@@ -212,12 +212,15 @@ public class CompanyResource {
      */
     @GetMapping("/_search/companies")
     @Timed
-    public ResponseEntity<List<Company>> searchCompanies(@RequestParam String query, @ApiParam Pageable pageable)
+    public ResponseEntity<?> searchCompanies(@RequestParam String query, @ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Companies for query {}", query);
         Page<Company> page = companyService.search(query, pageable);
+        Map<String, Object> result = new HashMap<>();
+        result.put("companies", page.getContent());
+        result.put("totalPages", page.getTotalPages());
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/companies");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
     }
 
 
