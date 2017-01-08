@@ -5,6 +5,8 @@ import com.yyh.repository.TaskRepository;
 import com.yyh.repository.search.TaskSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -46,13 +48,13 @@ public class TaskService {
     /**
      *  Get all the tasks.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<Task> findAll() {
+    public Page<Task> findAll(Pageable pageable) {
         log.debug("Request to get all Tasks");
-        List<Task> result = taskRepository.findAllWithEagerRelationships();
-
+        Page<Task> result = taskRepository.findAll(pageable);
         return result;
     }
 
@@ -87,10 +89,9 @@ public class TaskService {
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public List<Task> search(String query) {
-        log.debug("Request to search Tasks for query {}", query);
-        return StreamSupport
-            .stream(taskSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    public Page<Task> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Tasks for query {}", query);
+        Page<Task> result = taskSearchRepository.search(queryStringQuery(query), pageable);
+        return result;
     }
 }

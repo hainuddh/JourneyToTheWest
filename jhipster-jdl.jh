@@ -139,3 +139,7 @@ service Task with serviceClass
 service Company with serviceClass
 
 paginate Company with pager
+
+paginate TaskProject with pager
+
+paginate Task with pager
