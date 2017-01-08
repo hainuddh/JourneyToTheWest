@@ -380,7 +380,6 @@ public class CompanyResourceIntTest {
         assertThat(companyList).hasSize(databaseSizeBeforeTest);
     }
 
-    @Test
     @Transactional
     public void getAllCompanies() throws Exception {
         // Initialize the database
