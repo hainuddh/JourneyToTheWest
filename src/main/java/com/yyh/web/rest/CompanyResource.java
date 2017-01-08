@@ -124,6 +124,29 @@ public class CompanyResource {
     }
 
     /**
+     * GET  /companies/normal : get the normal companies.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/companies/normal")
+    @Timed
+    public ResponseEntity<?> getNormalCompanies(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Companies");
+        Map<String, Object> result = new HashMap<>();
+        Company company = new Company();
+        company.setCompanyStatus("否");
+        Example<Company> ex = Example.of(company);
+        Page<Company> page = companyRepository.findAll(ex, pageable);
+        result.put("companies", page.getContent());
+        result.put("totalPages", page.getTotalPages());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /companies/abnormal : get the abnormal companies.
      *
      * @param pageable the pagination information
