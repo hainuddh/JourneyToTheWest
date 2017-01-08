@@ -4,9 +4,27 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="journeyToTheWestApp.task.taskName">Task Name</span></dt>
+        <dd>
+            <span>{{vm.task.taskName}}</span>
+        </dd>
         <dt><span data-translate="journeyToTheWestApp.task.taskContent">Task Content</span></dt>
         <dd>
             <span>{{vm.task.taskContent}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.task.description">Description</span></dt>
+        <dd>
+            <span>{{vm.task.description}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.task.law">Law</span></dt>
+        <dd>
+            <span ng-repeat="law in vm.task.laws">
+                <a ui-sref="law-detail({id: law.id})">{{law.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.task.taskProject">Task Project</span></dt>
+        <dd>
+            <a ui-sref="task-project-detail({id:vm.task.taskProject.id})">{{vm.task.taskProject.id}}</a>
         </dd>
         <dt><span data-translate="journeyToTheWestApp.task.doubleRandom">Double Random</span></dt>
         <dd>

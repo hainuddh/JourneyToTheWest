@@ -60,5 +60,15 @@
 
     <cache alias="com.yyh.domain.Task" uses-template="simple"/>
 
+    <cache alias="com.yyh.domain.Task.laws" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.TaskProject" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.TaskProject.tasks" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Law" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Law.tasks" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

@@ -2,6 +2,20 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "task",
+            "relationshipName": "law",
+            "otherEntityName": "law",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "taskProject",
+            "otherEntityName": "taskProject",
+            "otherEntityField": "id"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "doubleRandom",
             "otherEntityName": "doubleRandom",
@@ -10,10 +24,27 @@
     ],
     "fields": [
         {
+            "fieldName": "taskName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
             "fieldName": "taskContent",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 1024

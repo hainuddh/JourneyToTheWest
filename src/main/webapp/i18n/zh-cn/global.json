@@ -16,6 +16,8 @@
                 "doubleRandom": "Double Random",
                 "doubleRandomResult": "Double Random Result",
                 "task": "Task",
+                "taskProject": "Task Project",
+                "law": "Law",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

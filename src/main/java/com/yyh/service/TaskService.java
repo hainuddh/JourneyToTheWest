@@ -51,7 +51,7 @@ public class TaskService {
     @Transactional(readOnly = true) 
     public List<Task> findAll() {
         log.debug("Request to get all Tasks");
-        List<Task> result = taskRepository.findAll();
+        List<Task> result = taskRepository.findAllWithEagerRelationships();
 
         return result;
     }
@@ -65,7 +65,7 @@ public class TaskService {
     @Transactional(readOnly = true) 
     public Task findOne(Long id) {
         log.debug("Request to get Task : {}", id);
-        Task task = taskRepository.findOne(id);
+        Task task = taskRepository.findOneWithEagerRelationships(id);
         return task;
     }
 

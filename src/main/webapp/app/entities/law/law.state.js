@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('task', {
+        .state('law', {
             parent: 'entity',
-            url: '/task',
+            url: '/law',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'journeyToTheWestApp.task.home.title'
+                pageTitle: 'journeyToTheWestApp.law.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/task/tasks.html',
-                    controller: 'TaskController',
+                    templateUrl: 'app/entities/law/laws.html',
+                    controller: 'LawController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('task');
+                    $translatePartialLoader.addPart('law');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('task-detail', {
+        .state('law-detail', {
             parent: 'entity',
-            url: '/task/{id}',
+            url: '/law/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'journeyToTheWestApp.task.detail.title'
+                pageTitle: 'journeyToTheWestApp.law.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/task/task-detail.html',
-                    controller: 'TaskDetailController',
+                    templateUrl: 'app/entities/law/law-detail.html',
+                    controller: 'LawDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('task');
+                    $translatePartialLoader.addPart('law');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Task', function($stateParams, Task) {
-                    return Task.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Law', function($stateParams, Law) {
+                    return Law.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'task',
+                        name: $state.current.name || 'law',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('task-detail.edit', {
-            parent: 'task-detail',
+        .state('law-detail.edit', {
+            parent: 'law-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-dialog.html',
-                    controller: 'TaskDialogController',
+                    templateUrl: 'app/entities/law/law-dialog.html',
+                    controller: 'LawDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Task', function(Task) {
-                            return Task.get({id : $stateParams.id}).$promise;
+                        entity: ['Law', function(Law) {
+                            return Law.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,80 +88,80 @@
                 });
             }]
         })
-        .state('task.new', {
-            parent: 'task',
+        .state('law.new', {
+            parent: 'law',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-dialog.html',
-                    controller: 'TaskDialogController',
+                    templateUrl: 'app/entities/law/law-dialog.html',
+                    controller: 'LawDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                taskName: null,
-                                taskContent: null,
+                                lawName: null,
+                                lawContent: null,
                                 description: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('task', null, { reload: 'task' });
+                    $state.go('law', null, { reload: 'law' });
                 }, function() {
-                    $state.go('task');
+                    $state.go('law');
                 });
             }]
         })
-        .state('task.edit', {
-            parent: 'task',
+        .state('law.edit', {
+            parent: 'law',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-dialog.html',
-                    controller: 'TaskDialogController',
+                    templateUrl: 'app/entities/law/law-dialog.html',
+                    controller: 'LawDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Task', function(Task) {
-                            return Task.get({id : $stateParams.id}).$promise;
+                        entity: ['Law', function(Law) {
+                            return Law.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('task', null, { reload: 'task' });
+                    $state.go('law', null, { reload: 'law' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('task.delete', {
-            parent: 'task',
+        .state('law.delete', {
+            parent: 'law',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-delete-dialog.html',
-                    controller: 'TaskDeleteController',
+                    templateUrl: 'app/entities/law/law-delete-dialog.html',
+                    controller: 'LawDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Task', function(Task) {
-                            return Task.get({id : $stateParams.id}).$promise;
+                        entity: ['Law', function(Law) {
+                            return Law.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('task', null, { reload: 'task' });
+                    $state.go('law', null, { reload: 'law' });
                 }, function() {
                     $state.go('^');
                 });

@@ -7,6 +7,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -25,9 +27,28 @@ public class Task implements Serializable {
     private Long id;
 
     @NotNull
+    @Size(max = 64)
+    @Column(name = "task_name", length = 64, nullable = false)
+    private String taskName;
+
+    @NotNull
     @Size(max = 1024)
     @Column(name = "task_content", length = 1024, nullable = false)
     private String taskContent;
+
+    @Size(max = 1024)
+    @Column(name = "description", length = 1024)
+    private String description;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "task_law",
+               joinColumns = @JoinColumn(name="tasks_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="laws_id", referencedColumnName="ID"))
+    private Set<Law> laws = new HashSet<>();
+
+    @ManyToOne
+    private TaskProject taskProject;
 
     @ManyToOne
     private DoubleRandom doubleRandom;
@@ -38,6 +59,19 @@ public class Task implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public Task taskName(String taskName) {
+        this.taskName = taskName;
+        return this;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
     public String getTaskContent() {
@@ -51,6 +85,57 @@ public class Task implements Serializable {
 
     public void setTaskContent(String taskContent) {
         this.taskContent = taskContent;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Task description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Law> getLaws() {
+        return laws;
+    }
+
+    public Task laws(Set<Law> laws) {
+        this.laws = laws;
+        return this;
+    }
+
+    public Task addLaw(Law law) {
+        laws.add(law);
+        law.getTasks().add(this);
+        return this;
+    }
+
+    public Task removeLaw(Law law) {
+        laws.remove(law);
+        law.getTasks().remove(this);
+        return this;
+    }
+
+    public void setLaws(Set<Law> laws) {
+        this.laws = laws;
+    }
+
+    public TaskProject getTaskProject() {
+        return taskProject;
+    }
+
+    public Task taskProject(TaskProject taskProject) {
+        this.taskProject = taskProject;
+        return this;
+    }
+
+    public void setTaskProject(TaskProject taskProject) {
+        this.taskProject = taskProject;
     }
 
     public DoubleRandom getDoubleRandom() {
@@ -90,7 +175,9 @@ public class Task implements Serializable {
     public String toString() {
         return "Task{" +
             "id=" + id +
+            ", taskName='" + taskName + "'" +
             ", taskContent='" + taskContent + "'" +
+            ", description='" + description + "'" +
             '}';
     }
 }

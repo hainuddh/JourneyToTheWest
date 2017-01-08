@@ -1,20 +1,20 @@
 <div>
-    <h2 data-translate="journeyToTheWestApp.task.home.title">Tasks</h2>
+    <h2 data-translate="journeyToTheWestApp.law.home.title">Laws</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="task.new" >
+                <button class="btn btn-primary" ui-sref="law.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs"  data-translate="journeyToTheWestApp.task.home.createLabel">
-                        Create new Task
+                    <span class="hidden-xs"  data-translate="journeyToTheWestApp.law.home.createLabel">
+                        Create new Law
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'journeyToTheWestApp.task.home.search' | translate }}">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'journeyToTheWestApp.law.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -36,48 +36,34 @@
             <thead>
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="journeyToTheWestApp.task.taskName">Task Name</span></th>
-                    <th><span data-translate="journeyToTheWestApp.task.taskContent">Task Content</span></th>
-                    <th><span data-translate="journeyToTheWestApp.task.description">Description</span></th>
-                    <th><span data-translate="journeyToTheWestApp.task.law">Law</span></th>
-                    <th><span data-translate="journeyToTheWestApp.task.taskProject">Task Project</span></th>
-                    <th><span data-translate="journeyToTheWestApp.task.doubleRandom">Double Random</span></th>
+                    <th><span data-translate="journeyToTheWestApp.law.lawName">Law Name</span></th>
+                    <th><span data-translate="journeyToTheWestApp.law.lawContent">Law Content</span></th>
+                    <th><span data-translate="journeyToTheWestApp.law.description">Description</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="task in vm.tasks track by task.id">
-                    <td><a ui-sref="task-detail({id:task.id})">{{task.id}}</a></td>
-                    <td>{{task.taskName}}</td>
-                    <td>{{task.taskContent}}</td>
-                    <td>{{task.description}}</td>
-                    <td>
-                        <span ng-repeat="law in task.laws">
-                            <a class="form-control-static" ui-sref="law-detail({id: law.id})">{{law.id}}</a>{{$last ? '' : ', '}}
-                        </span>
-                    </td>
-                    <td>
-                        <a ui-sref="task-project-detail({id:task.taskProject.id})">{{task.taskProject.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="double-random-detail({id:task.doubleRandom.id})">{{task.doubleRandom.id}}</a>
-                    </td>
+                <tr ng-repeat="law in vm.laws track by law.id">
+                    <td><a ui-sref="law-detail({id:law.id})">{{law.id}}</a></td>
+                    <td>{{law.lawName}}</td>
+                    <td>{{law.lawContent}}</td>
+                    <td>{{law.description}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="task-detail({id:task.id})"
+                                    ui-sref="law-detail({id:law.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="task.edit({id:task.id})"
+                                    ui-sref="law.edit({id:law.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="task.delete({id:task.id})"
+                                    ui-sref="law.delete({id:law.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>

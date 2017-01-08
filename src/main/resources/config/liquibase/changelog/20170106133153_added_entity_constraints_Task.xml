@@ -8,6 +8,23 @@
     -->
     <changeSet id="20170106133153-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="tasks_id"
+                                 baseTableName="task_law"
+                                 constraintName="fk_task_law_tasks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
+        <addForeignKeyConstraint baseColumnNames="laws_id"
+                                 baseTableName="task_law"
+                                 constraintName="fk_task_law_laws_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="law"/>
+        
+        <addForeignKeyConstraint baseColumnNames="task_project_id"
+                                 baseTableName="task"
+                                 constraintName="fk_task_task_project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task_project"/>
+
         <addForeignKeyConstraint baseColumnNames="double_random_id"
                                  baseTableName="task"
                                  constraintName="fk_task_double_random_id"

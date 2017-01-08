@@ -5,14 +5,16 @@
         .module('journeyToTheWestApp')
         .controller('TaskDialogController', TaskDialogController);
 
-    TaskDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'DoubleRandom'];
+    TaskDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'Law', 'TaskProject', 'DoubleRandom'];
 
-    function TaskDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Task, DoubleRandom) {
+    function TaskDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Task, Law, TaskProject, DoubleRandom) {
         var vm = this;
 
         vm.task = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.laws = Law.query();
+        vm.taskprojects = TaskProject.query();
         vm.doublerandoms = DoubleRandom.query();
 
         $timeout(function (){

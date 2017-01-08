@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "task",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "taskProject"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "taskProjectName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "taskProjectCheckDepartment",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 256
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        }
+    ],
+    "changelogDate": "20170108064743",
+    "entityTableName": "task_project",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

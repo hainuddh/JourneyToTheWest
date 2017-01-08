@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="journeyToTheWestApp.taskProject.detail.title">Task Project</span> {{vm.taskProject.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="journeyToTheWestApp.taskProject.taskProjectName">Task Project Name</span></dt>
+        <dd>
+            <span>{{vm.taskProject.taskProjectName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.taskProject.taskProjectCheckDepartment">Task Project Check Department</span></dt>
+        <dd>
+            <span>{{vm.taskProject.taskProjectCheckDepartment}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.taskProject.description">Description</span></dt>
+        <dd>
+            <span>{{vm.taskProject.description}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="task-project-detail.edit({id:vm.taskProject.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

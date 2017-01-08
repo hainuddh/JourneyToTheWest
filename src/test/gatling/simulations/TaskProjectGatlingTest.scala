@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Task entity.
+ * Performance test for the TaskProject entity.
  */
-class TaskGatlingTest extends Simulation {
+class TaskProjectGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -42,7 +42,7 @@ class TaskGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the Task entity")
+    val scn = scenario("Test the TaskProject entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -60,26 +60,26 @@ class TaskGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all tasks")
-            .get("/api/tasks")
+            exec(http("Get all taskProjects")
+            .get("/api/task-projects")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new task")
-            .post("/api/tasks")
+            .exec(http("Create new taskProject")
+            .post("/api/task-projects")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "taskName":"SAMPLE_TEXT", "taskContent":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "taskProjectName":"SAMPLE_TEXT", "taskProjectCheckDepartment":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_task_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_taskProject_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created task")
-                .get("${new_task_url}")
+                exec(http("Get created taskProject")
+                .get("${new_taskProject_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created task")
-            .delete("${new_task_url}")
+            .exec(http("Delete created taskProject")
+            .delete("${new_taskProject_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

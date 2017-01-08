@@ -1,0 +1,70 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTaskProjectLabel" data-translate="journeyToTheWestApp.taskProject.home.createOrEditLabel">Create or edit a Task Project</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.taskProject.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.taskProject.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.taskProject.taskProjectName" for="field_taskProjectName">Task Project Name</label>
+            <input type="text" class="form-control" name="taskProjectName" id="field_taskProjectName"
+                    ng-model="vm.taskProject.taskProjectName"
+                    required ng-maxlength="64" />
+            <div ng-show="editForm.taskProjectName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.taskProjectName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.taskProjectName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.taskProject.taskProjectCheckDepartment" for="field_taskProjectCheckDepartment">Task Project Check Department</label>
+            <input type="text" class="form-control" name="taskProjectCheckDepartment" id="field_taskProjectCheckDepartment"
+                    ng-model="vm.taskProject.taskProjectCheckDepartment"
+                    required ng-maxlength="256" />
+            <div ng-show="editForm.taskProjectCheckDepartment.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.taskProjectCheckDepartment.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.taskProjectCheckDepartment.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="256">
+                    This field cannot be longer than 256 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.taskProject.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.taskProject.description"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

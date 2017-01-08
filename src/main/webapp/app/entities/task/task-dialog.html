@@ -14,6 +14,22 @@
                     ng-model="vm.task.id" readonly />
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.task.taskName" for="field_taskName">Task Name</label>
+            <input type="text" class="form-control" name="taskName" id="field_taskName"
+                    ng-model="vm.task.taskName"
+                    required ng-maxlength="64" />
+            <div ng-show="editForm.taskName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.taskName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.taskName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.task.taskContent" for="field_taskContent">Task Content</label>
             <input type="text" class="form-control" name="taskContent" id="field_taskContent"
                     ng-model="vm.task.taskContent"
@@ -29,7 +45,29 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.task.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.task.description"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
 
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.task.law" for="field_law">Law</label>
+            <select class="form-control" id="field_law" multiple name="law" ng-model="vm.task.laws" ng-options="law as law.id for law in vm.laws track by law.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.task.taskProject" for="field_taskProject">Task Project</label>
+            <select class="form-control" id="field_taskProject" name="taskProject" ng-model="vm.task.taskProject" ng-options="taskProject as taskProject.id for taskProject in vm.taskprojects track by taskProject.id">
+                <option value=""></option>
+            </select>
+        </div>
         <div class="form-group">
             <label data-translate="journeyToTheWestApp.task.doubleRandom" for="field_doubleRandom">Double Random</label>
             <select class="form-control" id="field_doubleRandom" name="doubleRandom" ng-model="vm.task.doubleRandom" ng-options="doubleRandom as doubleRandom.id for doubleRandom in vm.doublerandoms track by doubleRandom.id">

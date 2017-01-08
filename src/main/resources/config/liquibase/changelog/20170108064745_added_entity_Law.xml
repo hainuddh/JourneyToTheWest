@@ -17,18 +17,18 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Task.
+        Added the entity Law.
     -->
-    <changeSet id="20170106133153-1" author="jhipster">
-        <createTable tableName="task">
+    <changeSet id="20170108064745-1" author="jhipster">
+        <createTable tableName="law">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="task_name" type="varchar(64)">
+            <column name="law_name" type="varchar(64)">
                 <constraints nullable="false" />
             </column>
             
-            <column name="task_content" type="varchar(1024)">
+            <column name="law_content" type="varchar(4096)">
                 <constraints nullable="false" />
             </column>
             
@@ -36,27 +36,8 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="task_project_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="double_random_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
-        <createTable tableName="task_law">
-            <column name="laws_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="tasks_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="tasks_id, laws_id" tableName="task_law"/>
         
     </changeSet>
 </databaseChangeLog>

@@ -39,8 +39,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class TaskResourceIntTest {
 
+    private static final String DEFAULT_TASK_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_TASK_NAME = "BBBBBBBBBB";
+
     private static final String DEFAULT_TASK_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_TASK_CONTENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     @Inject
     private TaskRepository taskRepository;
@@ -82,7 +88,9 @@ public class TaskResourceIntTest {
      */
     public static Task createEntity(EntityManager em) {
         Task task = new Task()
-                .taskContent(DEFAULT_TASK_CONTENT);
+                .taskName(DEFAULT_TASK_NAME)
+                .taskContent(DEFAULT_TASK_CONTENT)
+                .description(DEFAULT_DESCRIPTION);
         return task;
     }
 
@@ -108,7 +116,9 @@ public class TaskResourceIntTest {
         List<Task> taskList = taskRepository.findAll();
         assertThat(taskList).hasSize(databaseSizeBeforeCreate + 1);
         Task testTask = taskList.get(taskList.size() - 1);
+        assertThat(testTask.getTaskName()).isEqualTo(DEFAULT_TASK_NAME);
         assertThat(testTask.getTaskContent()).isEqualTo(DEFAULT_TASK_CONTENT);
+        assertThat(testTask.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the Task in ElasticSearch
         Task taskEs = taskSearchRepository.findOne(testTask.getId());
@@ -133,6 +143,24 @@ public class TaskResourceIntTest {
         // Validate the Alice in the database
         List<Task> taskList = taskRepository.findAll();
         assertThat(taskList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkTaskNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = taskRepository.findAll().size();
+        // set the field null
+        task.setTaskName(null);
+
+        // Create the Task, which fails.
+
+        restTaskMockMvc.perform(post("/api/tasks")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(task)))
+            .andExpect(status().isBadRequest());
+
+        List<Task> taskList = taskRepository.findAll();
+        assertThat(taskList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -164,7 +192,9 @@ public class TaskResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(task.getId().intValue())))
-            .andExpect(jsonPath("$.[*].taskContent").value(hasItem(DEFAULT_TASK_CONTENT.toString())));
+            .andExpect(jsonPath("$.[*].taskName").value(hasItem(DEFAULT_TASK_NAME.toString())))
+            .andExpect(jsonPath("$.[*].taskContent").value(hasItem(DEFAULT_TASK_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -178,7 +208,9 @@ public class TaskResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(task.getId().intValue()))
-            .andExpect(jsonPath("$.taskContent").value(DEFAULT_TASK_CONTENT.toString()));
+            .andExpect(jsonPath("$.taskName").value(DEFAULT_TASK_NAME.toString()))
+            .andExpect(jsonPath("$.taskContent").value(DEFAULT_TASK_CONTENT.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -200,7 +232,9 @@ public class TaskResourceIntTest {
         // Update the task
         Task updatedTask = taskRepository.findOne(task.getId());
         updatedTask
-                .taskContent(UPDATED_TASK_CONTENT);
+                .taskName(UPDATED_TASK_NAME)
+                .taskContent(UPDATED_TASK_CONTENT)
+                .description(UPDATED_DESCRIPTION);
 
         restTaskMockMvc.perform(put("/api/tasks")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -211,7 +245,9 @@ public class TaskResourceIntTest {
         List<Task> taskList = taskRepository.findAll();
         assertThat(taskList).hasSize(databaseSizeBeforeUpdate);
         Task testTask = taskList.get(taskList.size() - 1);
+        assertThat(testTask.getTaskName()).isEqualTo(UPDATED_TASK_NAME);
         assertThat(testTask.getTaskContent()).isEqualTo(UPDATED_TASK_CONTENT);
+        assertThat(testTask.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the Task in ElasticSearch
         Task taskEs = taskSearchRepository.findOne(testTask.getId());
@@ -269,6 +305,8 @@ public class TaskResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(task.getId().intValue())))
-            .andExpect(jsonPath("$.[*].taskContent").value(hasItem(DEFAULT_TASK_CONTENT.toString())));
+            .andExpect(jsonPath("$.[*].taskName").value(hasItem(DEFAULT_TASK_NAME.toString())))
+            .andExpect(jsonPath("$.[*].taskContent").value(hasItem(DEFAULT_TASK_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }

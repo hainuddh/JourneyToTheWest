@@ -14,6 +14,8 @@
     <include file="classpath:config/liquibase/changelog/20170106133151_added_entity_DoubleRandom.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170106133152_added_entity_DoubleRandomResult.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170106133153_added_entity_Task.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170108064743_added_entity_TaskProject.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170108064745_added_entity_Law.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170106133145_added_entity_constraints_Manager.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170106133148_added_entity_constraints_Company.xml" relativeToChangelogFile="false"/>

@@ -16,7 +16,11 @@
             "detail": {
                 "title": "Task"
             },
+            "taskName": "Task Name",
             "taskContent": "Task Content",
+            "description": "Description",
+            "law": "Law",
+            "taskProject": "Task Project",
             "doubleRandom": "Double Random"
         }
     }

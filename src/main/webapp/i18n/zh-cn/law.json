@@ -1,0 +1,25 @@
+{
+    "journeyToTheWestApp": {
+        "law" : {
+            "home": {
+                "title": "Laws",
+                "createLabel": "Create a new Law",
+                "createOrEditLabel": "Create or edit a Law",
+                "search": "Search for Law"
+            },
+            "created": "A new Law is created with identifier {{ param }}",
+            "updated": "A Law is updated with identifier {{ param }}",
+            "deleted": "A Law is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Law {{ id }}?"
+            },
+            "detail": {
+                "title": "Law"
+            },
+            "lawName": "Law Name",
+            "lawContent": "Law Content",
+            "description": "Description",
+            "task": "Task"
+        }
+    }
+}
