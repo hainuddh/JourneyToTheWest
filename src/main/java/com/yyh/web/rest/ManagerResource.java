@@ -4,9 +4,13 @@ import com.codahale.metrics.annotation.Timed;
 import com.yyh.domain.Manager;
 import com.yyh.service.ManagerService;
 import com.yyh.web.rest.util.HeaderUtil;
+import com.yyh.web.rest.util.PaginationUtil;
 
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +20,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +36,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ManagerResource {
 
     private final Logger log = LoggerFactory.getLogger(ManagerResource.class);
-        
+
     @Inject
     private ManagerService managerService;
 
@@ -80,13 +85,21 @@ public class ManagerResource {
     /**
      * GET  /managers : get all the managers.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of managers in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/managers")
     @Timed
-    public List<Manager> getAllManagers() {
-        log.debug("REST request to get all Managers");
-        return managerService.findAll();
+    public ResponseEntity<?> getAllManagers(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Managers");
+        Page<Manager> page = managerService.findAll(pageable);
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("managers", page.getContent());
+        result.put("totalPages", page.getTotalPages());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/managers");
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
     }
 
     /**
@@ -125,14 +138,19 @@ public class ManagerResource {
      * SEARCH  /_search/managers?query=:query : search for the manager corresponding
      * to the query.
      *
-     * @param query the query of the manager search 
+     * @param query    the query of the manager search
+     * @param pageable the pagination information
      * @return the result of the search
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/_search/managers")
     @Timed
-    public List<Manager> searchManagers(@RequestParam String query) {
-        log.debug("REST request to search Managers for query {}", query);
-        return managerService.search(query);
+    public ResponseEntity<List<Manager>> searchManagers(@RequestParam String query, @ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to search for a page of Managers for query {}", query);
+        Page<Manager> page = managerService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/managers");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 

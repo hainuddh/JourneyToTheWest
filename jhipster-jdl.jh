@@ -143,3 +143,5 @@ paginate Company with pager
 paginate TaskProject with pager
 
 paginate Task with pager
+
+paginate Manager with pager

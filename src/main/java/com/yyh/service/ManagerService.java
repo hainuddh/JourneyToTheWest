@@ -5,6 +5,8 @@ import com.yyh.repository.ManagerRepository;
 import com.yyh.repository.search.ManagerSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -46,13 +48,13 @@ public class ManagerService {
     /**
      *  Get all the managers.
      *  
+     *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<Manager> findAll() {
+    public Page<Manager> findAll(Pageable pageable) {
         log.debug("Request to get all Managers");
-        List<Manager> result = managerRepository.findAllWithEagerRelationships();
-
+        Page<Manager> result = managerRepository.findAll(pageable);
         return result;
     }
 
@@ -87,10 +89,9 @@ public class ManagerService {
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public List<Manager> search(String query) {
-        log.debug("Request to search Managers for query {}", query);
-        return StreamSupport
-            .stream(managerSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    public Page<Manager> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Managers for query {}", query);
+        Page<Manager> result = managerSearchRepository.search(queryStringQuery(query), pageable);
+        return result;
     }
 }

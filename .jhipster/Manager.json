@@ -106,6 +106,6 @@
     "changelogDate": "20170106133145",
     "entityTableName": "manager",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "serviceClass"
 }
