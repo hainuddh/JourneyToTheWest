@@ -39,6 +39,7 @@
                     <th jh-sort-by="taskName"><span data-translate="journeyToTheWestApp.task.taskName">Task Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="taskContent"><span data-translate="journeyToTheWestApp.task.taskContent">Task Content</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.task.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomResult.id"><span data-translate="journeyToTheWestApp.task.doubleRandomResult">Double Random Result</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="taskProject.id"><span data-translate="journeyToTheWestApp.task.taskProject">Task Project</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandom.id"><span data-translate="journeyToTheWestApp.task.doubleRandom">Double Random</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -50,6 +51,9 @@
                     <td>{{task.taskName}}</td>
                     <td>{{task.taskContent}}</td>
                     <td>{{task.description}}</td>
+                    <td>
+                        <a ui-sref="double-random-result-detail({id:task.doubleRandomResult.id})">{{task.doubleRandomResult.id}}</a>
+                    </td>
                     <td>
                         <a ui-sref="task-project-detail({id:task.taskProject.id})">{{task.taskProject.id}}</a>
                     </td>

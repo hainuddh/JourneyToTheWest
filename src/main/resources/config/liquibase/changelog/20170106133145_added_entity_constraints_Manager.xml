@@ -21,17 +21,6 @@
                                  referencedTableName="lawenforce_department"/>
 
         <addForeignKeyConstraint baseColumnNames="managers_id"
-                                 baseTableName="manager_double_random_result"
-                                 constraintName="fk_manager_double_random_result_managers_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="manager"/>
-        <addForeignKeyConstraint baseColumnNames="double_random_results_id"
-                                 baseTableName="manager_double_random_result"
-                                 constraintName="fk_manager_double_random_result_double_random_results_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="double_random_result"/>
-        
-        <addForeignKeyConstraint baseColumnNames="managers_id"
                                  baseTableName="manager_manager_lawenforce_area"
                                  constraintName="fk_manager_manager_lawenforce_area_managers_id"
                                  referencedColumnNames="id"

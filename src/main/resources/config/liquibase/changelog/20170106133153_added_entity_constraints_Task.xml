@@ -19,6 +19,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="law"/>
         
+        <addForeignKeyConstraint baseColumnNames="double_random_result_id"
+                                 baseTableName="task"
+                                 constraintName="fk_task_double_random_result_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="double_random_result"/>
+
         <addForeignKeyConstraint baseColumnNames="task_project_id"
                                  baseTableName="task"
                                  constraintName="fk_task_task_project_id"

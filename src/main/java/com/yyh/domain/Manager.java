@@ -1,5 +1,6 @@
 package com.yyh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -72,17 +73,15 @@ public class Manager implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "manager_double_random_result",
-               joinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="double_random_results_id", referencedColumnName="ID"))
-    private Set<DoubleRandomResult> doubleRandomResults = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "manager_manager_lawenforce_area",
                joinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="manager_lawenforce_areas_id", referencedColumnName="ID"))
     private Set<LawenforceArea> managerLawenforceAreas = new HashSet<>();
+
+    @ManyToMany(mappedBy = "managers")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DoubleRandomResult> doubleRandomResults = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -222,31 +221,6 @@ public class Manager implements Serializable {
         this.managerLawenforceDepartment = lawenforceDepartment;
     }
 
-    public Set<DoubleRandomResult> getDoubleRandomResults() {
-        return doubleRandomResults;
-    }
-
-    public Manager doubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
-        this.doubleRandomResults = doubleRandomResults;
-        return this;
-    }
-
-    public Manager addDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
-        doubleRandomResults.add(doubleRandomResult);
-        doubleRandomResult.getManagers().add(this);
-        return this;
-    }
-
-    public Manager removeDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
-        doubleRandomResults.remove(doubleRandomResult);
-        doubleRandomResult.getManagers().remove(this);
-        return this;
-    }
-
-    public void setDoubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
-        this.doubleRandomResults = doubleRandomResults;
-    }
-
     public Set<LawenforceArea> getManagerLawenforceAreas() {
         return managerLawenforceAreas;
     }
@@ -270,6 +244,31 @@ public class Manager implements Serializable {
 
     public void setManagerLawenforceAreas(Set<LawenforceArea> lawenforceAreas) {
         this.managerLawenforceAreas = lawenforceAreas;
+    }
+
+    public Set<DoubleRandomResult> getDoubleRandomResults() {
+        return doubleRandomResults;
+    }
+
+    public Manager doubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
+        this.doubleRandomResults = doubleRandomResults;
+        return this;
+    }
+
+    public Manager addDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        doubleRandomResults.add(doubleRandomResult);
+        doubleRandomResult.getManagers().add(this);
+        return this;
+    }
+
+    public Manager removeDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        doubleRandomResults.remove(doubleRandomResult);
+        doubleRandomResult.getManagers().remove(this);
+        return this;
+    }
+
+    public void setDoubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
+        this.doubleRandomResults = doubleRandomResults;
     }
 
     @Override

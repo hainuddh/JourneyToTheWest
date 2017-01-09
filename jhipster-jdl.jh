@@ -85,6 +85,18 @@ entity Law {
     description String maxlength(1024)
 }
 
+relationship OneToOne {
+	DoubleRandomResult{company} to Company{doubleRandomResult}
+}
+
+relationship ManyToMany {
+	DoubleRandomResult{manager} to Manager{doubleRandomResult}
+}
+
+relationship OneToMany {
+	DoubleRandomResult{task} to Task{doubleRandomResult}
+}
+
 relationship ManyToMany {
 	Task{law} to Law{task}
 }
@@ -95,10 +107,6 @@ relationship OneToMany {
 
 relationship OneToMany {
 	DoubleRandom{task} to Task{doubleRandom}
-}
-
-relationship ManyToMany {
-	Manager{doubleRandomResult} to DoubleRandomResult{manager}
 }
 
 relationship OneToMany {
@@ -146,3 +154,5 @@ paginate TaskProject with pager
 paginate Task with pager
 
 paginate Manager with pager
+
+paginate DoubleRandom with pager

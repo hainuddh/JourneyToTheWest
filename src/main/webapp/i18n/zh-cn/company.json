@@ -33,7 +33,8 @@
             "companyType": "Company Type",
             "industryType": "Industry Type",
             "companyArea": "Company Area",
-            "companySupervisory": "Company Supervisory"
+            "companySupervisory": "Company Supervisory",
+            "doubleRandomResult": "Double Random Result"
         }
     }
 }

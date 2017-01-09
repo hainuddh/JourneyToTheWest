@@ -65,17 +65,6 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
-        <createTable tableName="manager_double_random_result">
-            <column name="double_random_results_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="managers_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="managers_id, double_random_results_id" tableName="manager_double_random_result"/>
-        
         <createTable tableName="manager_manager_lawenforce_area">
             <column name="manager_lawenforce_areas_id" type="bigint">
                 <constraints nullable="false"/>

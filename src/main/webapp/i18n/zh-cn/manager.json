@@ -26,8 +26,8 @@
             "description": "Description",
             "managerUser": "Manager User",
             "managerLawenforceDepartment": "Manager Lawenforce Department",
-            "doubleRandomResult": "Double Random Result",
-            "managerLawenforceArea": "Manager Lawenforce Area"
+            "managerLawenforceArea": "Manager Lawenforce Area",
+            "doubleRandomResult": "Double Random Result"
         }
     }
 }

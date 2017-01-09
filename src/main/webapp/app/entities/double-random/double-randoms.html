@@ -34,22 +34,22 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr>
-                    <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomName">Double Random Name</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomDate">Double Random Date</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomNotary">Double Random Notary</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyName">Double Random Company Name</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyArea">Double Random Company Area</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanySupervisory">Double Random Company Supervisory</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyType">Double Random Company Type</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyIndustryType">Double Random Company Industry Type</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyRatio">Double Random Company Ratio</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerName">Double Random Manager Name</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerNumber">Double Random Manager Number</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerDepartment">Double Random Manager Department</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerRatio">Double Random Manager Ratio</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandom.description">Description</span></th>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomName">Double Random Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomDate"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomDate">Double Random Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomNotary"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomNotary">Double Random Notary</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyName">Double Random Company Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyArea"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyArea">Double Random Company Area</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanySupervisory"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanySupervisory">Double Random Company Supervisory</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyType"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyType">Double Random Company Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyIndustryType"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyIndustryType">Double Random Company Industry Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyRatio"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyRatio">Double Random Company Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomManagerName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerName">Double Random Manager Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomManagerNumber"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerNumber">Double Random Manager Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomManagerDepartment"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerDepartment">Double Random Manager Department</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomManagerRatio"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerRatio">Double Random Manager Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.doubleRandom.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -96,4 +96,8 @@
             </tbody>
         </table>
     </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>

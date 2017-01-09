@@ -11,6 +11,12 @@
         },
         {
             "relationshipType": "many-to-one",
+            "relationshipName": "doubleRandomResult",
+            "otherEntityName": "doubleRandomResult",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "relationshipName": "taskProject",
             "otherEntityName": "taskProject",
             "otherEntityField": "id"

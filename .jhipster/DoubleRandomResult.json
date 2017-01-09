@@ -2,17 +2,32 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "doubleRandomResult"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "task",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "doubleRandomResult"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "doubleRandomResult",
+            "relationshipName": "manager",
+            "otherEntityName": "manager",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "doubleRandom",
             "otherEntityName": "doubleRandom",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "manager",
-            "otherEntityName": "manager",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "doubleRandomResult"
         }
     ],
     "fields": [

@@ -20,8 +20,10 @@
             "companyRegisterId": "Company Register Id",
             "people": "People",
             "task": "Task",
-            "doubleRandom": "Double Random",
-            "manager": "Manager"
+            "company": "Company",
+            "task": "Task",
+            "manager": "Manager",
+            "doubleRandom": "Double Random"
         }
     }
 }

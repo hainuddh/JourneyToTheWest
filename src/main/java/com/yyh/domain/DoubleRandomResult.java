@@ -46,13 +46,24 @@ public class DoubleRandomResult implements Serializable {
     @Column(name = "task", length = 1024)
     private String task;
 
-    @ManyToOne
-    private DoubleRandom doubleRandom;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Company company;
 
-    @ManyToMany(mappedBy = "doubleRandomResults")
+    @OneToMany(mappedBy = "doubleRandomResult")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Task> tasks = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "double_random_result_manager",
+               joinColumns = @JoinColumn(name="double_random_results_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"))
     private Set<Manager> managers = new HashSet<>();
+
+    @ManyToOne
+    private DoubleRandom doubleRandom;
 
     public Long getId() {
         return id;
@@ -114,17 +125,42 @@ public class DoubleRandomResult implements Serializable {
         this.task = task;
     }
 
-    public DoubleRandom getDoubleRandom() {
-        return doubleRandom;
+    public Company getCompany() {
+        return company;
     }
 
-    public DoubleRandomResult doubleRandom(DoubleRandom doubleRandom) {
-        this.doubleRandom = doubleRandom;
+    public DoubleRandomResult company(Company company) {
+        this.company = company;
         return this;
     }
 
-    public void setDoubleRandom(DoubleRandom doubleRandom) {
-        this.doubleRandom = doubleRandom;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public DoubleRandomResult tasks(Set<Task> tasks) {
+        this.tasks = tasks;
+        return this;
+    }
+
+    public DoubleRandomResult addTask(Task task) {
+        tasks.add(task);
+        task.setDoubleRandomResult(this);
+        return this;
+    }
+
+    public DoubleRandomResult removeTask(Task task) {
+        tasks.remove(task);
+        task.setDoubleRandomResult(null);
+        return this;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Set<Manager> getManagers() {
@@ -150,6 +186,19 @@ public class DoubleRandomResult implements Serializable {
 
     public void setManagers(Set<Manager> managers) {
         this.managers = managers;
+    }
+
+    public DoubleRandom getDoubleRandom() {
+        return doubleRandom;
+    }
+
+    public DoubleRandomResult doubleRandom(DoubleRandom doubleRandom) {
+        this.doubleRandom = doubleRandom;
+        return this;
+    }
+
+    public void setDoubleRandom(DoubleRandom doubleRandom) {
+        this.doubleRandom = doubleRandom;
     }
 
     @Override

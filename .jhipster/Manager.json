@@ -18,18 +18,17 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "manager",
-            "relationshipName": "doubleRandomResult",
-            "otherEntityName": "doubleRandomResult",
+            "relationshipName": "managerLawenforceArea",
+            "otherEntityName": "lawenforceArea",
             "otherEntityField": "id",
             "ownerSide": true
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "manager",
-            "relationshipName": "managerLawenforceArea",
-            "otherEntityName": "lawenforceArea",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "relationshipName": "doubleRandomResult",
+            "otherEntityName": "doubleRandomResult",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "manager"
         }
     ],
     "fields": [

@@ -93,7 +93,7 @@ public class DoubleRandomResultResource {
     @Timed
     public List<DoubleRandomResult> getAllDoubleRandomResults() {
         log.debug("REST request to get all DoubleRandomResults");
-        List<DoubleRandomResult> doubleRandomResults = doubleRandomResultRepository.findAll();
+        List<DoubleRandomResult> doubleRandomResults = doubleRandomResultRepository.findAllWithEagerRelationships();
         return doubleRandomResults;
     }
 
@@ -107,7 +107,7 @@ public class DoubleRandomResultResource {
     @Timed
     public ResponseEntity<DoubleRandomResult> getDoubleRandomResult(@PathVariable Long id) {
         log.debug("REST request to get DoubleRandomResult : {}", id);
-        DoubleRandomResult doubleRandomResult = doubleRandomResultRepository.findOne(id);
+        DoubleRandomResult doubleRandomResult = doubleRandomResultRepository.findOneWithEagerRelationships(id);
         return Optional.ofNullable(doubleRandomResult)
             .map(result -> new ResponseEntity<>(
                 result,

@@ -48,6 +48,9 @@ public class Task implements Serializable {
     private Set<Law> laws = new HashSet<>();
 
     @ManyToOne
+    private DoubleRandomResult doubleRandomResult;
+
+    @ManyToOne
     private TaskProject taskProject;
 
     @ManyToOne
@@ -123,6 +126,19 @@ public class Task implements Serializable {
 
     public void setLaws(Set<Law> laws) {
         this.laws = laws;
+    }
+
+    public DoubleRandomResult getDoubleRandomResult() {
+        return doubleRandomResult;
+    }
+
+    public Task doubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        this.doubleRandomResult = doubleRandomResult;
+        return this;
+    }
+
+    public void setDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        this.doubleRandomResult = doubleRandomResult;
     }
 
     public TaskProject getTaskProject() {

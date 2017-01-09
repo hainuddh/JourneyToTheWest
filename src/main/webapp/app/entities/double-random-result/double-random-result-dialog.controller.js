@@ -5,16 +5,26 @@
         .module('journeyToTheWestApp')
         .controller('DoubleRandomResultDialogController', DoubleRandomResultDialogController);
 
-    DoubleRandomResultDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'DoubleRandomResult', 'DoubleRandom', 'Manager'];
+    DoubleRandomResultDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DoubleRandomResult', 'Company', 'Task', 'Manager', 'DoubleRandom'];
 
-    function DoubleRandomResultDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, DoubleRandomResult, DoubleRandom, Manager) {
+    function DoubleRandomResultDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DoubleRandomResult, Company, Task, Manager, DoubleRandom) {
         var vm = this;
 
         vm.doubleRandomResult = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.doublerandoms = DoubleRandom.query();
+        vm.companies = Company.query({filter: 'doublerandomresult-is-null'});
+        $q.all([vm.doubleRandomResult.$promise, vm.companies.$promise]).then(function() {
+            if (!vm.doubleRandomResult.company || !vm.doubleRandomResult.company.id) {
+                return $q.reject();
+            }
+            return Company.get({id : vm.doubleRandomResult.company.id}).$promise;
+        }).then(function(company) {
+            vm.companies.push(company);
+        });
+        vm.tasks = Task.query();
         vm.managers = Manager.query();
+        vm.doublerandoms = DoubleRandom.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

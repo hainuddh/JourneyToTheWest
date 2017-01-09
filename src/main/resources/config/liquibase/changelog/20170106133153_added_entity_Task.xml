@@ -36,6 +36,10 @@
                 <constraints nullable="true" />
             </column>
             
+            <column name="double_random_result_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="task_project_id" type="bigint">
                 <constraints nullable="true" />
             </column>

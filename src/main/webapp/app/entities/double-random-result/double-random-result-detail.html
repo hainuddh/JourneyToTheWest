@@ -20,6 +20,16 @@
         <dd>
             <span>{{vm.doubleRandomResult.task}}</span>
         </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span></dt>
+        <dd>
+            <a ui-sref="company-detail({id:vm.doubleRandomResult.company.id})">{{vm.doubleRandomResult.company.id}}</a>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.manager">Manager</span></dt>
+        <dd>
+            <span ng-repeat="manager in vm.doubleRandomResult.managers">
+                <a ui-sref="manager-detail({id: manager.id})">{{manager.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
         <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom">Double Random</span></dt>
         <dd>
             <a ui-sref="double-random-detail({id:vm.doubleRandomResult.doubleRandom.id})">{{vm.doubleRandomResult.doubleRandom.id}}</a>

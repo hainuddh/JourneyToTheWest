@@ -39,13 +39,26 @@
             <column name="task" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
-            
+                        <column name="company_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <column name="double_random_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        
+        <createTable tableName="double_random_result_manager">
+            <column name="managers_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="double_random_results_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="double_random_results_id, managers_id" tableName="double_random_result_manager"/>
         
     </changeSet>
 </databaseChangeLog>

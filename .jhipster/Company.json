@@ -24,6 +24,13 @@
             "relationshipName": "companySupervisory",
             "otherEntityName": "lawenforceDepartment",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "doubleRandomResult",
+            "otherEntityName": "doubleRandomResult",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "company"
         }
     ],
     "fields": [

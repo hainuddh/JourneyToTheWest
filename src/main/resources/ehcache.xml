@@ -70,5 +70,11 @@
 
     <cache alias="com.yyh.domain.Law.tasks" uses-template="simple"/>
 
+    <cache alias="com.yyh.domain.Company.doubleRandomResults" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.DoubleRandomResult.tasks" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.DoubleRandomResult.companies" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

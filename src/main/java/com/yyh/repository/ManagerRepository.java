@@ -13,10 +13,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ManagerRepository extends JpaRepository<Manager,Long> {
 
-    @Query("select distinct manager from Manager manager left join fetch manager.doubleRandomResults left join fetch manager.managerLawenforceAreas")
+    @Query("select distinct manager from Manager manager left join fetch manager.managerLawenforceAreas")
     List<Manager> findAllWithEagerRelationships();
 
-    @Query("select manager from Manager manager left join fetch manager.doubleRandomResults left join fetch manager.managerLawenforceAreas where manager.id =:id")
+    @Query("select manager from Manager manager left join fetch manager.managerLawenforceAreas where manager.id =:id")
     Manager findOneWithEagerRelationships(@Param("id") Long id);
 
 }

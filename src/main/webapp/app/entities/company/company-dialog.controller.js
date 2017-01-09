@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('CompanyDialogController', CompanyDialogController);
 
-    CompanyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Company', 'CompanyType', 'IndustryType', 'LawenforceArea', 'LawenforceDepartment'];
+    CompanyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Company', 'CompanyType', 'IndustryType', 'LawenforceArea', 'LawenforceDepartment', 'DoubleRandomResult'];
 
-    function CompanyDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Company, CompanyType, IndustryType, LawenforceArea, LawenforceDepartment) {
+    function CompanyDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Company, CompanyType, IndustryType, LawenforceArea, LawenforceDepartment, DoubleRandomResult) {
         var vm = this;
 
         vm.company = entity;
@@ -17,6 +17,7 @@
         vm.industrytypes = IndustryType.query();
         vm.lawenforceareas = LawenforceArea.query();
         vm.lawenforcedepartments = LawenforceDepartment.query();
+        vm.doublerandomresults = DoubleRandomResult.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

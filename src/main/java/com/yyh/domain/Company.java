@@ -1,5 +1,6 @@
 package com.yyh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -101,6 +102,10 @@ public class Company implements Serializable {
 
     @ManyToOne
     private LawenforceDepartment companySupervisory;
+
+    @OneToOne(mappedBy = "company")
+    @JsonIgnore
+    private DoubleRandomResult doubleRandomResult;
 
     public Long getId() {
         return id;
@@ -342,6 +347,19 @@ public class Company implements Serializable {
 
     public void setCompanySupervisory(LawenforceDepartment lawenforceDepartment) {
         this.companySupervisory = lawenforceDepartment;
+    }
+
+    public DoubleRandomResult getDoubleRandomResult() {
+        return doubleRandomResult;
+    }
+
+    public Company doubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        this.doubleRandomResult = doubleRandomResult;
+        return this;
+    }
+
+    public void setDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        this.doubleRandomResult = doubleRandomResult;
     }
 
     @Override
