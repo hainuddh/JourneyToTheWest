@@ -67,7 +67,7 @@ public class DoubleRandomService {
         * 这里的查询效率太低了
         */
         int[] people = randomPickPeople(managerList.size(), 1);
-        int[] business = randomPickBusiness(companyList.size(), 0.0001);
+        int[] business = randomPickBusiness(companyList.size(), 0.001);
         ArrayList<int[]> drResultList = bindPeopleWithBusiness(people, business);
         for (int i = 0; i < drResultList.size(); i++) {
             DoubleRandomResult doubleRandomResult = new DoubleRandomResult();
