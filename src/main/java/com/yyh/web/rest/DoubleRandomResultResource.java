@@ -1,14 +1,22 @@
 package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.yyh.domain.DoubleRandom;
 import com.yyh.domain.DoubleRandomResult;
 
+import com.yyh.domain.Task;
+import com.yyh.domain.TaskProject;
 import com.yyh.repository.DoubleRandomResultRepository;
 import com.yyh.repository.search.DoubleRandomResultSearchRepository;
 import com.yyh.web.rest.util.HeaderUtil;
+import com.yyh.web.rest.util.PaginationUtil;
 
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +26,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +42,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DoubleRandomResultResource {
 
     private final Logger log = LoggerFactory.getLogger(DoubleRandomResultResource.class);
-        
+
     @Inject
     private DoubleRandomResultRepository doubleRandomResultRepository;
 
@@ -87,14 +96,26 @@ public class DoubleRandomResultResource {
     /**
      * GET  /double-random-results : get all the doubleRandomResults.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of doubleRandomResults in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/double-random-results")
     @Timed
-    public List<DoubleRandomResult> getAllDoubleRandomResults() {
-        log.debug("REST request to get all DoubleRandomResults");
-        List<DoubleRandomResult> doubleRandomResults = doubleRandomResultRepository.findAllWithEagerRelationships();
-        return doubleRandomResults;
+    public ResponseEntity<?> getAllDoubleRandomResults(@ApiParam Pageable pageable, @RequestParam Long doubleRandomId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of DoubleRandomResults");
+        HashMap<String, Object> result = new HashMap<>();
+        DoubleRandom doubleRandom = new DoubleRandom();
+        doubleRandom.setId(doubleRandomId);
+        DoubleRandomResult doubleRandomResult = new DoubleRandomResult();
+        doubleRandomResult.setDoubleRandom(doubleRandom);
+        Example<DoubleRandomResult> ex = Example.of(doubleRandomResult);
+        Page<DoubleRandomResult> page = doubleRandomResultRepository.findAll(ex, pageable);
+        result.put("doubleRandomResults", page.getContent());
+        result.put("totalPages", page.getTotalPages());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/double-random-results");
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
     }
 
     /**
@@ -134,16 +155,19 @@ public class DoubleRandomResultResource {
      * SEARCH  /_search/double-random-results?query=:query : search for the doubleRandomResult corresponding
      * to the query.
      *
-     * @param query the query of the doubleRandomResult search 
+     * @param query the query of the doubleRandomResult search
+     * @param pageable the pagination information
      * @return the result of the search
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/_search/double-random-results")
     @Timed
-    public List<DoubleRandomResult> searchDoubleRandomResults(@RequestParam String query) {
-        log.debug("REST request to search DoubleRandomResults for query {}", query);
-        return StreamSupport
-            .stream(doubleRandomResultSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+    public ResponseEntity<List<DoubleRandomResult>> searchDoubleRandomResults(@RequestParam String query, @ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to search for a page of DoubleRandomResults for query {}", query);
+        Page<DoubleRandomResult> page = doubleRandomResultSearchRepository.search(queryStringQuery(query), pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/double-random-results");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 

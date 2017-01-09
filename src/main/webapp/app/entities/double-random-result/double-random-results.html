@@ -34,15 +34,14 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr>
-                    <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.companyName">Company Name</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.companyRegisterId">Company Register Id</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.people">People</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.task">Task</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.manager">Manager</span></th>
-                    <th><span data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom">Double Random</span></th>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyName"><span data-translate="journeyToTheWestApp.doubleRandomResult.companyName">Company Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyRegisterId"><span data-translate="journeyToTheWestApp.doubleRandomResult.companyRegisterId">Company Register Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="people"><span data-translate="journeyToTheWestApp.doubleRandomResult.people">People</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="task"><span data-translate="journeyToTheWestApp.doubleRandomResult.task">Task</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="company.id"><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandom.id"><span data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom">Double Random</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -55,11 +54,6 @@
                     <td>{{doubleRandomResult.task}}</td>
                     <td>
                         <a ui-sref="company-detail({id:doubleRandomResult.company.id})">{{doubleRandomResult.company.id}}</a>
-                    </td>
-                    <td>
-                        <span ng-repeat="manager in doubleRandomResult.managers">
-                            <a class="form-control-static" ui-sref="manager-detail({id: manager.id})">{{manager.id}}</a>{{$last ? '' : ', '}}
-                        </span>
                     </td>
                     <td>
                         <a ui-sref="double-random-detail({id:doubleRandomResult.doubleRandom.id})">{{doubleRandomResult.doubleRandom.id}}</a>
@@ -90,4 +84,8 @@
             </tbody>
         </table>
     </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>

@@ -63,6 +63,9 @@ public class DoubleRandomService {
         log.debug("Request to save DoubleRandom : {}", doubleRandom);
         List<Manager> managerList = managerRepository.findAll();
         List<Company> companyList = companyRepository.findAll();
+        /*TODO
+        * 这里的查询效率太低了
+        */
         int[] people = randomPickPeople(managerList.size(), 1);
         int[] business = randomPickBusiness(companyList.size(), 0.0001);
         ArrayList<int[]> drResultList = bindPeopleWithBusiness(people, business);

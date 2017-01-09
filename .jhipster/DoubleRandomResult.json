@@ -70,6 +70,6 @@
     "changelogDate": "20170106133152",
     "entityTableName": "double_random_result",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no"
 }
