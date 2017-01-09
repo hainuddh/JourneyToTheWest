@@ -147,6 +147,8 @@ service Task with serviceClass
 
 service Company with serviceClass
 
+service DoubleRandom with serviceClass
+
 paginate Company with pager
 
 paginate TaskProject with pager
@@ -156,3 +158,5 @@ paginate Task with pager
 paginate Manager with pager
 
 paginate DoubleRandom with pager
+
+paginate DoubleRandomResult with pager

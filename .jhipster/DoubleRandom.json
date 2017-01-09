@@ -138,5 +138,5 @@
     "entityTableName": "double_random",
     "dto": "no",
     "pagination": "pager",
-    "service": "no"
+    "service": "serviceClass"
 }
