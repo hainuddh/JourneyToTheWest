@@ -117,6 +117,7 @@
                                 doubleRandomManagerNumber: null,
                                 doubleRandomManagerDepartment: null,
                                 doubleRandomManagerRatio: null,
+                                description: null,
                                 id: null
                             };
                         }

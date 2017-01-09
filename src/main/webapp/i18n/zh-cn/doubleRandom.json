@@ -29,6 +29,7 @@
             "doubleRandomManagerNumber": "Double Random Manager Number",
             "doubleRandomManagerDepartment": "Double Random Manager Department",
             "doubleRandomManagerRatio": "Double Random Manager Ratio",
+            "description": "Description",
             "task": "Task",
             "doubleRandomResult": "Double Random Result"
         }

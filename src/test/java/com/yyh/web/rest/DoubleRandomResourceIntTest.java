@@ -77,6 +77,9 @@ public class DoubleRandomResourceIntTest {
     private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_MANAGER_RATIO = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     @Inject
     private DoubleRandomRepository doubleRandomRepository;
 
@@ -127,7 +130,8 @@ public class DoubleRandomResourceIntTest {
                 .doubleRandomManagerName(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME)
                 .doubleRandomManagerNumber(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)
                 .doubleRandomManagerDepartment(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT)
-                .doubleRandomManagerRatio(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO);
+                .doubleRandomManagerRatio(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO)
+                .description(DEFAULT_DESCRIPTION);
         return doubleRandom;
     }
 
@@ -166,6 +170,7 @@ public class DoubleRandomResourceIntTest {
         assertThat(testDoubleRandom.getDoubleRandomManagerNumber()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER);
         assertThat(testDoubleRandom.getDoubleRandomManagerDepartment()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT);
         assertThat(testDoubleRandom.getDoubleRandomManagerRatio()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO);
+        assertThat(testDoubleRandom.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the DoubleRandom in ElasticSearch
         DoubleRandom doubleRandomEs = doubleRandomSearchRepository.findOne(testDoubleRandom.getId());
@@ -248,96 +253,6 @@ public class DoubleRandomResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDoubleRandomCompanyNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomCompanyName(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomCompanyAreaIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomCompanyArea(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomCompanySupervisoryIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomCompanySupervisory(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomCompanyTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomCompanyType(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomCompanyIndustryTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomCompanyIndustryType(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkDoubleRandomCompanyRatioIsRequired() throws Exception {
         int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
         // set the field null
@@ -356,46 +271,10 @@ public class DoubleRandomResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDoubleRandomManagerNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomManagerName(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkDoubleRandomManagerNumberIsRequired() throws Exception {
         int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
         // set the field null
         doubleRandom.setDoubleRandomManagerNumber(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomManagerDepartmentIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomManagerDepartment(null);
 
         // Create the DoubleRandom, which fails.
 
@@ -449,7 +328,8 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.[*].doubleRandomManagerName").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomManagerDepartment").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())));
+            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -475,7 +355,8 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.doubleRandomManagerName").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString()))
             .andExpect(jsonPath("$.doubleRandomManagerNumber").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER.toString()))
             .andExpect(jsonPath("$.doubleRandomManagerDepartment").value(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString()))
-            .andExpect(jsonPath("$.doubleRandomManagerRatio").value(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString()));
+            .andExpect(jsonPath("$.doubleRandomManagerRatio").value(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -509,7 +390,8 @@ public class DoubleRandomResourceIntTest {
                 .doubleRandomManagerName(UPDATED_DOUBLE_RANDOM_MANAGER_NAME)
                 .doubleRandomManagerNumber(UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER)
                 .doubleRandomManagerDepartment(UPDATED_DOUBLE_RANDOM_MANAGER_DEPARTMENT)
-                .doubleRandomManagerRatio(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO);
+                .doubleRandomManagerRatio(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO)
+                .description(UPDATED_DESCRIPTION);
 
         restDoubleRandomMockMvc.perform(put("/api/double-randoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -533,6 +415,7 @@ public class DoubleRandomResourceIntTest {
         assertThat(testDoubleRandom.getDoubleRandomManagerNumber()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER);
         assertThat(testDoubleRandom.getDoubleRandomManagerDepartment()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_DEPARTMENT);
         assertThat(testDoubleRandom.getDoubleRandomManagerRatio()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO);
+        assertThat(testDoubleRandom.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the DoubleRandom in ElasticSearch
         DoubleRandom doubleRandomEs = doubleRandomSearchRepository.findOne(testDoubleRandom.getId());
@@ -603,6 +486,7 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.[*].doubleRandomManagerName").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomManagerDepartment").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())));
+            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }

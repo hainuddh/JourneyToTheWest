@@ -42,29 +42,24 @@ public class DoubleRandom implements Serializable {
     @Column(name = "double_random_notary", length = 32, nullable = false)
     private String doubleRandomNotary;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_company_name", length = 64, nullable = false)
+    @Column(name = "double_random_company_name", length = 64)
     private String doubleRandomCompanyName;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_company_area", length = 64, nullable = false)
+    @Column(name = "double_random_company_area", length = 64)
     private String doubleRandomCompanyArea;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_company_supervisory", length = 64, nullable = false)
+    @Column(name = "double_random_company_supervisory", length = 64)
     private String doubleRandomCompanySupervisory;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_company_type", length = 64, nullable = false)
+    @Column(name = "double_random_company_type", length = 64)
     private String doubleRandomCompanyType;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_company_industry_type", length = 64, nullable = false)
+    @Column(name = "double_random_company_industry_type", length = 64)
     private String doubleRandomCompanyIndustryType;
 
     @NotNull
@@ -72,9 +67,8 @@ public class DoubleRandom implements Serializable {
     @Column(name = "double_random_company_ratio", length = 64, nullable = false)
     private String doubleRandomCompanyRatio;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_manager_name", length = 64, nullable = false)
+    @Column(name = "double_random_manager_name", length = 64)
     private String doubleRandomManagerName;
 
     @NotNull
@@ -82,15 +76,18 @@ public class DoubleRandom implements Serializable {
     @Column(name = "double_random_manager_number", length = 64, nullable = false)
     private String doubleRandomManagerNumber;
 
-    @NotNull
     @Size(max = 64)
-    @Column(name = "double_random_manager_department", length = 64, nullable = false)
+    @Column(name = "double_random_manager_department", length = 64)
     private String doubleRandomManagerDepartment;
 
     @NotNull
     @Size(max = 64)
     @Column(name = "double_random_manager_ratio", length = 64, nullable = false)
     private String doubleRandomManagerRatio;
+
+    @Size(max = 1024)
+    @Column(name = "description", length = 1024)
+    private String description;
 
     @OneToMany(mappedBy = "doubleRandom")
     @JsonIgnore
@@ -279,6 +276,19 @@ public class DoubleRandom implements Serializable {
         this.doubleRandomManagerRatio = doubleRandomManagerRatio;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public DoubleRandom description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Set<Task> getTasks() {
         return tasks;
     }
@@ -366,6 +376,7 @@ public class DoubleRandom implements Serializable {
             ", doubleRandomManagerNumber='" + doubleRandomManagerNumber + "'" +
             ", doubleRandomManagerDepartment='" + doubleRandomManagerDepartment + "'" +
             ", doubleRandomManagerRatio='" + doubleRandomManagerRatio + "'" +
+            ", description='" + description + "'" +
             '}';
     }
 }

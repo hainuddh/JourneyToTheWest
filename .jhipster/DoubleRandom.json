@@ -46,7 +46,6 @@
             "fieldName": "doubleRandomCompanyName",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -55,7 +54,6 @@
             "fieldName": "doubleRandomCompanyArea",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -64,7 +62,6 @@
             "fieldName": "doubleRandomCompanySupervisory",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -73,7 +70,6 @@
             "fieldName": "doubleRandomCompanyType",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -82,7 +78,6 @@
             "fieldName": "doubleRandomCompanyIndustryType",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -100,7 +95,6 @@
             "fieldName": "doubleRandomManagerName",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -118,7 +112,6 @@
             "fieldName": "doubleRandomManagerDepartment",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
@@ -131,6 +124,14 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
         }
     ],
     "changelogDate": "20170106133151",
