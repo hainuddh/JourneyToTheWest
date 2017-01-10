@@ -56,8 +56,10 @@ public class CompanyResource {
     @Timed
     public ResponseEntity<?> importCompany() {
         List<Company> companyList = companyService.createCompanyList("E:\\市场主体名单(市场主体查询).xls");
-        companyRepository.save(companyList);
-        companySearchRepository.save(companyList);
+        if (companyList.size() > 0) {
+            companyRepository.save(companyList);
+            companySearchRepository.save(companyList);
+        }
         return ResponseEntity.ok().body("ok");
     }
 
