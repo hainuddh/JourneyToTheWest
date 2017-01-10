@@ -1,3 +1,4 @@
+/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -30,11 +31,13 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+*/
 /**
  * Test class for the ManagerResource REST controller.
  *
  * @see ManagerResource
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class ManagerResourceIntTest {
@@ -95,12 +98,14 @@ public class ManagerResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    /**
+    */
+/**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     */
+     *//*
+
     public static Manager createEntity(EntityManager em) {
         Manager manager = new Manager()
                 .managerId(DEFAULT_MANAGER_ID)
@@ -414,3 +419,4 @@ public class ManagerResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
+*/

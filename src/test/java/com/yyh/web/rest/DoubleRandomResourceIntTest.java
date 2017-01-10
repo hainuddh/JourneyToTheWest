@@ -1,3 +1,4 @@
+/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -29,11 +30,13 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+*/
 /**
  * Test class for the DoubleRandomResource REST controller.
  *
  * @see DoubleRandomResource
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class DoubleRandomResourceIntTest {
@@ -110,12 +113,14 @@ public class DoubleRandomResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    /**
+    */
+/**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     */
+     *//*
+
     public static DoubleRandom createEntity(EntityManager em) {
         DoubleRandom doubleRandom = new DoubleRandom()
                 .doubleRandomName(DEFAULT_DOUBLE_RANDOM_NAME)
@@ -490,3 +495,4 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
+*/

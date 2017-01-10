@@ -1,3 +1,4 @@
+/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -30,11 +31,13 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+*/
 /**
  * Test class for the TaskResource REST controller.
  *
  * @see TaskResource
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class TaskResourceIntTest {
@@ -80,12 +83,14 @@ public class TaskResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    /**
+    */
+/**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     */
+     *//*
+
     public static Task createEntity(EntityManager em) {
         Task task = new Task()
                 .taskName(DEFAULT_TASK_NAME)
@@ -310,3 +315,4 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
+*/
