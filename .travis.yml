@@ -25,7 +25,7 @@ before_install:
 #  - gulp -v
   - java -version
   - chmod +x mvnw
-install: npm install
+#install: npm install
 script:
   - ./mvnw clean
   - ./mvnw test
