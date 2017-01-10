@@ -1,15 +1,11 @@
 package com.yyh.service;
 
-import com.yyh.domain.Company;
-import com.yyh.domain.CompanyType;
-import com.yyh.domain.LawenforceDepartment;
-import com.yyh.domain.Manager;
-import com.yyh.repository.CompanyRepository;
-import com.yyh.repository.CompanyTypeRepository;
-import com.yyh.repository.LawenforceDepartmentRepository;
-import com.yyh.repository.ManagerRepository;
+import com.yyh.domain.*;
+import com.yyh.repository.*;
 import com.yyh.repository.search.CompanySearchRepository;
 import com.yyh.repository.search.ManagerSearchRepository;
+import com.yyh.security.AuthoritiesConstants;
+import com.yyh.service.util.RandomUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +23,8 @@ import javax.inject.Inject;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -43,6 +38,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ManagerService {
 
     private final Logger log = LoggerFactory.getLogger(ManagerService.class);
+
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     @Inject
     private ManagerRepository managerRepository;
@@ -61,6 +59,12 @@ public class ManagerService {
 
     @Inject
     private CompanyTypeRepository companyTypeRepository;
+
+    @Inject
+    private AuthorityRepository authorityRepository;
+
+    @Inject
+    private UserRepository userRepository;
 
     /**
      * Create a manager list
@@ -94,10 +98,10 @@ public class ManagerService {
         /**
          * 第二部分：加载相关对象到内存中，以键值对存储，降低时间复杂度
          */
-        List<Manager> managerList = managerRepository.findAll();
-        Map<String, Manager> managerMap = new HashMap<>();
-        for (Manager manager : managerList) {
-            managerMap.put(manager.getManagerId(), manager);
+        List<User> userList = userRepository.findAll();
+        Map<String, User> userMap = new HashMap<>();
+        for (User user : userList) {
+            userMap.put(user.getLogin(), user);
         }
         List<LawenforceDepartment> lawenforceDepartmentList = lawenforceDepartmentRepository.findAll();
         Map<String, LawenforceDepartment> lawenforceDepartmentMap = new HashMap<>();
@@ -112,19 +116,35 @@ public class ManagerService {
             if (i > 3) {
                 try {
                     Row row = sheet.getRow(i);
+                    Row rowHelp = sheet.getRow(i + 1);
                     if (row.getCell(0) == null) {
                         break;
                     }
-                    String managerId = String.valueOf((int) row.getCell(0).getNumericCellValue());
+                    DecimalFormat df = new DecimalFormat("0");
+                    String login = String.valueOf(df.format(rowHelp.getCell(6).getNumericCellValue()));
                     /**
-                     * 排除注册号相同的ID
+                     * 排除工商行政执法号相同的ID
                      */
-                    if (managerMap.get(managerId) != null) {
+                    if (userMap.get(login) != null) {
                         continue;
                     } else {
                         Manager manager = new Manager();
-                        managerMap.put(managerId, manager);
-                        manager.setManagerId(managerId);
+                        /**
+                         * 关联用户
+                         */
+                        User user = new User();
+                        user.setLogin(login);
+                        String encryptedPassword = passwordEncoder.encode("123456");
+                        user.setPassword(encryptedPassword);
+                        user.setActivated(true);
+                        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+                        Set<Authority> authorities = new HashSet<>();
+                        authorities.add(authority);
+                        user.setAuthorities(authorities);
+                        userRepository.save(user);
+                        manager.setManagerUser(user);
+                        userMap.put(login, user);
+                        manager.setManagerId(String.valueOf((int) row.getCell(0).getNumericCellValue()));
                         manager.setManagerName(row.getCell(1).getStringCellValue());
                         String departmentName = row.getCell(2).getStringCellValue();
                         /**
@@ -150,7 +170,12 @@ public class ManagerService {
                 }
             }
         }
-        return managers;
+        List<Manager> managerList = new ArrayList<>();
+        if (managers.size() > 0) {
+            managerList = managerRepository.save(managers);
+            managerSearchRepository.save(managers);
+        }
+        return managerList;
     }
 
     /**

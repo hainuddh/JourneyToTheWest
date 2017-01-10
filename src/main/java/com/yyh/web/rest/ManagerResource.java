@@ -58,9 +58,7 @@ public class ManagerResource {
     @Timed
     public ResponseEntity<?> importManager() {
         List<Manager> managerList = managerService.createManagerList("E:\\万宁市工商局执法检查人员名录库.xls");
-        managerRepository.save(managerList);
-        managerSearchRepository.save(managerList);
-        return ResponseEntity.ok().body("ok");
+        return ResponseEntity.ok().body(managerList);
     }
 
     /**
