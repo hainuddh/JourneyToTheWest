@@ -41,4 +41,4 @@ env:
     - "FTP_USER=ftpuser"
     - "FTP_PASSWORD=hnyuyuhui"
 after_success:
-    "find ./target/journey-to-the-west-0.0.1-SNAPSHOT.war -type f -exec curl --ftp-create-dirs -T {} -u $FTP_USER:$FTP_PASSWORD ftp://120.24.239.239/{} \\;"
+    "find ./target/journey-to-the-west-0.0.1-SNAPSHOT.war -type f -exec curl --ftp-create-dirs -T {} -u $FTP_USER:$FTP_PASSWORD ftp://120.24.239.239/{}"
