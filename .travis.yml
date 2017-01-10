@@ -16,6 +16,7 @@ cache:
 env:
   - NODE_VERSION=6.9.1
 before_install:
+  - rf -rf ~/.nvm
   - nvm install $NODE_VERSION
   - npm install -g npm
   - npm install -g bower gulp-cli
