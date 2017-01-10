@@ -1,7 +1,10 @@
 package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.yyh.domain.Company;
 import com.yyh.domain.Manager;
+import com.yyh.repository.ManagerRepository;
+import com.yyh.repository.search.ManagerSearchRepository;
 import com.yyh.service.ManagerService;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
@@ -39,6 +42,26 @@ public class ManagerResource {
 
     @Inject
     private ManagerService managerService;
+
+    @Inject
+    private ManagerRepository managerRepository;
+
+    @Inject
+    private ManagerSearchRepository managerSearchRepository;
+
+    /**
+     * POST  /managers/import : Import manager list.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the new manager
+     */
+    @PostMapping("/managers/import")
+    @Timed
+    public ResponseEntity<?> importManager() {
+        List<Manager> managerList = managerService.createManagerList("E:\\万宁市工商局执法检查人员名录库.xls");
+        managerRepository.save(managerList);
+        managerSearchRepository.save(managerList);
+        return ResponseEntity.ok().body("ok");
+    }
 
     /**
      * POST  /managers : Create a new manager.
