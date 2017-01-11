@@ -3,8 +3,6 @@ package com.yyh.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.domain.Task;
 import com.yyh.domain.TaskProject;
-import com.yyh.repository.TaskProjectRepository;
-import com.yyh.repository.TaskRepository;
 import com.yyh.service.TaskProjectService;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
@@ -24,7 +22,9 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -41,12 +41,6 @@ public class TaskProjectResource {
 
     @Inject
     private TaskProjectService taskProjectService;
-
-    @Inject
-    private TaskRepository taskRepository;
-
-    @Inject
-    private TaskProjectRepository taskProjectRepository;
 
     /**
      * POST  /task-projects : Create a new taskProject.

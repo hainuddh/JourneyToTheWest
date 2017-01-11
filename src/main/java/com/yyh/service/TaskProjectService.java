@@ -25,7 +25,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TaskProjectService {
 
     private final Logger log = LoggerFactory.getLogger(TaskProjectService.class);
-
+    
     @Inject
     private TaskProjectRepository taskProjectRepository;
 
@@ -47,11 +47,11 @@ public class TaskProjectService {
 
     /**
      *  Get all the taskProjects.
-     *
+     *  
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) 
     public Page<TaskProject> findAll(Pageable pageable) {
         log.debug("Request to get all TaskProjects");
         Page<TaskProject> result = taskProjectRepository.findAll(pageable);
@@ -64,7 +64,7 @@ public class TaskProjectService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) 
     public TaskProject findOne(Long id) {
         log.debug("Request to get TaskProject : {}", id);
         TaskProject taskProject = taskProjectRepository.findOne(id);
