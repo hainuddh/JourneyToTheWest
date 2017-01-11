@@ -40,5 +40,5 @@
     "entityTableName": "task_project",
     "dto": "no",
     "pagination": "pager",
-    "service": "no"
+    "service": "serviceClass"
 }

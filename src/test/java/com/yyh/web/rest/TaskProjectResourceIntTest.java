@@ -1,10 +1,10 @@
-/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
 
 import com.yyh.domain.TaskProject;
 import com.yyh.repository.TaskProjectRepository;
+import com.yyh.service.TaskProjectService;
 import com.yyh.repository.search.TaskProjectSearchRepository;
 
 import org.junit.Before;
@@ -30,13 +30,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
 /**
  * Test class for the TaskProjectResource REST controller.
  *
  * @see TaskProjectResource
- *//*
-
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class TaskProjectResourceIntTest {
@@ -52,6 +50,9 @@ public class TaskProjectResourceIntTest {
 
     @Inject
     private TaskProjectRepository taskProjectRepository;
+
+    @Inject
+    private TaskProjectService taskProjectService;
 
     @Inject
     private TaskProjectSearchRepository taskProjectSearchRepository;
@@ -73,21 +74,18 @@ public class TaskProjectResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         TaskProjectResource taskProjectResource = new TaskProjectResource();
-        ReflectionTestUtils.setField(taskProjectResource, "taskProjectSearchRepository", taskProjectSearchRepository);
-        ReflectionTestUtils.setField(taskProjectResource, "taskProjectRepository", taskProjectRepository);
+        ReflectionTestUtils.setField(taskProjectResource, "taskProjectService", taskProjectService);
         this.restTaskProjectMockMvc = MockMvcBuilders.standaloneSetup(taskProjectResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
-/**
+    /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
-
+     */
     public static TaskProject createEntity(EntityManager em) {
         TaskProject taskProject = new TaskProject()
                 .taskProjectName(DEFAULT_TASK_PROJECT_NAME)
@@ -227,8 +225,8 @@ public class TaskProjectResourceIntTest {
     @Transactional
     public void updateTaskProject() throws Exception {
         // Initialize the database
-        taskProjectRepository.saveAndFlush(taskProject);
-        taskProjectSearchRepository.save(taskProject);
+        taskProjectService.save(taskProject);
+
         int databaseSizeBeforeUpdate = taskProjectRepository.findAll().size();
 
         // Update the taskProject
@@ -278,8 +276,8 @@ public class TaskProjectResourceIntTest {
     @Transactional
     public void deleteTaskProject() throws Exception {
         // Initialize the database
-        taskProjectRepository.saveAndFlush(taskProject);
-        taskProjectSearchRepository.save(taskProject);
+        taskProjectService.save(taskProject);
+
         int databaseSizeBeforeDelete = taskProjectRepository.findAll().size();
 
         // Get the taskProject
@@ -300,8 +298,7 @@ public class TaskProjectResourceIntTest {
     @Transactional
     public void searchTaskProject() throws Exception {
         // Initialize the database
-        taskProjectRepository.saveAndFlush(taskProject);
-        taskProjectSearchRepository.save(taskProject);
+        taskProjectService.save(taskProject);
 
         // Search the taskProject
         restTaskProjectMockMvc.perform(get("/api/_search/task-projects?query=id:" + taskProject.getId()))
@@ -313,4 +310,3 @@ public class TaskProjectResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
-*/

@@ -3,16 +3,16 @@ package com.yyh.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.domain.Task;
 import com.yyh.domain.TaskProject;
-
 import com.yyh.repository.TaskProjectRepository;
 import com.yyh.repository.TaskRepository;
-import com.yyh.repository.search.TaskProjectSearchRepository;
+import com.yyh.service.TaskProjectService;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
 
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -40,13 +40,13 @@ public class TaskProjectResource {
     private final Logger log = LoggerFactory.getLogger(TaskProjectResource.class);
 
     @Inject
-    private TaskProjectRepository taskProjectRepository;
-
-    @Inject
-    private TaskProjectSearchRepository taskProjectSearchRepository;
+    private TaskProjectService taskProjectService;
 
     @Inject
     private TaskRepository taskRepository;
+
+    @Inject
+    private TaskProjectRepository taskProjectRepository;
 
     /**
      * POST  /task-projects : Create a new taskProject.
@@ -62,8 +62,7 @@ public class TaskProjectResource {
         if (taskProject.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("taskProject", "idexists", "A new taskProject cannot already have an ID")).body(null);
         }
-        TaskProject result = taskProjectRepository.save(taskProject);
-        taskProjectSearchRepository.save(result);
+        TaskProject result = taskProjectService.save(taskProject);
         return ResponseEntity.created(new URI("/api/task-projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("taskProject", result.getId().toString()))
             .body(result);
@@ -85,8 +84,7 @@ public class TaskProjectResource {
         if (taskProject.getId() == null) {
             return createTaskProject(taskProject);
         }
-        TaskProject result = taskProjectRepository.save(taskProject);
-        taskProjectSearchRepository.save(result);
+        TaskProject result = taskProjectService.save(taskProject);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("taskProject", taskProject.getId().toString()))
             .body(result);
@@ -101,15 +99,12 @@ public class TaskProjectResource {
      */
     @GetMapping("/task-projects")
     @Timed
-    public ResponseEntity<?> getAllTaskProjects(@ApiParam Pageable pageable)
+    public ResponseEntity<List<TaskProject>> getAllTaskProjects(@ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of TaskProjects");
-        Page<TaskProject> page = taskProjectRepository.findAll(pageable);
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("taskProjects", page.getContent());
-        result.put("totalPages", page.getTotalPages());
+        Page<TaskProject> page = taskProjectService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/task-projects");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -122,35 +117,12 @@ public class TaskProjectResource {
     @Timed
     public ResponseEntity<TaskProject> getTaskProject(@PathVariable Long id) {
         log.debug("REST request to get TaskProject : {}", id);
-        TaskProject taskProject = taskProjectRepository.findOne(id);
+        TaskProject taskProject = taskProjectService.findOne(id);
         return Optional.ofNullable(taskProject)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    /**
-     * GET  /task-projects/tasks : get all the task-projects with tasks.
-     *
-     * @throws URISyntaxException if there is an error to generate the HTTP headers
-     */
-    @GetMapping("/task-projects/tasks")
-    @Timed
-    public List<TaskProject> getAllTaskProjectWithTasks()
-        throws URISyntaxException {
-        List<TaskProject> taskProjects = taskProjectRepository.findAll();
-//        for (TaskProject taskProject : taskProjects) {
-//            Set<Task> taskSet = new HashSet<>();
-//            for (Task task : tasks) {
-//                if (task.getTaskProject().equals(taskProject)) {
-//                    taskSet.add(task);
-//                }
-//            }
-//            taskProject.setTasks(taskSet);
-//        }
-        List<Task> tasks = taskRepository.findAll();
-        return taskProjects;
     }
 
     /**
@@ -163,8 +135,7 @@ public class TaskProjectResource {
     @Timed
     public ResponseEntity<Void> deleteTaskProject(@PathVariable Long id) {
         log.debug("REST request to delete TaskProject : {}", id);
-        taskProjectRepository.delete(id);
-        taskProjectSearchRepository.delete(id);
+        taskProjectService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("taskProject", id.toString())).build();
     }
 
@@ -172,22 +143,19 @@ public class TaskProjectResource {
      * SEARCH  /_search/task-projects?query=:query : search for the taskProject corresponding
      * to the query.
      *
-     * @param query    the query of the taskProject search
+     * @param query the query of the taskProject search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/_search/task-projects")
     @Timed
-    public ResponseEntity<?> searchTaskProjects(@RequestParam String query, @ApiParam Pageable pageable)
+    public ResponseEntity<List<TaskProject>> searchTaskProjects(@RequestParam String query, @ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of TaskProjects for query {}", query);
-        Page<TaskProject> page = taskProjectSearchRepository.search(queryStringQuery(query), pageable);
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("taskProjects", page.getContent());
-        result.put("totalPages", page.getTotalPages());
+        Page<TaskProject> page = taskProjectService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/task-projects");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 
