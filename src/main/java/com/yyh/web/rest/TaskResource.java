@@ -89,15 +89,15 @@ public class TaskResource {
     }
 
     /**
-     * GET  /tasks : get all the tasks.
+     * GET  /tasks/taskProject : get all the tasks.
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of tasks in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/tasks")
+    @GetMapping("/tasks/taskProject")
     @Timed
-    public ResponseEntity<?> getAllTasks(@ApiParam Pageable pageable, @RequestParam Long taskProjectId)
+    public ResponseEntity<?> getAllTasksByTaskProjectId(@ApiParam Pageable pageable, @RequestParam Long taskProjectId)
         throws URISyntaxException {
         log.debug("REST request to get a page of Tasks");
         HashMap<String, Object> result = new HashMap<>();
@@ -111,6 +111,19 @@ public class TaskResource {
         result.put("totalPages", page.getTotalPages());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tasks");
         return new ResponseEntity<>(result, headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /tasks : get all the tasks.
+     *
+     * @throws URISyntaxException if there is an error to generate the HTTP headers
+     */
+    @GetMapping("/tasks")
+    @Timed
+    public List<Task> getAllTasks()
+        throws URISyntaxException {
+        List<Task> tasks = taskRepository.findAll();
+        return tasks;
     }
 
     /**
