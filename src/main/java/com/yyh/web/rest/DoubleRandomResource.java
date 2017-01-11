@@ -47,8 +47,8 @@ public class DoubleRandomResource {
      */
     @PostMapping("/double-randoms/start")
     @Timed
-    public ResponseEntity<DoubleRandom> startDoubleRandom() throws URISyntaxException {
-        DoubleRandom result = doubleRandomService.saveDoubleRandomWithResult();
+    public ResponseEntity<DoubleRandom> startDoubleRandom(@Valid @RequestBody DoubleRandom doubleRandom, @RequestParam(value = "tasks") String tasks) throws URISyntaxException {
+        DoubleRandom result = doubleRandomService.saveDoubleRandomWithResult(doubleRandom, tasks);
         return ResponseEntity.created(new URI("/api/double-randoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("doubleRandom", result.getId().toString()))
             .body(result);

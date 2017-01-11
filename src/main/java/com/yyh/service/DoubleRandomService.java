@@ -1,9 +1,6 @@
 package com.yyh.service;
 
-import com.yyh.domain.Company;
-import com.yyh.domain.DoubleRandom;
-import com.yyh.domain.DoubleRandomResult;
-import com.yyh.domain.Manager;
+import com.yyh.domain.*;
 import com.yyh.repository.CompanyRepository;
 import com.yyh.repository.DoubleRandomRepository;
 import com.yyh.repository.DoubleRandomResultRepository;
@@ -11,6 +8,8 @@ import com.yyh.repository.ManagerRepository;
 import com.yyh.repository.search.DoubleRandomSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -52,34 +49,57 @@ public class DoubleRandomService {
      *
      * @return the persisted entity
      */
-    public DoubleRandom saveDoubleRandomWithResult() {
-        DoubleRandom doubleRandom = new DoubleRandom();
-        doubleRandom.setDoubleRandomCompanyRatio("0.0001");
-        doubleRandom.setDoubleRandomDate("2016-1-9");
-        doubleRandom.setDoubleRandomManagerNumber("2");
-        doubleRandom.setDoubleRandomNotary("1");
-        doubleRandom.setDoubleRandomManagerRatio("1");
-        doubleRandom.setDoubleRandomName("dr");
+    public DoubleRandom saveDoubleRandomWithResult(DoubleRandom doubleRandom, String tasks) {
         log.debug("Request to save DoubleRandom : {}", doubleRandom);
-        List<Manager> managerList = managerRepository.findAll();
-        List<Company> companyList = companyRepository.findAll();
+        Manager manager = new Manager();
+        if (doubleRandom.getDoubleRandomManagerDepartment() != null && !doubleRandom.getDoubleRandomManagerDepartment().trim().equals("")) {
+            LawenforceDepartment lawenforceDepartmentM = new LawenforceDepartment();
+            lawenforceDepartmentM.setId(Long.valueOf(doubleRandom.getDoubleRandomManagerDepartment()));
+            manager.setManagerLawenforceDepartment(lawenforceDepartmentM);
+        }
+        manager.setManagerName(doubleRandom.getDoubleRandomManagerName());
+        ExampleMatcher matcherM = ExampleMatcher.matching().withMatcher("managerName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING).ignoreCase());
+        Example<Manager> managerExample = Example.of(manager, matcherM);
+        List<Manager> managerList = managerRepository.findAll(managerExample);
+        Company company = new Company();
+        if (doubleRandom.getDoubleRandomCompanySupervisory() != null && !doubleRandom.getDoubleRandomCompanySupervisory().trim().equals("")) {
+            LawenforceDepartment lawenforceDepartmentC = new LawenforceDepartment();
+            lawenforceDepartmentC.setId(Long.valueOf(doubleRandom.getDoubleRandomCompanySupervisory()));
+            company.setCompanySupervisory(lawenforceDepartmentC);
+        }
+        company.setCompanyName(doubleRandom.getDoubleRandomCompanyName());
+        if (doubleRandom.getDoubleRandomCompanyType() != null && !doubleRandom.getDoubleRandomCompanyType().trim().equals("")) {
+            CompanyType companyType = new CompanyType();
+            companyType.setId(Long.valueOf(doubleRandom.getDoubleRandomCompanyType()));
+            company.setCompanyType(companyType);
+        }
+        if (doubleRandom.getDoubleRandomCompanyIndustryType() != null && !doubleRandom.getDoubleRandomCompanyIndustryType().trim().equals("")) {
+            IndustryType industryType = new IndustryType();
+            industryType.setId(Long.valueOf(doubleRandom.getDoubleRandomCompanyIndustryType()));
+            company.setIndustryType(industryType);
+        }
+        ExampleMatcher matcherC = ExampleMatcher.matching().withMatcher("companyName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING).ignoreCase());
+        Example<Company> companyExample = Example.of(company, matcherC);
+        List<Company> companyList = companyRepository.findAll(companyExample);
         /*TODO
         * 这里的查询效率太低了
         */
-        int[] people = randomPickPeople(managerList.size(), 1);
-        int[] business = randomPickBusiness(companyList.size(), 0.001);
+        Double peopleRatio = Double.valueOf(doubleRandom.getDoubleRandomManagerRatio()) / 100;
+        Double companyRatio = Double.valueOf(doubleRandom.getDoubleRandomCompanyRatio()) / 100;
+        int[] people = randomPickPeople(managerList.size(), peopleRatio);
+        int[] business = randomPickBusiness(companyList.size(), companyRatio);
         ArrayList<int[]> drResultList = bindPeopleWithBusiness(people, business);
         for (int i = 0; i < drResultList.size(); i++) {
             DoubleRandomResult doubleRandomResult = new DoubleRandomResult();
             Set<Manager> managers = new HashSet<>();
-            Company company = companyList.get(drResultList.get(i)[0]);
+            Company companyResult = companyList.get(drResultList.get(i)[0]);
             managers.add(managerList.get(drResultList.get(i)[1]));
             managers.add(managerList.get(drResultList.get(i)[2]));
             doubleRandomResult.setPeople(managerList.get(drResultList.get(i)[1]).getManagerName() + "," + managerList.get(drResultList.get(i)[2]).getManagerName());
             doubleRandomResult.setManagers(managers);
-            doubleRandomResult.setCompany(company);
-            doubleRandomResult.setCompanyRegisterId(company.getCompanyRegisterId());
-            doubleRandomResult.setCompanyName(company.getCompanyName());
+            doubleRandomResult.setCompany(companyResult);
+            doubleRandomResult.setCompanyRegisterId(companyResult.getCompanyRegisterId());
+            doubleRandomResult.setCompanyName(companyResult.getCompanyName());
             doubleRandom.addDoubleRandomResult(doubleRandomResult);
         }
         doubleRandomResultRepository.save(doubleRandom.getDoubleRandomResults());
@@ -101,10 +121,10 @@ public class DoubleRandomService {
     }
 
     /**
-     *  Get all the doubleRandoms.
+     * Get all the doubleRandoms.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<DoubleRandom> findAll(Pageable pageable) {
@@ -114,10 +134,10 @@ public class DoubleRandomService {
     }
 
     /**
-     *  Get one doubleRandom by id.
+     * Get one doubleRandom by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public DoubleRandom findOne(Long id) {
@@ -127,9 +147,9 @@ public class DoubleRandomService {
     }
 
     /**
-     *  Delete the  doubleRandom by id.
+     * Delete the  doubleRandom by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete DoubleRandom : {}", id);
@@ -140,8 +160,8 @@ public class DoubleRandomService {
     /**
      * Search for the doubleRandom corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<DoubleRandom> search(String query, Pageable pageable) {
