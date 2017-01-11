@@ -3,6 +3,7 @@ package com.yyh.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.domain.Task;
 import com.yyh.domain.TaskProject;
+import com.yyh.repository.TaskProjectRepository;
 import com.yyh.repository.TaskRepository;
 import com.yyh.service.TaskService;
 import com.yyh.web.rest.util.HeaderUtil;
@@ -23,6 +24,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -111,19 +113,6 @@ public class TaskResource {
         result.put("totalPages", page.getTotalPages());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tasks");
         return new ResponseEntity<>(result, headers, HttpStatus.OK);
-    }
-
-    /**
-     * GET  /tasks : get all the tasks.
-     *
-     * @throws URISyntaxException if there is an error to generate the HTTP headers
-     */
-    @GetMapping("/tasks")
-    @Timed
-    public List<Task> getAllTasks()
-        throws URISyntaxException {
-        List<Task> tasks = taskRepository.findAll();
-        return tasks;
     }
 
     /**

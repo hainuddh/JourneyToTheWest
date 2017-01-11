@@ -145,6 +145,8 @@ service Manager with serviceClass
 
 service Task with serviceClass
 
+service TaskProject with serviceClass
+
 service Company with serviceClass
 
 service DoubleRandom with serviceClass

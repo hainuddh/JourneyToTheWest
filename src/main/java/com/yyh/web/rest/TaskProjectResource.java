@@ -1,9 +1,11 @@
 package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.yyh.domain.Task;
 import com.yyh.domain.TaskProject;
 
 import com.yyh.repository.TaskProjectRepository;
+import com.yyh.repository.TaskRepository;
 import com.yyh.repository.search.TaskProjectSearchRepository;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
@@ -22,9 +24,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -44,6 +44,9 @@ public class TaskProjectResource {
 
     @Inject
     private TaskProjectSearchRepository taskProjectSearchRepository;
+
+    @Inject
+    private TaskRepository taskRepository;
 
     /**
      * POST  /task-projects : Create a new taskProject.
@@ -128,6 +131,29 @@ public class TaskProjectResource {
     }
 
     /**
+     * GET  /task-projects/tasks : get all the task-projects with tasks.
+     *
+     * @throws URISyntaxException if there is an error to generate the HTTP headers
+     */
+    @GetMapping("/task-projects/tasks")
+    @Timed
+    public List<TaskProject> getAllTaskProjectWithTasks()
+        throws URISyntaxException {
+        List<TaskProject> taskProjects = taskProjectRepository.findAll();
+//        for (TaskProject taskProject : taskProjects) {
+//            Set<Task> taskSet = new HashSet<>();
+//            for (Task task : tasks) {
+//                if (task.getTaskProject().equals(taskProject)) {
+//                    taskSet.add(task);
+//                }
+//            }
+//            taskProject.setTasks(taskSet);
+//        }
+        List<Task> tasks = taskRepository.findAll();
+        return taskProjects;
+    }
+
+    /**
      * DELETE  /task-projects/:id : delete the "id" taskProject.
      *
      * @param id the id of the taskProject to delete
@@ -146,7 +172,7 @@ public class TaskProjectResource {
      * SEARCH  /_search/task-projects?query=:query : search for the taskProject corresponding
      * to the query.
      *
-     * @param query the query of the taskProject search
+     * @param query    the query of the taskProject search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
