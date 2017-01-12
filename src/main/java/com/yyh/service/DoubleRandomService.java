@@ -49,7 +49,7 @@ public class DoubleRandomService {
      *
      * @return the persisted entity
      */
-    public DoubleRandom saveDoubleRandomWithResult(DoubleRandom doubleRandom, String tasks) {
+    public DoubleRandom saveDoubleRandomWithResult(DoubleRandom doubleRandom) {
         log.debug("Request to save DoubleRandom : {}", doubleRandom);
         Manager manager = new Manager();
         if (doubleRandom.getDoubleRandomManagerDepartment() != null && !doubleRandom.getDoubleRandomManagerDepartment().trim().equals("")) {
@@ -89,6 +89,7 @@ public class DoubleRandomService {
         int[] people = randomPickPeople(managerList.size(), peopleRatio);
         int[] business = randomPickBusiness(companyList.size(), companyRatio);
         ArrayList<int[]> drResultList = bindPeopleWithBusiness(people, business);
+        doubleRandom.setDoubleRandomCompanyCount(drResultList.size());
         for (int i = 0; i < drResultList.size(); i++) {
             DoubleRandomResult doubleRandomResult = new DoubleRandomResult();
             Set<Manager> managers = new HashSet<>();
