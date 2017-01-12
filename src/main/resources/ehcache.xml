@@ -24,21 +24,17 @@
 
     <cache alias="com.yyh.domain.Manager.doubleRandomResults" uses-template="simple"/>
 
-    <cache alias="com.yyh.domain.Manager.managerLawenforceAreas" uses-template="simple"/>
-
     <cache alias="com.yyh.domain.LawenforceDepartment" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.LawenforceDepartment.companies" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.LawenforceDepartment.managers" uses-template="simple"/>
 
-    <cache alias="com.yyh.domain.LawenforceArea" uses-template="simple"/>
-
-    <cache alias="com.yyh.domain.LawenforceArea.companies" uses-template="simple"/>
-
-    <cache alias="com.yyh.domain.LawenforceArea.managers" uses-template="simple"/>
-
     <cache alias="com.yyh.domain.Company" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Company.doubleRandomResults" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Company.punishes" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.CompanyType" uses-template="simple"/>
 
@@ -50,17 +46,21 @@
 
     <cache alias="com.yyh.domain.DoubleRandom" uses-template="simple"/>
 
-    <cache alias="com.yyh.domain.DoubleRandom.tasks" uses-template="simple"/>
-
     <cache alias="com.yyh.domain.DoubleRandom.doubleRandomResults" uses-template="simple"/>
 
+    <cache alias="com.yyh.domain.DoubleRandom.tasks" uses-template="simple"/>
+
     <cache alias="com.yyh.domain.DoubleRandomResult" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.DoubleRandomResult.tasks" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.DoubleRandomResult.managers" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.Task" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.Task.laws" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Task.doubleRandoms" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.TaskProject" uses-template="simple"/>
 
@@ -70,17 +70,7 @@
 
     <cache alias="com.yyh.domain.Law.tasks" uses-template="simple"/>
 
-    <cache alias="com.yyh.domain.Company.doubleRandomResults" uses-template="simple"/>
-
-    <cache alias="com.yyh.domain.DoubleRandomResult.tasks" uses-template="simple"/>
-
-    <cache alias="com.yyh.domain.DoubleRandomResult.companies" uses-template="simple"/>
-
     <cache alias="com.yyh.domain.Sign" uses-template="simple"/>
-
-    <cache alias="com.yyh.domain.Task.doubleRandoms" uses-template="simple"/>
-
-    <cache alias="com.yyh.domain.Company.punishes" uses-template="simple"/>
 
     <cache alias="com.yyh.domain.Punish" uses-template="simple"/>
 

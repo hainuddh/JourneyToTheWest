@@ -27,6 +27,7 @@
     "nativeLanguage": "zh-cn",
     "languages": [
       "zh-cn"
-    ]
+    ],
+    "serviceDiscoveryType": false
   }
 }
