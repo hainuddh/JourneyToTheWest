@@ -7,6 +7,8 @@ public final class Constants {
 
     public static final String COMPANY_NORMAL = "0";
     public static final String COMPANY_ABNORMAL = "1";
+    public static final String UPLOAD_FOLDER_WINDOWS = "D:\\uploader";
+    public static final String UPLOAD_FOLDER_LINUX = "/uploader";
 
     //Regex for acceptable logins
     public static final String LOGIN_REGEX = "^[_'.@A-Za-z0-9-]*$";
