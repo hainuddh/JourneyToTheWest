@@ -45,8 +45,8 @@
                     <th jh-sort-by="resultStatus"><span data-translate="journeyToTheWestApp.doubleRandomResult.resultStatus">Result Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="checkDate"><span data-translate="journeyToTheWestApp.doubleRandomResult.checkDate">Check Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="finishDate"><span data-translate="journeyToTheWestApp.doubleRandomResult.finishDate">Finish Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="company.id"><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sign.id"><span data-translate="journeyToTheWestApp.doubleRandomResult.sign">Sign</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="company.id"><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandom.id"><span data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom">Double Random</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -64,10 +64,10 @@
                     <td>{{doubleRandomResult.checkDate}}</td>
                     <td>{{doubleRandomResult.finishDate}}</td>
                     <td>
-                        <a ui-sref="company-detail({id:doubleRandomResult.company.id})">{{doubleRandomResult.company.id}}</a>
+                        <a ui-sref="sign-detail({id:doubleRandomResult.sign.id})">{{doubleRandomResult.sign.id}}</a>
                     </td>
                     <td>
-                        <a ui-sref="sign-detail({id:doubleRandomResult.sign.id})">{{doubleRandomResult.sign.id}}</a>
+                        <a ui-sref="company-detail({id:doubleRandomResult.company.id})">{{doubleRandomResult.company.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="double-random-detail({id:doubleRandomResult.doubleRandom.id})">{{doubleRandomResult.doubleRandom.id}}</a>

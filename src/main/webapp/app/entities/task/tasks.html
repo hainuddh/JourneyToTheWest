@@ -41,7 +41,6 @@
                     <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.task.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomResult.id"><span data-translate="journeyToTheWestApp.task.doubleRandomResult">Double Random Result</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="taskProject.id"><span data-translate="journeyToTheWestApp.task.taskProject">Task Project</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="doubleRandom.id"><span data-translate="journeyToTheWestApp.task.doubleRandom">Double Random</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,9 +55,6 @@
                     </td>
                     <td>
                         <a ui-sref="task-project-detail({id:task.taskProject.id})">{{task.taskProject.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="double-random-detail({id:task.doubleRandom.id})">{{task.doubleRandom.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

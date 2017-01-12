@@ -88,10 +88,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="company_area_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="company_supervisory_id" type="bigint">
                 <constraints nullable="true" />
             </column>

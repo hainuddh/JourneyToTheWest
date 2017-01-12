@@ -20,16 +20,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="lawenforce_department"/>
 
-        <addForeignKeyConstraint baseColumnNames="managers_id"
-                                 baseTableName="manager_manager_lawenforce_area"
-                                 constraintName="fk_manager_manager_lawenforce_area_managers_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="manager"/>
-        <addForeignKeyConstraint baseColumnNames="manager_lawenforce_areas_id"
-                                 baseTableName="manager_manager_lawenforce_area"
-                                 constraintName="fk_manager_manager_lawenforce_area_manager_lawenforce_areas_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="lawenforce_area"/>
-        
     </changeSet>
 </databaseChangeLog>

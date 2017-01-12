@@ -31,11 +31,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="task_project"/>
 
-        <addForeignKeyConstraint baseColumnNames="double_random_id"
-                                 baseTableName="task"
-                                 constraintName="fk_task_double_random_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="double_random"/>
-
     </changeSet>
 </databaseChangeLog>

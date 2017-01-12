@@ -67,6 +67,11 @@ public class DoubleRandom implements Serializable {
     @Column(name = "double_random_company_ratio", length = 64, nullable = false)
     private String doubleRandomCompanyRatio;
 
+    @NotNull
+    @Max(value = 100000)
+    @Column(name = "double_random_company_count", nullable = false)
+    private Integer doubleRandomCompanyCount;
+
     @Size(max = 64)
     @Column(name = "double_random_manager_name", length = 64)
     private String doubleRandomManagerName;
@@ -92,12 +97,14 @@ public class DoubleRandom implements Serializable {
     @OneToMany(mappedBy = "doubleRandom")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Task> tasks = new HashSet<>();
-
-    @OneToMany(mappedBy = "doubleRandom")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DoubleRandomResult> doubleRandomResults = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "double_random_task",
+               joinColumns = @JoinColumn(name="double_randoms_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="tasks_id", referencedColumnName="ID"))
+    private Set<Task> tasks = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -224,6 +231,19 @@ public class DoubleRandom implements Serializable {
         this.doubleRandomCompanyRatio = doubleRandomCompanyRatio;
     }
 
+    public Integer getDoubleRandomCompanyCount() {
+        return doubleRandomCompanyCount;
+    }
+
+    public DoubleRandom doubleRandomCompanyCount(Integer doubleRandomCompanyCount) {
+        this.doubleRandomCompanyCount = doubleRandomCompanyCount;
+        return this;
+    }
+
+    public void setDoubleRandomCompanyCount(Integer doubleRandomCompanyCount) {
+        this.doubleRandomCompanyCount = doubleRandomCompanyCount;
+    }
+
     public String getDoubleRandomManagerName() {
         return doubleRandomManagerName;
     }
@@ -289,31 +309,6 @@ public class DoubleRandom implements Serializable {
         this.description = description;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public DoubleRandom tasks(Set<Task> tasks) {
-        this.tasks = tasks;
-        return this;
-    }
-
-    public DoubleRandom addTask(Task task) {
-        tasks.add(task);
-        task.setDoubleRandom(this);
-        return this;
-    }
-
-    public DoubleRandom removeTask(Task task) {
-        tasks.remove(task);
-        task.setDoubleRandom(null);
-        return this;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     public Set<DoubleRandomResult> getDoubleRandomResults() {
         return doubleRandomResults;
     }
@@ -337,6 +332,31 @@ public class DoubleRandom implements Serializable {
 
     public void setDoubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
         this.doubleRandomResults = doubleRandomResults;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public DoubleRandom tasks(Set<Task> tasks) {
+        this.tasks = tasks;
+        return this;
+    }
+
+    public DoubleRandom addTask(Task task) {
+        tasks.add(task);
+        task.getDoubleRandoms().add(this);
+        return this;
+    }
+
+    public DoubleRandom removeTask(Task task) {
+        tasks.remove(task);
+        task.getDoubleRandoms().remove(this);
+        return this;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
@@ -372,6 +392,7 @@ public class DoubleRandom implements Serializable {
             ", doubleRandomCompanyType='" + doubleRandomCompanyType + "'" +
             ", doubleRandomCompanyIndustryType='" + doubleRandomCompanyIndustryType + "'" +
             ", doubleRandomCompanyRatio='" + doubleRandomCompanyRatio + "'" +
+            ", doubleRandomCompanyCount='" + doubleRandomCompanyCount + "'" +
             ", doubleRandomManagerName='" + doubleRandomManagerName + "'" +
             ", doubleRandomManagerNumber='" + doubleRandomManagerNumber + "'" +
             ", doubleRandomManagerDepartment='" + doubleRandomManagerDepartment + "'" +

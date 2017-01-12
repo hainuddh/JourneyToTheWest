@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity DoubleRandom.
+    -->
+    <changeSet id="20170106133151-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="double_randoms_id"
+                                 baseTableName="double_random_task"
+                                 constraintName="fk_double_random_task_double_randoms_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="double_random"/>
+        <addForeignKeyConstraint baseColumnNames="tasks_id"
+                                 baseTableName="double_random_task"
+                                 constraintName="fk_double_random_task_tasks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
+        
+    </changeSet>
+</databaseChangeLog>

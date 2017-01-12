@@ -40,10 +40,6 @@
         <dd>
             <span>{{vm.doubleRandomResult.finishDate}}</span>
         </dd>
-        <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span></dt>
-        <dd>
-            <a ui-sref="company-detail({id:vm.doubleRandomResult.company.id})">{{vm.doubleRandomResult.company.id}}</a>
-        </dd>
         <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.sign">Sign</span></dt>
         <dd>
             <a ui-sref="sign-detail({id:vm.doubleRandomResult.sign.id})">{{vm.doubleRandomResult.sign.id}}</a>
@@ -53,6 +49,10 @@
             <span ng-repeat="manager in vm.doubleRandomResult.managers">
                 <a ui-sref="manager-detail({id: manager.id})">{{manager.id}}</a>{{$last ? '' : ', '}}
             </span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.company">Company</span></dt>
+        <dd>
+            <a ui-sref="company-detail({id:vm.doubleRandomResult.company.id})">{{vm.doubleRandomResult.company.id}}</a>
         </dd>
         <dt><span data-translate="journeyToTheWestApp.doubleRandomResult.doubleRandom">Double Random</span></dt>
         <dd>

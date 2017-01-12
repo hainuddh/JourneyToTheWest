@@ -1,0 +1,182 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myPunishLabel" data-translate="journeyToTheWestApp.punish.home.createOrEditLabel">Create or edit a Punish</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.punish.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.punish.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.punishId" for="field_punishId">Punish Id</label>
+            <input type="text" class="form-control" name="punishId" id="field_punishId"
+                    ng-model="vm.punish.punishId"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.punishId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.punishId.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.punishId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.personName" for="field_personName">Person Name</label>
+            <input type="text" class="form-control" name="personName" id="field_personName"
+                    ng-model="vm.punish.personName"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.personName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.personName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.personName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.personRegisterId" for="field_personRegisterId">Person Register Id</label>
+            <input type="text" class="form-control" name="personRegisterId" id="field_personRegisterId"
+                    ng-model="vm.punish.personRegisterId"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.personRegisterId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.personRegisterId.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.personRegisterId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.unitName" for="field_unitName">Unit Name</label>
+            <input type="text" class="form-control" name="unitName" id="field_unitName"
+                    ng-model="vm.punish.unitName"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.unitName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.unitName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.unitName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.unitRegisterId" for="field_unitRegisterId">Unit Register Id</label>
+            <input type="text" class="form-control" name="unitRegisterId" id="field_unitRegisterId"
+                    ng-model="vm.punish.unitRegisterId"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.unitRegisterId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.unitRegisterId.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.unitRegisterId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.unitOwner" for="field_unitOwner">Unit Owner</label>
+            <input type="text" class="form-control" name="unitOwner" id="field_unitOwner"
+                    ng-model="vm.punish.unitOwner"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.unitOwner.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.unitOwner.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.unitOwner.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.breakLaw" for="field_breakLaw">Break Law</label>
+            <input type="text" class="form-control" name="breakLaw" id="field_breakLaw"
+                    ng-model="vm.punish.breakLaw"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.breakLaw.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.breakLaw.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.breakLaw.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.punishContent" for="field_punishContent">Punish Content</label>
+            <input type="text" class="form-control" name="punishContent" id="field_punishContent"
+                    ng-model="vm.punish.punishContent"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.punishContent.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.punishContent.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.punishContent.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.punish.punishDate" for="field_punishDate">Punish Date</label>
+            <input type="text" class="form-control" name="punishDate" id="field_punishDate"
+                    ng-model="vm.punish.punishDate"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.punishDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.punishDate.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.punishDate.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.punish.department" for="field_department">Department</label>
+            <select class="form-control" id="field_department" name="department" ng-model="vm.punish.department" ng-options="lawenforceDepartment as lawenforceDepartment.id for lawenforceDepartment in vm.departments | orderBy:'id' track by lawenforceDepartment.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.punish.company" for="field_company">Company</label>
+            <select class="form-control" id="field_company" name="company" ng-model="vm.punish.company" ng-options="company as company.id for company in vm.companies track by company.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

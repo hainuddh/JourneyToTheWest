@@ -20,12 +20,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="industry_type"/>
 
-        <addForeignKeyConstraint baseColumnNames="company_area_id"
-                                 baseTableName="company"
-                                 constraintName="fk_company_company_area_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="lawenforce_area"/>
-
         <addForeignKeyConstraint baseColumnNames="company_supervisory_id"
                                  baseTableName="company"
                                  constraintName="fk_company_company_supervisory_id"

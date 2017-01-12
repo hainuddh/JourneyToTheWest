@@ -42,13 +42,34 @@ public class DoubleRandomResult implements Serializable {
     @Column(name = "people", length = 32, nullable = false)
     private String people;
 
-    @Size(max = 1024)
-    @Column(name = "task", length = 1024)
-    private String task;
+    @NotNull
+    @Size(max = 32)
+    @Column(name = "department", length = 32, nullable = false)
+    private String department;
+
+    @Size(max = 64)
+    @Column(name = "result", length = 64)
+    private String result;
+
+    @Size(max = 64)
+    @Column(name = "result_deal", length = 64)
+    private String resultDeal;
+
+    @Size(max = 64)
+    @Column(name = "result_status", length = 64)
+    private String resultStatus;
+
+    @Size(max = 64)
+    @Column(name = "check_date", length = 64)
+    private String checkDate;
+
+    @Size(max = 64)
+    @Column(name = "finish_date", length = 64)
+    private String finishDate;
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Company company;
+    private Sign sign;
 
     @OneToMany(mappedBy = "doubleRandomResult")
     @JsonIgnore
@@ -61,6 +82,9 @@ public class DoubleRandomResult implements Serializable {
                joinColumns = @JoinColumn(name="double_random_results_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"))
     private Set<Manager> managers = new HashSet<>();
+
+    @ManyToOne
+    private Company company;
 
     @ManyToOne
     private DoubleRandom doubleRandom;
@@ -112,30 +136,95 @@ public class DoubleRandomResult implements Serializable {
         this.people = people;
     }
 
-    public String getTask() {
-        return task;
+    public String getDepartment() {
+        return department;
     }
 
-    public DoubleRandomResult task(String task) {
-        this.task = task;
+    public DoubleRandomResult department(String department) {
+        this.department = department;
         return this;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public Company getCompany() {
-        return company;
+    public String getResult() {
+        return result;
     }
 
-    public DoubleRandomResult company(Company company) {
-        this.company = company;
+    public DoubleRandomResult result(String result) {
+        this.result = result;
         return this;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResultDeal() {
+        return resultDeal;
+    }
+
+    public DoubleRandomResult resultDeal(String resultDeal) {
+        this.resultDeal = resultDeal;
+        return this;
+    }
+
+    public void setResultDeal(String resultDeal) {
+        this.resultDeal = resultDeal;
+    }
+
+    public String getResultStatus() {
+        return resultStatus;
+    }
+
+    public DoubleRandomResult resultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+        return this;
+    }
+
+    public void setResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+    }
+
+    public String getCheckDate() {
+        return checkDate;
+    }
+
+    public DoubleRandomResult checkDate(String checkDate) {
+        this.checkDate = checkDate;
+        return this;
+    }
+
+    public void setCheckDate(String checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public DoubleRandomResult finishDate(String finishDate) {
+        this.finishDate = finishDate;
+        return this;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public Sign getSign() {
+        return sign;
+    }
+
+    public DoubleRandomResult sign(Sign sign) {
+        this.sign = sign;
+        return this;
+    }
+
+    public void setSign(Sign sign) {
+        this.sign = sign;
     }
 
     public Set<Task> getTasks() {
@@ -188,6 +277,19 @@ public class DoubleRandomResult implements Serializable {
         this.managers = managers;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public DoubleRandomResult company(Company company) {
+        this.company = company;
+        return this;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public DoubleRandom getDoubleRandom() {
         return doubleRandom;
     }
@@ -228,7 +330,12 @@ public class DoubleRandomResult implements Serializable {
             ", companyName='" + companyName + "'" +
             ", companyRegisterId='" + companyRegisterId + "'" +
             ", people='" + people + "'" +
-            ", task='" + task + "'" +
+            ", department='" + department + "'" +
+            ", result='" + result + "'" +
+            ", resultDeal='" + resultDeal + "'" +
+            ", resultStatus='" + resultStatus + "'" +
+            ", checkDate='" + checkDate + "'" +
+            ", finishDate='" + finishDate + "'" +
             '}';
     }
 }

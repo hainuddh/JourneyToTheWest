@@ -19,6 +19,7 @@
                 "taskProject": "Task Project",
                 "law": "Law",
                 "sign": "Sign",
+                "punish": "Punish",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -8,12 +8,6 @@
     -->
     <changeSet id="20170106133152-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="company_id"
-                                 baseTableName="double_random_result"
-                                 constraintName="fk_double_random_result_company_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="company"/>
-
         <addForeignKeyConstraint baseColumnNames="sign_id"
                                  baseTableName="double_random_result"
                                  constraintName="fk_double_random_result_sign_id"
@@ -31,6 +25,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="manager"/>
         
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="double_random_result"
+                                 constraintName="fk_double_random_result_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
         <addForeignKeyConstraint baseColumnNames="double_random_id"
                                  baseTableName="double_random_result"
                                  constraintName="fk_double_random_result_double_random_id"

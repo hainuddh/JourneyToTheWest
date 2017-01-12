@@ -22,10 +22,11 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "many-to-many",
             "relationshipName": "doubleRandom",
             "otherEntityName": "doubleRandom",
-            "otherEntityField": "id"
+            "ownerSide": false,
+            "otherEntityRelationshipName": "task"
         }
     ],
     "fields": [

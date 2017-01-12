@@ -78,5 +78,11 @@
 
     <cache alias="com.yyh.domain.Sign" uses-template="simple"/>
 
+    <cache alias="com.yyh.domain.Task.doubleRandoms" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Company.punishes" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Punish" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

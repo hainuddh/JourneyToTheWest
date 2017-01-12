@@ -65,16 +65,5 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
-        <createTable tableName="manager_manager_lawenforce_area">
-            <column name="manager_lawenforce_areas_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="managers_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="managers_id, manager_lawenforce_areas_id" tableName="manager_manager_lawenforce_area"/>
-        
     </changeSet>
 </databaseChangeLog>

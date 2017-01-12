@@ -66,8 +66,8 @@ public class DoubleRandomResourceIntTest {
     private static final String DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_COMPANY_RATIO = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT = 100;
-    private static final Integer UPDATED_DOUBLE_RANDOM_COMPANY_COUNT = 99;
+    private static final Integer DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT = 100000;
+    private static final Integer UPDATED_DOUBLE_RANDOM_COMPANY_COUNT = 99999;
 
     private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_MANAGER_NAME = "BBBBBBBBBB";

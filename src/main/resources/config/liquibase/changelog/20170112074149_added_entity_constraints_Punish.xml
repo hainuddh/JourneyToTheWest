@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Punish.
+    -->
+    <changeSet id="20170112074149-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="punish"
+                                 constraintName="fk_punish_department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lawenforce_department"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="punish"
+                                 constraintName="fk_punish_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+    </changeSet>
+</databaseChangeLog>

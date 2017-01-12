@@ -2,6 +2,18 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "relationshipName": "doubleRandomResult",
+            "otherEntityName": "doubleRandomResult",
+            "otherEntityRelationshipName": "company"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "punish",
+            "otherEntityName": "punish",
+            "otherEntityRelationshipName": "company"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "companyType",
             "otherEntityName": "companyType",
@@ -15,22 +27,9 @@
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "companyArea",
-            "otherEntityName": "lawenforceArea",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
             "relationshipName": "companySupervisory",
             "otherEntityName": "lawenforceDepartment",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "doubleRandomResult",
-            "otherEntityName": "doubleRandomResult",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "company"
         }
     ],
     "fields": [

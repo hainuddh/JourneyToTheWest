@@ -1,0 +1,63 @@
+
+<div>
+    <h2><span data-translate="journeyToTheWestApp.punish.detail.title">Punish</span> {{vm.punish.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="journeyToTheWestApp.punish.punishId">Punish Id</span></dt>
+        <dd>
+            <span>{{vm.punish.punishId}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.personName">Person Name</span></dt>
+        <dd>
+            <span>{{vm.punish.personName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.personRegisterId">Person Register Id</span></dt>
+        <dd>
+            <span>{{vm.punish.personRegisterId}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.unitName">Unit Name</span></dt>
+        <dd>
+            <span>{{vm.punish.unitName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.unitRegisterId">Unit Register Id</span></dt>
+        <dd>
+            <span>{{vm.punish.unitRegisterId}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.unitOwner">Unit Owner</span></dt>
+        <dd>
+            <span>{{vm.punish.unitOwner}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.breakLaw">Break Law</span></dt>
+        <dd>
+            <span>{{vm.punish.breakLaw}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.punishContent">Punish Content</span></dt>
+        <dd>
+            <span>{{vm.punish.punishContent}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.punishDate">Punish Date</span></dt>
+        <dd>
+            <span>{{vm.punish.punishDate}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.department">Department</span></dt>
+        <dd>
+            <a ui-sref="lawenforce-department-detail({id:vm.punish.department.id})">{{vm.punish.department.id}}</a>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.punish.company">Company</span></dt>
+        <dd>
+            <a ui-sref="company-detail({id:vm.punish.company.id})">{{vm.punish.company.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="punish-detail.edit({id:vm.punish.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

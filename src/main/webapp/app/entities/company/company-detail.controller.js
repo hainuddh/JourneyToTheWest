@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('CompanyDetailController', CompanyDetailController);
 
-    CompanyDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Company', 'CompanyType', 'IndustryType', 'LawenforceArea', 'LawenforceDepartment', 'DoubleRandomResult'];
+    CompanyDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Company', 'DoubleRandomResult', 'Punish', 'CompanyType', 'IndustryType', 'LawenforceDepartment'];
 
-    function CompanyDetailController($scope, $rootScope, $stateParams, previousState, entity, Company, CompanyType, IndustryType, LawenforceArea, LawenforceDepartment, DoubleRandomResult) {
+    function CompanyDetailController($scope, $rootScope, $stateParams, previousState, entity, Company, DoubleRandomResult, Punish, CompanyType, IndustryType, LawenforceDepartment) {
         var vm = this;
 
         vm.company = entity;

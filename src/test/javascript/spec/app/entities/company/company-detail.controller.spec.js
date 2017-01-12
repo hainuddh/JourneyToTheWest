@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Company Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockCompany, MockCompanyType, MockIndustryType, MockLawenforceArea, MockLawenforceDepartment, MockDoubleRandomResult;
+        var MockEntity, MockPreviousState, MockCompany, MockDoubleRandomResult, MockPunish, MockCompanyType, MockIndustryType, MockLawenforceDepartment;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,11 +13,11 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockCompany = jasmine.createSpy('MockCompany');
+            MockDoubleRandomResult = jasmine.createSpy('MockDoubleRandomResult');
+            MockPunish = jasmine.createSpy('MockPunish');
             MockCompanyType = jasmine.createSpy('MockCompanyType');
             MockIndustryType = jasmine.createSpy('MockIndustryType');
-            MockLawenforceArea = jasmine.createSpy('MockLawenforceArea');
             MockLawenforceDepartment = jasmine.createSpy('MockLawenforceDepartment');
-            MockDoubleRandomResult = jasmine.createSpy('MockDoubleRandomResult');
             
 
             var locals = {
@@ -26,11 +26,11 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'Company': MockCompany,
+                'DoubleRandomResult': MockDoubleRandomResult,
+                'Punish': MockPunish,
                 'CompanyType': MockCompanyType,
                 'IndustryType': MockIndustryType,
-                'LawenforceArea': MockLawenforceArea,
-                'LawenforceDepartment': MockLawenforceDepartment,
-                'DoubleRandomResult': MockDoubleRandomResult
+                'LawenforceDepartment': MockLawenforceDepartment
             };
             createController = function() {
                 $injector.get('$controller')("CompanyDetailController", locals);

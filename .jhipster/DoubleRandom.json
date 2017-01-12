@@ -3,15 +3,17 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "task",
-            "otherEntityName": "task",
-            "otherEntityRelationshipName": "doubleRandom"
-        },
-        {
-            "relationshipType": "one-to-many",
             "relationshipName": "doubleRandomResult",
             "otherEntityName": "doubleRandomResult",
             "otherEntityRelationshipName": "doubleRandom"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "doubleRandom",
+            "relationshipName": "task",
+            "otherEntityName": "task",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "fields": [
@@ -98,7 +100,7 @@
                 "required",
                 "max"
             ],
-            "fieldValidateRulesMax": 100
+            "fieldValidateRulesMax": 100000
         },
         {
             "fieldName": "doubleRandomManagerName",

@@ -71,13 +71,6 @@ public class Manager implements Serializable {
     @ManyToOne
     private LawenforceDepartment managerLawenforceDepartment;
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "manager_manager_lawenforce_area",
-               joinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="manager_lawenforce_areas_id", referencedColumnName="ID"))
-    private Set<LawenforceArea> managerLawenforceAreas = new HashSet<>();
-
     @ManyToMany(mappedBy = "managers")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -219,31 +212,6 @@ public class Manager implements Serializable {
 
     public void setManagerLawenforceDepartment(LawenforceDepartment lawenforceDepartment) {
         this.managerLawenforceDepartment = lawenforceDepartment;
-    }
-
-    public Set<LawenforceArea> getManagerLawenforceAreas() {
-        return managerLawenforceAreas;
-    }
-
-    public Manager managerLawenforceAreas(Set<LawenforceArea> lawenforceAreas) {
-        this.managerLawenforceAreas = lawenforceAreas;
-        return this;
-    }
-
-    public Manager addManagerLawenforceArea(LawenforceArea lawenforceArea) {
-        managerLawenforceAreas.add(lawenforceArea);
-        lawenforceArea.getManagers().add(this);
-        return this;
-    }
-
-    public Manager removeManagerLawenforceArea(LawenforceArea lawenforceArea) {
-        managerLawenforceAreas.remove(lawenforceArea);
-        lawenforceArea.getManagers().remove(this);
-        return this;
-    }
-
-    public void setManagerLawenforceAreas(Set<LawenforceArea> lawenforceAreas) {
-        this.managerLawenforceAreas = lawenforceAreas;
     }
 
     public Set<DoubleRandomResult> getDoubleRandomResults() {

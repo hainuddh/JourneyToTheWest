@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('ManagerDetailController', ManagerDetailController);
 
-    ManagerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Manager', 'User', 'LawenforceDepartment', 'LawenforceArea', 'DoubleRandomResult'];
+    ManagerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Manager', 'User', 'LawenforceDepartment', 'DoubleRandomResult'];
 
-    function ManagerDetailController($scope, $rootScope, $stateParams, previousState, entity, Manager, User, LawenforceDepartment, LawenforceArea, DoubleRandomResult) {
+    function ManagerDetailController($scope, $rootScope, $stateParams, previousState, entity, Manager, User, LawenforceDepartment, DoubleRandomResult) {
         var vm = this;
 
         vm.manager = entity;

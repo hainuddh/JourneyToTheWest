@@ -52,7 +52,6 @@
                     <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.company.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="companyType.id"><span data-translate="journeyToTheWestApp.company.companyType">Company Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="industryType.id"><span data-translate="journeyToTheWestApp.company.industryType">Industry Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="companyArea.id"><span data-translate="journeyToTheWestApp.company.companyArea">Company Area</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="companySupervisory.id"><span data-translate="journeyToTheWestApp.company.companySupervisory">Company Supervisory</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -79,9 +78,6 @@
                     </td>
                     <td>
                         <a ui-sref="industry-type-detail({id:company.industryType.id})">{{company.industryType.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="lawenforce-area-detail({id:company.companyArea.id})">{{company.companyArea.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="lawenforce-department-detail({id:company.companySupervisory.id})">{{company.companySupervisory.id}}</a>

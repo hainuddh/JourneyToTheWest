@@ -1,0 +1,97 @@
+<div>
+    <h2 data-translate="journeyToTheWestApp.punish.home.title">Punishes</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="punish.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="journeyToTheWestApp.punish.home.createLabel">
+                        Create new Punish
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'journeyToTheWestApp.punish.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.punishId">Punish Id</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.personName">Person Name</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.personRegisterId">Person Register Id</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.unitName">Unit Name</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.unitRegisterId">Unit Register Id</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.unitOwner">Unit Owner</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.breakLaw">Break Law</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.punishContent">Punish Content</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.punishDate">Punish Date</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.department">Department</span></th>
+                    <th><span data-translate="journeyToTheWestApp.punish.company">Company</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="punish in vm.punishes track by punish.id">
+                    <td><a ui-sref="punish-detail({id:punish.id})">{{punish.id}}</a></td>
+                    <td>{{punish.punishId}}</td>
+                    <td>{{punish.personName}}</td>
+                    <td>{{punish.personRegisterId}}</td>
+                    <td>{{punish.unitName}}</td>
+                    <td>{{punish.unitRegisterId}}</td>
+                    <td>{{punish.unitOwner}}</td>
+                    <td>{{punish.breakLaw}}</td>
+                    <td>{{punish.punishContent}}</td>
+                    <td>{{punish.punishDate}}</td>
+                    <td>
+                        <a ui-sref="lawenforce-department-detail({id:punish.department.id})">{{punish.department.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="company-detail({id:punish.company.id})">{{punish.company.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="punish-detail({id:punish.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="punish.edit({id:punish.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="punish.delete({id:punish.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

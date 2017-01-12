@@ -5,16 +5,16 @@
         .module('journeyToTheWestApp')
         .controller('DoubleRandomDialogController', DoubleRandomDialogController);
 
-    DoubleRandomDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'DoubleRandom', 'Task', 'DoubleRandomResult'];
+    DoubleRandomDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'DoubleRandom', 'DoubleRandomResult', 'Task'];
 
-    function DoubleRandomDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, DoubleRandom, Task, DoubleRandomResult) {
+    function DoubleRandomDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, DoubleRandom, DoubleRandomResult, Task) {
         var vm = this;
 
         vm.doubleRandom = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.tasks = Task.query();
         vm.doublerandomresults = DoubleRandomResult.query();
+        vm.tasks = Task.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

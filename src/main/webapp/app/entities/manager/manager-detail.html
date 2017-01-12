@@ -44,12 +44,6 @@
         <dd>
             <a ui-sref="lawenforce-department-detail({id:vm.manager.managerLawenforceDepartment.id})">{{vm.manager.managerLawenforceDepartment.id}}</a>
         </dd>
-        <dt><span data-translate="journeyToTheWestApp.manager.managerLawenforceArea">Manager Lawenforce Area</span></dt>
-        <dd>
-            <span ng-repeat="managerLawenforceArea in vm.manager.managerLawenforceAreas">
-                <a ui-sref="lawenforce-area-detail({id: managerLawenforceArea.id})">{{managerLawenforceArea.id}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
     </dl>
 
     <button type="submit"

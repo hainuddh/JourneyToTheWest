@@ -1,0 +1,32 @@
+{
+    "journeyToTheWestApp": {
+        "punish" : {
+            "home": {
+                "title": "Punishes",
+                "createLabel": "Create a new Punish",
+                "createOrEditLabel": "Create or edit a Punish",
+                "search": "Search for Punish"
+            },
+            "created": "A new Punish is created with identifier {{ param }}",
+            "updated": "A Punish is updated with identifier {{ param }}",
+            "deleted": "A Punish is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Punish {{ id }}?"
+            },
+            "detail": {
+                "title": "Punish"
+            },
+            "punishId": "Punish Id",
+            "personName": "Person Name",
+            "personRegisterId": "Person Register Id",
+            "unitName": "Unit Name",
+            "unitRegisterId": "Unit Register Id",
+            "unitOwner": "Unit Owner",
+            "breakLaw": "Break Law",
+            "punishContent": "Punish Content",
+            "punishDate": "Punish Date",
+            "department": "Department",
+            "company": "Company"
+        }
+    }
+}

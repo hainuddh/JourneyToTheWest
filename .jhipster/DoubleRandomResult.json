@@ -3,14 +3,6 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "company",
-            "otherEntityName": "company",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "doubleRandomResult"
-        },
-        {
-            "relationshipType": "one-to-one",
             "relationshipName": "sign",
             "otherEntityName": "sign",
             "otherEntityField": "id",
@@ -30,6 +22,12 @@
             "otherEntityName": "manager",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",

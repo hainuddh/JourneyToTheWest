@@ -25,10 +25,10 @@
             "resultStatus": "Result Status",
             "checkDate": "Check Date",
             "finishDate": "Finish Date",
-            "company": "Company",
             "sign": "Sign",
             "task": "Task",
             "manager": "Manager",
+            "company": "Company",
             "doubleRandom": "Double Random"
         }
     }

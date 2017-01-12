@@ -53,7 +53,6 @@ entity DoubleRandom {
     doubleRandomManagerNumber String required maxlength(64),
     doubleRandomManagerDepartment String maxlength(64),
     doubleRandomManagerRatio String required maxlength(64),
-    doubleRandomCompanyCount Integer required max(100),
     description String maxlength(1024)
 }
 
@@ -69,6 +68,18 @@ entity DoubleRandomResult {
     finishDate String maxlength(64)
 }
 
+entity Punish {
+    punishId String required maxlength(32),
+    personName String required maxlength(32),
+    personRegisterId String required maxlength(32),
+    unitName String required maxlength(32),
+    unitRegisterId String required maxlength(32),
+    unitOwner String required maxlength(32),
+    breakLaw String required maxlength(32),
+    punishContent String required maxlength(32),
+    punishDate String required maxlength(32)
+}
+
 entity Sign {
     signName String required maxlength(10),
     signConfig String required maxlength(10),
@@ -77,10 +88,6 @@ entity Sign {
 entity LawenforceDepartment {
     departmentName String required maxlength(32),
     departmentAddress String required maxlength(32)
-}
-
-entity LawenforceArea {
-    areaName String required maxlength(32)
 }
 
 entity CompanyType {
@@ -98,80 +105,41 @@ entity Law {
 }
 
 relationship OneToOne {
-    DoubleRandomResult{company} to Company{doubleRandomResult},
-    DoubleRandomResult{sign} to Sign
+    DoubleRandomResult{sign} to Sign,
+    Punish{department} to LawenforceDepartment,
+    Manager{managerUser} to User{manager}
 }
 
 relationship ManyToMany {
-    DoubleRandomResult{manager} to Manager{doubleRandomResult}
-}
-
-relationship OneToMany {
-    DoubleRandomResult{task} to Task{doubleRandomResult}
-}
-
-relationship ManyToMany {
-    Task{law} to Law{task}
-}
-
-relationship OneToMany {
-    TaskProject{task} to Task{taskProject}
-}
-
-relationship OneToMany {
+    DoubleRandomResult{manager} to Manager{doubleRandomResult},
+    Task{law} to Law{task},
     DoubleRandom{task} to Task{doubleRandom}
 }
 
 relationship OneToMany {
+    Company{doubleRandomResult} to DoubleRandomResult{company},
+    DoubleRandomResult{task} to Task{doubleRandomResult},
+    Company{punish} to Punish{company},
+    TaskProject{task} to Task{taskProject},
     DoubleRandom{doubleRandomResult} to DoubleRandomResult{doubleRandom}
 }
 
 relationship ManyToOne {
-    Company{companyType} to CompanyType{company}
-}
-
-relationship ManyToOne {
-    Company{industryType} to IndustryType{company}
-}
-
-relationship ManyToOne {
-    Company{companyArea} to LawenforceArea{company}
-}
-
-relationship ManyToOne {
-    Company{companySupervisory} to LawenforceDepartment{company}
-}
-
-relationship ManyToOne {
+    Company{companyType} to CompanyType{company},
+    Company{industryType} to IndustryType{company},
+    Company{companySupervisory} to LawenforceDepartment{company},
     Manager{managerLawenforceDepartment} to LawenforceDepartment{manager}
 }
 
-relationship ManyToMany {
-    Manager{managerLawenforceArea} to LawenforceArea{manager}
-}
-
-relationship OneToOne {
-    Manager{managerUser} to User{manager}
-}
-
 service Manager with serviceClass
-
 service Task with serviceClass
-
 service TaskProject with serviceClass
-
 service Company with serviceClass
-
 service DoubleRandom with serviceClass
 
 paginate Company with pager
-
 paginate TaskProject with pager
-
 paginate Task with pager
-
 paginate Manager with pager
-
 paginate DoubleRandom with pager
-
 paginate DoubleRandomResult with pager

@@ -8,6 +8,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -91,6 +93,16 @@ public class Company implements Serializable {
     @Column(name = "description", length = 4069)
     private String description;
 
+    @OneToMany(mappedBy = "company")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DoubleRandomResult> doubleRandomResults = new HashSet<>();
+
+    @OneToMany(mappedBy = "company")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Punish> punishes = new HashSet<>();
+
     @ManyToOne
     private CompanyType companyType;
 
@@ -98,14 +110,7 @@ public class Company implements Serializable {
     private IndustryType industryType;
 
     @ManyToOne
-    private LawenforceArea companyArea;
-
-    @ManyToOne
     private LawenforceDepartment companySupervisory;
-
-    @OneToOne(mappedBy = "company")
-    @JsonIgnore
-    private DoubleRandomResult doubleRandomResult;
 
     public Long getId() {
         return id;
@@ -297,6 +302,56 @@ public class Company implements Serializable {
         this.description = description;
     }
 
+    public Set<DoubleRandomResult> getDoubleRandomResults() {
+        return doubleRandomResults;
+    }
+
+    public Company doubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
+        this.doubleRandomResults = doubleRandomResults;
+        return this;
+    }
+
+    public Company addDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        doubleRandomResults.add(doubleRandomResult);
+        doubleRandomResult.setCompany(this);
+        return this;
+    }
+
+    public Company removeDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        doubleRandomResults.remove(doubleRandomResult);
+        doubleRandomResult.setCompany(null);
+        return this;
+    }
+
+    public void setDoubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
+        this.doubleRandomResults = doubleRandomResults;
+    }
+
+    public Set<Punish> getPunishes() {
+        return punishes;
+    }
+
+    public Company punishes(Set<Punish> punishes) {
+        this.punishes = punishes;
+        return this;
+    }
+
+    public Company addPunish(Punish punish) {
+        punishes.add(punish);
+        punish.setCompany(this);
+        return this;
+    }
+
+    public Company removePunish(Punish punish) {
+        punishes.remove(punish);
+        punish.setCompany(null);
+        return this;
+    }
+
+    public void setPunishes(Set<Punish> punishes) {
+        this.punishes = punishes;
+    }
+
     public CompanyType getCompanyType() {
         return companyType;
     }
@@ -323,19 +378,6 @@ public class Company implements Serializable {
         this.industryType = industryType;
     }
 
-    public LawenforceArea getCompanyArea() {
-        return companyArea;
-    }
-
-    public Company companyArea(LawenforceArea lawenforceArea) {
-        this.companyArea = lawenforceArea;
-        return this;
-    }
-
-    public void setCompanyArea(LawenforceArea lawenforceArea) {
-        this.companyArea = lawenforceArea;
-    }
-
     public LawenforceDepartment getCompanySupervisory() {
         return companySupervisory;
     }
@@ -347,19 +389,6 @@ public class Company implements Serializable {
 
     public void setCompanySupervisory(LawenforceDepartment lawenforceDepartment) {
         this.companySupervisory = lawenforceDepartment;
-    }
-
-    public DoubleRandomResult getDoubleRandomResult() {
-        return doubleRandomResult;
-    }
-
-    public Company doubleRandomResult(DoubleRandomResult doubleRandomResult) {
-        this.doubleRandomResult = doubleRandomResult;
-        return this;
-    }
-
-    public void setDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
-        this.doubleRandomResult = doubleRandomResult;
     }
 
     @Override

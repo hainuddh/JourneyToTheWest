@@ -64,6 +64,12 @@
         <dd>
             <span>{{vm.doubleRandom.description}}</span>
         </dd>
+        <dt><span data-translate="journeyToTheWestApp.doubleRandom.task">Task</span></dt>
+        <dd>
+            <span ng-repeat="task in vm.doubleRandom.tasks">
+                <a ui-sref="task-detail({id: task.id})">{{task.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"
