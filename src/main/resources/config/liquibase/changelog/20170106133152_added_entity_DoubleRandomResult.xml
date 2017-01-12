@@ -36,7 +36,23 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="task" type="varchar(1024)">
+            <column name="department" type="varchar(32)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="result" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="result_deal" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="result_status" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="check_date" type="varchar(64)">
                 <constraints nullable="true" />
             </column>
             

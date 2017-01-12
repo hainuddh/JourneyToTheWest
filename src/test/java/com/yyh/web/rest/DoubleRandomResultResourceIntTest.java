@@ -47,8 +47,20 @@ public class DoubleRandomResultResourceIntTest {
     private static final String DEFAULT_PEOPLE = "AAAAAAAAAA";
     private static final String UPDATED_PEOPLE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TASK = "AAAAAAAAAA";
-    private static final String UPDATED_TASK = "BBBBBBBBBB";
+    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RESULT = "AAAAAAAAAA";
+    private static final String UPDATED_RESULT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RESULT_DEAL = "AAAAAAAAAA";
+    private static final String UPDATED_RESULT_DEAL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RESULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_RESULT_STATUS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CHECK_DATE = "AAAAAAAAAA";
+    private static final String UPDATED_CHECK_DATE = "BBBBBBBBBB";
 
     private static final String DEFAULT_FINISH_DATE = "AAAAAAAAAA";
     private static final String UPDATED_FINISH_DATE = "BBBBBBBBBB";
@@ -94,7 +106,11 @@ public class DoubleRandomResultResourceIntTest {
                 .companyName(DEFAULT_COMPANY_NAME)
                 .companyRegisterId(DEFAULT_COMPANY_REGISTER_ID)
                 .people(DEFAULT_PEOPLE)
-                .task(DEFAULT_TASK)
+                .department(DEFAULT_DEPARTMENT)
+                .result(DEFAULT_RESULT)
+                .resultDeal(DEFAULT_RESULT_DEAL)
+                .resultStatus(DEFAULT_RESULT_STATUS)
+                .checkDate(DEFAULT_CHECK_DATE)
                 .finishDate(DEFAULT_FINISH_DATE);
         return doubleRandomResult;
     }
@@ -124,7 +140,11 @@ public class DoubleRandomResultResourceIntTest {
         assertThat(testDoubleRandomResult.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testDoubleRandomResult.getCompanyRegisterId()).isEqualTo(DEFAULT_COMPANY_REGISTER_ID);
         assertThat(testDoubleRandomResult.getPeople()).isEqualTo(DEFAULT_PEOPLE);
-        assertThat(testDoubleRandomResult.getTask()).isEqualTo(DEFAULT_TASK);
+        assertThat(testDoubleRandomResult.getDepartment()).isEqualTo(DEFAULT_DEPARTMENT);
+        assertThat(testDoubleRandomResult.getResult()).isEqualTo(DEFAULT_RESULT);
+        assertThat(testDoubleRandomResult.getResultDeal()).isEqualTo(DEFAULT_RESULT_DEAL);
+        assertThat(testDoubleRandomResult.getResultStatus()).isEqualTo(DEFAULT_RESULT_STATUS);
+        assertThat(testDoubleRandomResult.getCheckDate()).isEqualTo(DEFAULT_CHECK_DATE);
         assertThat(testDoubleRandomResult.getFinishDate()).isEqualTo(DEFAULT_FINISH_DATE);
 
         // Validate the DoubleRandomResult in ElasticSearch
@@ -208,6 +228,24 @@ public class DoubleRandomResultResourceIntTest {
 
     @Test
     @Transactional
+    public void checkDepartmentIsRequired() throws Exception {
+        int databaseSizeBeforeTest = doubleRandomResultRepository.findAll().size();
+        // set the field null
+        doubleRandomResult.setDepartment(null);
+
+        // Create the DoubleRandomResult, which fails.
+
+        restDoubleRandomResultMockMvc.perform(post("/api/double-random-results")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(doubleRandomResult)))
+            .andExpect(status().isBadRequest());
+
+        List<DoubleRandomResult> doubleRandomResultList = doubleRandomResultRepository.findAll();
+        assertThat(doubleRandomResultList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllDoubleRandomResults() throws Exception {
         // Initialize the database
         doubleRandomResultRepository.saveAndFlush(doubleRandomResult);
@@ -220,7 +258,11 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].companyRegisterId").value(hasItem(DEFAULT_COMPANY_REGISTER_ID.toString())))
             .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE.toString())))
-            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())))
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT.toString())))
+            .andExpect(jsonPath("$.[*].result").value(hasItem(DEFAULT_RESULT.toString())))
+            .andExpect(jsonPath("$.[*].resultDeal").value(hasItem(DEFAULT_RESULT_DEAL.toString())))
+            .andExpect(jsonPath("$.[*].resultStatus").value(hasItem(DEFAULT_RESULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].checkDate").value(hasItem(DEFAULT_CHECK_DATE.toString())))
             .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())));
     }
 
@@ -238,7 +280,11 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
             .andExpect(jsonPath("$.companyRegisterId").value(DEFAULT_COMPANY_REGISTER_ID.toString()))
             .andExpect(jsonPath("$.people").value(DEFAULT_PEOPLE.toString()))
-            .andExpect(jsonPath("$.task").value(DEFAULT_TASK.toString()))
+            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT.toString()))
+            .andExpect(jsonPath("$.result").value(DEFAULT_RESULT.toString()))
+            .andExpect(jsonPath("$.resultDeal").value(DEFAULT_RESULT_DEAL.toString()))
+            .andExpect(jsonPath("$.resultStatus").value(DEFAULT_RESULT_STATUS.toString()))
+            .andExpect(jsonPath("$.checkDate").value(DEFAULT_CHECK_DATE.toString()))
             .andExpect(jsonPath("$.finishDate").value(DEFAULT_FINISH_DATE.toString()));
     }
 
@@ -264,7 +310,11 @@ public class DoubleRandomResultResourceIntTest {
                 .companyName(UPDATED_COMPANY_NAME)
                 .companyRegisterId(UPDATED_COMPANY_REGISTER_ID)
                 .people(UPDATED_PEOPLE)
-                .task(UPDATED_TASK)
+                .department(UPDATED_DEPARTMENT)
+                .result(UPDATED_RESULT)
+                .resultDeal(UPDATED_RESULT_DEAL)
+                .resultStatus(UPDATED_RESULT_STATUS)
+                .checkDate(UPDATED_CHECK_DATE)
                 .finishDate(UPDATED_FINISH_DATE);
 
         restDoubleRandomResultMockMvc.perform(put("/api/double-random-results")
@@ -279,7 +329,11 @@ public class DoubleRandomResultResourceIntTest {
         assertThat(testDoubleRandomResult.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testDoubleRandomResult.getCompanyRegisterId()).isEqualTo(UPDATED_COMPANY_REGISTER_ID);
         assertThat(testDoubleRandomResult.getPeople()).isEqualTo(UPDATED_PEOPLE);
-        assertThat(testDoubleRandomResult.getTask()).isEqualTo(UPDATED_TASK);
+        assertThat(testDoubleRandomResult.getDepartment()).isEqualTo(UPDATED_DEPARTMENT);
+        assertThat(testDoubleRandomResult.getResult()).isEqualTo(UPDATED_RESULT);
+        assertThat(testDoubleRandomResult.getResultDeal()).isEqualTo(UPDATED_RESULT_DEAL);
+        assertThat(testDoubleRandomResult.getResultStatus()).isEqualTo(UPDATED_RESULT_STATUS);
+        assertThat(testDoubleRandomResult.getCheckDate()).isEqualTo(UPDATED_CHECK_DATE);
         assertThat(testDoubleRandomResult.getFinishDate()).isEqualTo(UPDATED_FINISH_DATE);
 
         // Validate the DoubleRandomResult in ElasticSearch
@@ -342,7 +396,11 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].companyRegisterId").value(hasItem(DEFAULT_COMPANY_REGISTER_ID.toString())))
             .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE.toString())))
-            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())))
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT.toString())))
+            .andExpect(jsonPath("$.[*].result").value(hasItem(DEFAULT_RESULT.toString())))
+            .andExpect(jsonPath("$.[*].resultDeal").value(hasItem(DEFAULT_RESULT_DEAL.toString())))
+            .andExpect(jsonPath("$.[*].resultStatus").value(hasItem(DEFAULT_RESULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].checkDate").value(hasItem(DEFAULT_CHECK_DATE.toString())))
             .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())));
     }
 }

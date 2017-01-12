@@ -62,14 +62,66 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.task" for="field_task">Task</label>
-            <input type="text" class="form-control" name="task" id="field_task"
-                    ng-model="vm.doubleRandomResult.task"
-                    ng-maxlength="1024" />
-            <div ng-show="editForm.task.$invalid">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.department" for="field_department">Department</label>
+            <input type="text" class="form-control" name="department" id="field_department"
+                    ng-model="vm.doubleRandomResult.department"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.department.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.task.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1024">
-                    This field cannot be longer than 1024 characters.
+                    ng-show="editForm.department.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.department.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.result" for="field_result">Result</label>
+            <input type="text" class="form-control" name="result" id="field_result"
+                    ng-model="vm.doubleRandomResult.result"
+                    ng-maxlength="64" />
+            <div ng-show="editForm.result.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.result.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.resultDeal" for="field_resultDeal">Result Deal</label>
+            <input type="text" class="form-control" name="resultDeal" id="field_resultDeal"
+                    ng-model="vm.doubleRandomResult.resultDeal"
+                    ng-maxlength="64" />
+            <div ng-show="editForm.resultDeal.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.resultDeal.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.resultStatus" for="field_resultStatus">Result Status</label>
+            <input type="text" class="form-control" name="resultStatus" id="field_resultStatus"
+                    ng-model="vm.doubleRandomResult.resultStatus"
+                    ng-maxlength="64" />
+            <div ng-show="editForm.resultStatus.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.resultStatus.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.checkDate" for="field_checkDate">Check Date</label>
+            <input type="text" class="form-control" name="checkDate" id="field_checkDate"
+                    ng-model="vm.doubleRandomResult.checkDate"
+                    ng-maxlength="64" />
+            <div ng-show="editForm.checkDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.checkDate.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
                 </p>
             </div>
         </div>

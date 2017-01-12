@@ -127,7 +127,11 @@
                                 companyName: null,
                                 companyRegisterId: null,
                                 people: null,
-                                task: null,
+                                department: null,
+                                result: null,
+                                resultDeal: null,
+                                resultStatus: null,
+                                checkDate: null,
                                 finishDate: null,
                                 id: null
                             };

@@ -61,7 +61,11 @@ entity DoubleRandomResult {
     companyName String required maxlength(32),
     companyRegisterId String required maxlength(32),
     people String required maxlength(32),
-    task String maxlength(1024),
+    department String required maxlength(32),
+    result String maxlength(64),
+    resultDeal String maxlength(64),
+    resultStatus String maxlength(64),
+    checkDate String maxlength(64),
     finishDate String maxlength(64)
 }
 

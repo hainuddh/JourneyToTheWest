@@ -67,12 +67,45 @@
             "fieldValidateRulesMaxlength": 32
         },
         {
-            "fieldName": "task",
+            "fieldName": "department",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        },
+        {
+            "fieldName": "result",
             "fieldType": "String",
             "fieldValidateRules": [
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": 1024
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "resultDeal",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "resultStatus",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "checkDate",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
         },
         {
             "fieldName": "finishDate",

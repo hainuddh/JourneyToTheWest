@@ -68,7 +68,7 @@ class DoubleRandomResultGatlingTest extends Simulation {
             .exec(http("Create new doubleRandomResult")
             .post("/api/double-random-results")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "companyName":"SAMPLE_TEXT", "companyRegisterId":"SAMPLE_TEXT", "people":"SAMPLE_TEXT", "task":"SAMPLE_TEXT", "finishDate":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "companyName":"SAMPLE_TEXT", "companyRegisterId":"SAMPLE_TEXT", "people":"SAMPLE_TEXT", "department":"SAMPLE_TEXT", "result":"SAMPLE_TEXT", "resultDeal":"SAMPLE_TEXT", "resultStatus":"SAMPLE_TEXT", "checkDate":"SAMPLE_TEXT", "finishDate":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_doubleRandomResult_url"))).exitHereIfFailed
             .pause(10)
