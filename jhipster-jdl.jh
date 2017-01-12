@@ -9,17 +9,8 @@ entity Manager {
     description String maxlength(4069)
 }
 
-entity LawenforceDepartment {
-	departmentName String required maxlength(32),
-    departmentAddress String required maxlength(32)
-}
-
-entity LawenforceArea {
-	areaName String required maxlength(32)
-}
-
 entity Company {
-	companyName String required maxlength(32),
+    companyName String required maxlength(32),
     companyRegisterId String required maxlength(32),
     companyCapital String required maxlength(32),
     companyAddress String required maxlength(256),
@@ -28,11 +19,20 @@ entity Company {
     companyOwner String required maxlength(32),
     companyDate String required maxlength(32),
     companyPhone String required maxlength(32),
-	checkCount Integer max(10000),
+    checkCount Integer max(10000),
     companyStatus String required maxlength(32),
     lastCheckDate String maxlength(32),
     abnormalInfo String maxlength(4069),
     description String maxlength(4069)
+}
+
+entity LawenforceDepartment {
+	departmentName String required maxlength(32),
+    departmentAddress String required maxlength(32)
+}
+
+entity LawenforceArea {
+	areaName String required maxlength(32)
 }
 
 entity CompanyType {
@@ -53,10 +53,12 @@ entity DoubleRandom {
     doubleRandomCompanyType String maxlength(64),
     doubleRandomCompanyIndustryType String maxlength(64),
     doubleRandomCompanyRatio String required maxlength(64),
+    doubleRandomCompanyCount Integer required max(100000),
     doubleRandomManagerName String maxlength(64),
     doubleRandomManagerNumber String required maxlength(64),
     doubleRandomManagerDepartment String maxlength(64),
     doubleRandomManagerRatio String required maxlength(64),
+    doubleRandomCompanyCount Integer required max(100),
     description String maxlength(1024)
 }
 
