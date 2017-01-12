@@ -3,6 +3,7 @@ package com.yyh.repository;
 import com.yyh.domain.Manager;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -11,5 +12,11 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface ManagerRepository extends JpaRepository<Manager,Long> {
+
+    @Query("select distinct manager from Manager manager left join fetch manager.doubleRandomResults")
+    List<Manager> findAllWithEagerRelationships();
+
+    @Query("select manager from Manager manager left join fetch manager.doubleRandomResults where manager.id =:id")
+    Manager findOneWithEagerRelationships(@Param("id") Long id);
 
 }

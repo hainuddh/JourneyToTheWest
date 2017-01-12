@@ -19,7 +19,7 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "doubleRandomResult",
+            "otherEntityRelationshipName": "",
             "relationshipName": "manager",
             "otherEntityName": "manager",
             "otherEntityField": "id",

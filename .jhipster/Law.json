@@ -1,14 +1,6 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "task",
-            "otherEntityName": "task",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "law"
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
             "fieldName": "lawName",

@@ -1,19 +1,16 @@
 package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.yyh.domain.*;
+import com.yyh.domain.DoubleRandomResult;
 
 import com.yyh.repository.DoubleRandomResultRepository;
-import com.yyh.repository.ManagerRepository;
 import com.yyh.repository.search.DoubleRandomResultSearchRepository;
-import com.yyh.service.UserService;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
 
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +22,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -39,18 +37,12 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DoubleRandomResultResource {
 
     private final Logger log = LoggerFactory.getLogger(DoubleRandomResultResource.class);
-
+        
     @Inject
     private DoubleRandomResultRepository doubleRandomResultRepository;
 
     @Inject
     private DoubleRandomResultSearchRepository doubleRandomResultSearchRepository;
-
-    @Inject
-    private ManagerRepository managerRepository;
-
-    @Inject
-    private UserService userService;
 
     /**
      * POST  /double-random-results : Create a new doubleRandomResult.
@@ -105,50 +97,12 @@ public class DoubleRandomResultResource {
      */
     @GetMapping("/double-random-results")
     @Timed
-    public ResponseEntity<?> getAllDoubleRandomResults(@ApiParam Pageable pageable, @RequestParam Long doubleRandomId)
+    public ResponseEntity<List<DoubleRandomResult>> getAllDoubleRandomResults(@ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of DoubleRandomResults");
-        HashMap<String, Object> result = new HashMap<>();
-        DoubleRandom doubleRandom = new DoubleRandom();
-        doubleRandom.setId(doubleRandomId);
-        DoubleRandomResult doubleRandomResult = new DoubleRandomResult();
-        doubleRandomResult.setDoubleRandom(doubleRandom);
-        Example<DoubleRandomResult> ex = Example.of(doubleRandomResult);
-        Page<DoubleRandomResult> page = doubleRandomResultRepository.findAll(ex, pageable);
-        result.put("doubleRandomResults", page.getContent());
-        result.put("totalPages", page.getTotalPages());
+        Page<DoubleRandomResult> page = doubleRandomResultRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/double-random-results");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
-    }
-
-    /**
-     * GET  /double-random-results/login : get all the doubleRandomResults.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of doubleRandomResults in body
-     * @throws URISyntaxException if there is an error to generate the HTTP headers
-     */
-    @GetMapping("/double-random-results/login")
-    @Timed
-    public ResponseEntity<?> getAllDoubleRandomResultsByLogin(@ApiParam Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of DoubleRandomResults");
-        HashMap<String, Object> result = new HashMap<>();
-        Manager manager = new Manager();
-        manager.setManagerUser(userService.getUserWithAuthorities());
-        Example<Manager> exManager = Example.of(manager);
-        Manager managerFind = managerRepository.findOne(exManager);
-        List<DoubleRandomResult> doubleRandomResults = doubleRandomResultRepository.findAllWithEagerRelationships();
-        List<DoubleRandomResult> finalResult = new ArrayList<>();
-        for (DoubleRandomResult drr : doubleRandomResults) {
-            if (drr.getManagers().contains(managerFind)) {
-                finalResult.add(drr);
-            }
-        }
-        /*TODO
-        * 这里问题太大了，效率极其低。
-        */
-        result.put("doubleRandomResults", finalResult);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -188,7 +142,7 @@ public class DoubleRandomResultResource {
      * SEARCH  /_search/double-random-results?query=:query : search for the doubleRandomResult corresponding
      * to the query.
      *
-     * @param query the query of the doubleRandomResult search
+     * @param query the query of the doubleRandomResult search 
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

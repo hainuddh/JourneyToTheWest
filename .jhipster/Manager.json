@@ -17,10 +17,11 @@
         },
         {
             "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
             "relationshipName": "doubleRandomResult",
             "otherEntityName": "doubleRandomResult",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "manager"
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "fields": [

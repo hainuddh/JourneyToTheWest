@@ -9,7 +9,7 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "doubleRandom",
+            "otherEntityRelationshipName": "",
             "relationshipName": "task",
             "otherEntityName": "task",
             "otherEntityField": "id",

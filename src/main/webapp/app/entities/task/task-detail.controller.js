@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('TaskDetailController', TaskDetailController);
 
-    TaskDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Task', 'Law', 'TaskProject', 'DoubleRandom'];
+    TaskDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Task', 'Law', 'TaskProject'];
 
-    function TaskDetailController($scope, $rootScope, $stateParams, previousState, entity, Task, Law, TaskProject, DoubleRandom) {
+    function TaskDetailController($scope, $rootScope, $stateParams, previousState, entity, Task, Law, TaskProject) {
         var vm = this;
 
         vm.task = entity;

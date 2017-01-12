@@ -5,15 +5,14 @@
         .module('journeyToTheWestApp')
         .controller('LawDialogController', LawDialogController);
 
-    LawDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Law', 'Task'];
+    LawDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Law'];
 
-    function LawDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Law, Task) {
+    function LawDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Law) {
         var vm = this;
 
         vm.law = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.tasks = Task.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

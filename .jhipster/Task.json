@@ -3,7 +3,7 @@
     "relationships": [
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "task",
+            "otherEntityRelationshipName": "",
             "relationshipName": "law",
             "otherEntityName": "law",
             "otherEntityField": "id",
@@ -14,13 +14,6 @@
             "relationshipName": "taskProject",
             "otherEntityName": "taskProject",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "doubleRandom",
-            "otherEntityName": "doubleRandom",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "task"
         }
     ],
     "fields": [

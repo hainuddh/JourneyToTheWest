@@ -1,6 +1,5 @@
 package com.yyh.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -50,11 +49,6 @@ public class Task implements Serializable {
 
     @ManyToOne
     private TaskProject taskProject;
-
-    @ManyToMany(mappedBy = "tasks")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<DoubleRandom> doubleRandoms = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -114,13 +108,11 @@ public class Task implements Serializable {
 
     public Task addLaw(Law law) {
         laws.add(law);
-        law.getTasks().add(this);
         return this;
     }
 
     public Task removeLaw(Law law) {
         laws.remove(law);
-        law.getTasks().remove(this);
         return this;
     }
 
@@ -139,31 +131,6 @@ public class Task implements Serializable {
 
     public void setTaskProject(TaskProject taskProject) {
         this.taskProject = taskProject;
-    }
-
-    public Set<DoubleRandom> getDoubleRandoms() {
-        return doubleRandoms;
-    }
-
-    public Task doubleRandoms(Set<DoubleRandom> doubleRandoms) {
-        this.doubleRandoms = doubleRandoms;
-        return this;
-    }
-
-    public Task addDoubleRandom(DoubleRandom doubleRandom) {
-        doubleRandoms.add(doubleRandom);
-        doubleRandom.getTasks().add(this);
-        return this;
-    }
-
-    public Task removeDoubleRandom(DoubleRandom doubleRandom) {
-        doubleRandoms.remove(doubleRandom);
-        doubleRandom.getTasks().remove(this);
-        return this;
-    }
-
-    public void setDoubleRandoms(Set<DoubleRandom> doubleRandoms) {
-        this.doubleRandoms = doubleRandoms;
     }
 
     @Override

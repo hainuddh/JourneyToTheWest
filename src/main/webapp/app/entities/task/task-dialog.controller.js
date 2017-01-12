@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('TaskDialogController', TaskDialogController);
 
-    TaskDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'Law', 'TaskProject', 'DoubleRandom'];
+    TaskDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'Law', 'TaskProject'];
 
-    function TaskDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Task, Law, TaskProject, DoubleRandom) {
+    function TaskDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Task, Law, TaskProject) {
         var vm = this;
 
         vm.task = entity;
@@ -15,7 +15,6 @@
         vm.save = save;
         vm.laws = Law.query();
         vm.taskprojects = TaskProject.query();
-        vm.doublerandoms = DoubleRandom.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

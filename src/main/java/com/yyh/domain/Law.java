@@ -1,6 +1,5 @@
 package com.yyh.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -8,8 +7,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -40,11 +37,6 @@ public class Law implements Serializable {
     @Size(max = 1024)
     @Column(name = "description", length = 1024)
     private String description;
-
-    @ManyToMany(mappedBy = "laws")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Task> tasks = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -91,31 +83,6 @@ public class Law implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public Law tasks(Set<Task> tasks) {
-        this.tasks = tasks;
-        return this;
-    }
-
-    public Law addTask(Task task) {
-        tasks.add(task);
-        task.getLaws().add(this);
-        return this;
-    }
-
-    public Law removeTask(Task task) {
-        tasks.remove(task);
-        task.getLaws().remove(this);
-        return this;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
     }
 
     @Override

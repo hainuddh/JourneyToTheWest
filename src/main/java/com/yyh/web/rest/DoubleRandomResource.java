@@ -35,24 +35,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DoubleRandomResource {
 
     private final Logger log = LoggerFactory.getLogger(DoubleRandomResource.class);
-
+        
     @Inject
     private DoubleRandomService doubleRandomService;
-
-    /**
-     * POST  /double-randoms/start : Create a new doubleRandom.
-     *
-     * @return the ResponseEntity with status 201 (Created) and with body the new doubleRandom, or with status 400 (Bad Request) if the doubleRandom has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PostMapping("/double-randoms/start")
-    @Timed
-    public ResponseEntity<DoubleRandom> startDoubleRandom(@Valid @RequestBody DoubleRandom doubleRandom, @RequestParam(value = "tasks") String tasks) throws URISyntaxException {
-        DoubleRandom result = doubleRandomService.saveDoubleRandomWithResult(doubleRandom, tasks);
-        return ResponseEntity.created(new URI("/api/double-randoms/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("doubleRandom", result.getId().toString()))
-            .body(result);
-    }
 
     /**
      * POST  /double-randoms : Create a new doubleRandom.
@@ -149,7 +134,7 @@ public class DoubleRandomResource {
      * SEARCH  /_search/double-randoms?query=:query : search for the doubleRandom corresponding
      * to the query.
      *
-     * @param query the query of the doubleRandom search
+     * @param query the query of the doubleRandom search 
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

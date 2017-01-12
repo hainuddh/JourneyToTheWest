@@ -18,8 +18,7 @@
             },
             "lawName": "Law Name",
             "lawContent": "Law Content",
-            "description": "Description",
-            "task": "Task"
+            "description": "Description"
         }
     }
 }

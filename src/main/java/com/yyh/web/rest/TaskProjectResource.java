@@ -1,7 +1,6 @@
 package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.yyh.domain.Task;
 import com.yyh.domain.TaskProject;
 import com.yyh.service.TaskProjectService;
 import com.yyh.web.rest.util.HeaderUtil;
@@ -10,7 +9,6 @@ import com.yyh.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +20,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +35,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TaskProjectResource {
 
     private final Logger log = LoggerFactory.getLogger(TaskProjectResource.class);
-
+        
     @Inject
     private TaskProjectService taskProjectService;
 
@@ -137,7 +134,7 @@ public class TaskProjectResource {
      * SEARCH  /_search/task-projects?query=:query : search for the taskProject corresponding
      * to the query.
      *
-     * @param query the query of the taskProject search
+     * @param query the query of the taskProject search 
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

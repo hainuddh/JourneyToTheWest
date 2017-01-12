@@ -44,6 +44,12 @@
         <dd>
             <a ui-sref="lawenforce-department-detail({id:vm.manager.managerLawenforceDepartment.id})">{{vm.manager.managerLawenforceDepartment.id}}</a>
         </dd>
+        <dt><span data-translate="journeyToTheWestApp.manager.doubleRandomResult">Double Random Result</span></dt>
+        <dd>
+            <span ng-repeat="doubleRandomResult in vm.manager.doubleRandomResults">
+                <a ui-sref="double-random-result-detail({id: doubleRandomResult.id})">{{doubleRandomResult.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"

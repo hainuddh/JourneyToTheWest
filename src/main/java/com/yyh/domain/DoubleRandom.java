@@ -345,13 +345,11 @@ public class DoubleRandom implements Serializable {
 
     public DoubleRandom addTask(Task task) {
         tasks.add(task);
-        task.getDoubleRandoms().add(this);
         return this;
     }
 
     public DoubleRandom removeTask(Task task) {
         tasks.remove(task);
-        task.getDoubleRandoms().remove(this);
         return this;
     }
 
