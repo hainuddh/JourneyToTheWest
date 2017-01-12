@@ -25,6 +25,7 @@
             "doubleRandomCompanyType": "Double Random Company Type",
             "doubleRandomCompanyIndustryType": "Double Random Company Industry Type",
             "doubleRandomCompanyRatio": "Double Random Company Ratio",
+            "doubleRandomCompanyCount": "Double Random Company Count",
             "doubleRandomManagerName": "Double Random Manager Name",
             "doubleRandomManagerNumber": "Double Random Manager Number",
             "doubleRandomManagerDepartment": "Double Random Manager Department",

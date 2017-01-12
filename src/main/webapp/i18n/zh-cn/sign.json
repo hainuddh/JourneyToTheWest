@@ -1,0 +1,23 @@
+{
+    "journeyToTheWestApp": {
+        "sign" : {
+            "home": {
+                "title": "Signs",
+                "createLabel": "Create a new Sign",
+                "createOrEditLabel": "Create or edit a Sign",
+                "search": "Search for Sign"
+            },
+            "created": "A new Sign is created with identifier {{ param }}",
+            "updated": "A Sign is updated with identifier {{ param }}",
+            "deleted": "A Sign is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sign {{ id }}?"
+            },
+            "detail": {
+                "title": "Sign"
+            },
+            "signName": "Sign Name",
+            "signConfig": "Sign Config"
+        }
+    }
+}

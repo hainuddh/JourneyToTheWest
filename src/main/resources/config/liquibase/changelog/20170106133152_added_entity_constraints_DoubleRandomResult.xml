@@ -14,6 +14,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="company"/>
 
+        <addForeignKeyConstraint baseColumnNames="sign_id"
+                                 baseTableName="double_random_result"
+                                 constraintName="fk_double_random_result_sign_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sign"/>
+
         <addForeignKeyConstraint baseColumnNames="double_random_results_id"
                                  baseTableName="double_random_result_manager"
                                  constraintName="fk_double_random_result_manager_double_random_results_id"

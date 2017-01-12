@@ -1,4 +1,3 @@
-/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -30,13 +29,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
 /**
  * Test class for the LawResource REST controller.
  *
  * @see LawResource
- *//*
-
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class LawResourceIntTest {
@@ -80,14 +77,12 @@ public class LawResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
-/**
+    /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
-
+     */
     public static Law createEntity(EntityManager em) {
         Law law = new Law()
                 .lawName(DEFAULT_LAW_NAME)
@@ -313,4 +308,3 @@ public class LawResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
-*/

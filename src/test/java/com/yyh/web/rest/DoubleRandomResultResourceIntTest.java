@@ -1,4 +1,3 @@
-/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -30,13 +29,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
 /**
  * Test class for the DoubleRandomResultResource REST controller.
  *
  * @see DoubleRandomResultResource
- *//*
-
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class DoubleRandomResultResourceIntTest {
@@ -52,6 +49,9 @@ public class DoubleRandomResultResourceIntTest {
 
     private static final String DEFAULT_TASK = "AAAAAAAAAA";
     private static final String UPDATED_TASK = "BBBBBBBBBB";
+
+    private static final String DEFAULT_FINISH_DATE = "AAAAAAAAAA";
+    private static final String UPDATED_FINISH_DATE = "BBBBBBBBBB";
 
     @Inject
     private DoubleRandomResultRepository doubleRandomResultRepository;
@@ -83,20 +83,19 @@ public class DoubleRandomResultResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
-/**
+    /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
-
+     */
     public static DoubleRandomResult createEntity(EntityManager em) {
         DoubleRandomResult doubleRandomResult = new DoubleRandomResult()
                 .companyName(DEFAULT_COMPANY_NAME)
                 .companyRegisterId(DEFAULT_COMPANY_REGISTER_ID)
                 .people(DEFAULT_PEOPLE)
-                .task(DEFAULT_TASK);
+                .task(DEFAULT_TASK)
+                .finishDate(DEFAULT_FINISH_DATE);
         return doubleRandomResult;
     }
 
@@ -126,6 +125,7 @@ public class DoubleRandomResultResourceIntTest {
         assertThat(testDoubleRandomResult.getCompanyRegisterId()).isEqualTo(DEFAULT_COMPANY_REGISTER_ID);
         assertThat(testDoubleRandomResult.getPeople()).isEqualTo(DEFAULT_PEOPLE);
         assertThat(testDoubleRandomResult.getTask()).isEqualTo(DEFAULT_TASK);
+        assertThat(testDoubleRandomResult.getFinishDate()).isEqualTo(DEFAULT_FINISH_DATE);
 
         // Validate the DoubleRandomResult in ElasticSearch
         DoubleRandomResult doubleRandomResultEs = doubleRandomResultSearchRepository.findOne(testDoubleRandomResult.getId());
@@ -220,7 +220,8 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].companyRegisterId").value(hasItem(DEFAULT_COMPANY_REGISTER_ID.toString())))
             .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE.toString())))
-            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())));
+            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())))
+            .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())));
     }
 
     @Test
@@ -237,7 +238,8 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
             .andExpect(jsonPath("$.companyRegisterId").value(DEFAULT_COMPANY_REGISTER_ID.toString()))
             .andExpect(jsonPath("$.people").value(DEFAULT_PEOPLE.toString()))
-            .andExpect(jsonPath("$.task").value(DEFAULT_TASK.toString()));
+            .andExpect(jsonPath("$.task").value(DEFAULT_TASK.toString()))
+            .andExpect(jsonPath("$.finishDate").value(DEFAULT_FINISH_DATE.toString()));
     }
 
     @Test
@@ -262,7 +264,8 @@ public class DoubleRandomResultResourceIntTest {
                 .companyName(UPDATED_COMPANY_NAME)
                 .companyRegisterId(UPDATED_COMPANY_REGISTER_ID)
                 .people(UPDATED_PEOPLE)
-                .task(UPDATED_TASK);
+                .task(UPDATED_TASK)
+                .finishDate(UPDATED_FINISH_DATE);
 
         restDoubleRandomResultMockMvc.perform(put("/api/double-random-results")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -277,6 +280,7 @@ public class DoubleRandomResultResourceIntTest {
         assertThat(testDoubleRandomResult.getCompanyRegisterId()).isEqualTo(UPDATED_COMPANY_REGISTER_ID);
         assertThat(testDoubleRandomResult.getPeople()).isEqualTo(UPDATED_PEOPLE);
         assertThat(testDoubleRandomResult.getTask()).isEqualTo(UPDATED_TASK);
+        assertThat(testDoubleRandomResult.getFinishDate()).isEqualTo(UPDATED_FINISH_DATE);
 
         // Validate the DoubleRandomResult in ElasticSearch
         DoubleRandomResult doubleRandomResultEs = doubleRandomResultSearchRepository.findOne(testDoubleRandomResult.getId());
@@ -338,7 +342,7 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].companyRegisterId").value(hasItem(DEFAULT_COMPANY_REGISTER_ID.toString())))
             .andExpect(jsonPath("$.[*].people").value(hasItem(DEFAULT_PEOPLE.toString())))
-            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())));
+            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())))
+            .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())));
     }
 }
-*/

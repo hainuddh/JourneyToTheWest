@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the DoubleRandom entity.
+ * Performance test for the Sign entity.
  */
-class DoubleRandomGatlingTest extends Simulation {
+class SignGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -42,7 +42,7 @@ class DoubleRandomGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the DoubleRandom entity")
+    val scn = scenario("Test the Sign entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -60,26 +60,26 @@ class DoubleRandomGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all doubleRandoms")
-            .get("/api/double-randoms")
+            exec(http("Get all signs")
+            .get("/api/signs")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new doubleRandom")
-            .post("/api/double-randoms")
+            .exec(http("Create new sign")
+            .post("/api/signs")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "doubleRandomName":"SAMPLE_TEXT", "doubleRandomDate":"SAMPLE_TEXT", "doubleRandomNotary":"SAMPLE_TEXT", "doubleRandomCompanyName":"SAMPLE_TEXT", "doubleRandomCompanyArea":"SAMPLE_TEXT", "doubleRandomCompanySupervisory":"SAMPLE_TEXT", "doubleRandomCompanyType":"SAMPLE_TEXT", "doubleRandomCompanyIndustryType":"SAMPLE_TEXT", "doubleRandomCompanyRatio":"SAMPLE_TEXT", "doubleRandomCompanyCount":"0", "doubleRandomManagerName":"SAMPLE_TEXT", "doubleRandomManagerNumber":"SAMPLE_TEXT", "doubleRandomManagerDepartment":"SAMPLE_TEXT", "doubleRandomManagerRatio":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "signName":"SAMPLE_TEXT", "signConfig":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_doubleRandom_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_sign_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created doubleRandom")
-                .get("${new_doubleRandom_url}")
+                exec(http("Get created sign")
+                .get("${new_sign_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created doubleRandom")
-            .delete("${new_doubleRandom_url}")
+            .exec(http("Delete created sign")
+            .delete("${new_sign_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

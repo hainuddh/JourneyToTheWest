@@ -73,10 +73,28 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.finishDate" for="field_finishDate">Finish Date</label>
+            <input type="text" class="form-control" name="finishDate" id="field_finishDate"
+                    ng-model="vm.doubleRandomResult.finishDate"
+                    ng-maxlength="64" />
+            <div ng-show="editForm.finishDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.finishDate.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label data-translate="journeyToTheWestApp.doubleRandomResult.company" for="field_company">Company</label>
             <select class="form-control" id="field_company" name="company" ng-model="vm.doubleRandomResult.company" ng-options="company as company.id for company in vm.companies | orderBy:'id' track by company.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.doubleRandomResult.sign" for="field_sign">Sign</label>
+            <select class="form-control" id="field_sign" name="sign" ng-model="vm.doubleRandomResult.sign" ng-options="sign as sign.id for sign in vm.signs | orderBy:'id' track by sign.id">
                 <option value=""></option>
             </select>
         </div>

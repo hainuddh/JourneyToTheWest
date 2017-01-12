@@ -1,0 +1,58 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySignLabel" data-translate="journeyToTheWestApp.sign.home.createOrEditLabel">Create or edit a Sign</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.sign.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.sign.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.sign.signName" for="field_signName">Sign Name</label>
+            <input type="text" class="form-control" name="signName" id="field_signName"
+                    ng-model="vm.sign.signName"
+                    required ng-maxlength="10" />
+            <div ng-show="editForm.signName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.signName.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.signName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.sign.signConfig" for="field_signConfig">Sign Config</label>
+            <input type="text" class="form-control" name="signConfig" id="field_signConfig"
+                    ng-model="vm.sign.signConfig"
+                    required ng-maxlength="10" />
+            <div ng-show="editForm.signConfig.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.signConfig.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.signConfig.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

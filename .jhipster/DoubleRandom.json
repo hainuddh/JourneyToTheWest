@@ -92,6 +92,15 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "doubleRandomCompanyCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "max"
+            ],
+            "fieldValidateRulesMax": 100
+        },
+        {
             "fieldName": "doubleRandomManagerName",
             "fieldType": "String",
             "fieldValidateRules": [

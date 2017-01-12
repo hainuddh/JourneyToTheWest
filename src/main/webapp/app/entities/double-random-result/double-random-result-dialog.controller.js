@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('DoubleRandomResultDialogController', DoubleRandomResultDialogController);
 
-    DoubleRandomResultDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DoubleRandomResult', 'Company', 'Task', 'Manager', 'DoubleRandom'];
+    DoubleRandomResultDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DoubleRandomResult', 'Company', 'Sign', 'Task', 'Manager', 'DoubleRandom'];
 
-    function DoubleRandomResultDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DoubleRandomResult, Company, Task, Manager, DoubleRandom) {
+    function DoubleRandomResultDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DoubleRandomResult, Company, Sign, Task, Manager, DoubleRandom) {
         var vm = this;
 
         vm.doubleRandomResult = entity;
@@ -21,6 +21,15 @@
             return Company.get({id : vm.doubleRandomResult.company.id}).$promise;
         }).then(function(company) {
             vm.companies.push(company);
+        });
+        vm.signs = Sign.query({filter: 'doublerandomresult-is-null'});
+        $q.all([vm.doubleRandomResult.$promise, vm.signs.$promise]).then(function() {
+            if (!vm.doubleRandomResult.sign || !vm.doubleRandomResult.sign.id) {
+                return $q.reject();
+            }
+            return Sign.get({id : vm.doubleRandomResult.sign.id}).$promise;
+        }).then(function(sign) {
+            vm.signs.push(sign);
         });
         vm.tasks = Task.query();
         vm.managers = Manager.query();

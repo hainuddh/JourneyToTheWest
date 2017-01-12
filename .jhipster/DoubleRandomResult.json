@@ -10,6 +10,14 @@
             "otherEntityRelationshipName": "doubleRandomResult"
         },
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "sign",
+            "otherEntityName": "sign",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "doubleRandomResult"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "task",
             "otherEntityName": "task",
@@ -65,6 +73,14 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "finishDate",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
         }
     ],
     "changelogDate": "20170106133152",

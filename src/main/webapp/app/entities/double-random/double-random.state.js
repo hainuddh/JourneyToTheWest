@@ -133,6 +133,7 @@
                                 doubleRandomCompanyType: null,
                                 doubleRandomCompanyIndustryType: null,
                                 doubleRandomCompanyRatio: null,
+                                doubleRandomCompanyCount: null,
                                 doubleRandomManagerName: null,
                                 doubleRandomManagerNumber: null,
                                 doubleRandomManagerDepartment: null,

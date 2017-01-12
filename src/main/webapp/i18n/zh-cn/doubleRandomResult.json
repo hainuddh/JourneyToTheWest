@@ -20,7 +20,9 @@
             "companyRegisterId": "Company Register Id",
             "people": "People",
             "task": "Task",
+            "finishDate": "Finish Date",
             "company": "Company",
+            "sign": "Sign",
             "task": "Task",
             "manager": "Manager",
             "doubleRandom": "Double Random"

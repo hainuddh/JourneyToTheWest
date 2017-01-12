@@ -60,6 +60,10 @@
                 <constraints nullable="false" />
             </column>
             
+            <column name="double_random_company_count" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
             <column name="double_random_manager_name" type="varchar(64)">
                 <constraints nullable="true" />
             </column>

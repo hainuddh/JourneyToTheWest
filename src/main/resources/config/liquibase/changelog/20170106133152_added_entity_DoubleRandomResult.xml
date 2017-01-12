@@ -39,7 +39,13 @@
             <column name="task" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
+            
+            <column name="finish_date" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
                         <column name="company_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="sign_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
             <column name="double_random_id" type="bigint">

@@ -1,5 +1,5 @@
 entity Manager {
-	managerId String required maxlength(32),
+    managerId String required maxlength(32),
     managerName String required maxlength(32),
     managerCardId String required maxlength(32),
     managerCardType String required maxlength(64),
@@ -26,25 +26,20 @@ entity Company {
     description String maxlength(4069)
 }
 
-entity LawenforceDepartment {
-	departmentName String required maxlength(32),
-    departmentAddress String required maxlength(32)
+entity TaskProject {
+    taskProjectName String required maxlength(64),
+    taskProjectCheckDepartment String required maxlength(256),
+    description String maxlength(1024)
 }
 
-entity LawenforceArea {
-	areaName String required maxlength(32)
-}
-
-entity CompanyType {
-	typeName String required maxlength(32)
-}
-
-entity IndustryType {
-	typeName String required maxlength(32)
+entity Task {
+    taskName String required maxlength(64),
+    taskContent String required maxlength(1024),
+    description String maxlength(1024)
 }
 
 entity DoubleRandom {
-	doubleRandomName String required maxlength(32),
+    doubleRandomName String required maxlength(32),
     doubleRandomDate String required maxlength(32),
     doubleRandomNotary String required maxlength(32),
     doubleRandomCompanyName String maxlength(64),
@@ -63,84 +58,96 @@ entity DoubleRandom {
 }
 
 entity DoubleRandomResult {
-	companyName String required maxlength(32),
+    companyName String required maxlength(32),
     companyRegisterId String required maxlength(32),
     people String required maxlength(32),
-    task String maxlength(1024)
+    task String maxlength(1024),
+    finishDate String maxlength(64)
 }
 
-entity TaskProject {
-	taskProjectName String required maxlength(64),
-    taskProjectCheckDepartment String required maxlength(256),
-    description String maxlength(1024)
+entity Sign {
+    signName String required maxlength(10),
+    signConfig String required maxlength(10),
 }
 
-entity Task {
-	taskName String required maxlength(64),
-	taskContent String required maxlength(1024),
-    description String maxlength(1024)
+entity LawenforceDepartment {
+    departmentName String required maxlength(32),
+    departmentAddress String required maxlength(32)
+}
+
+entity LawenforceArea {
+    areaName String required maxlength(32)
+}
+
+entity CompanyType {
+    typeName String required maxlength(32)
+}
+
+entity IndustryType {
+    typeName String required maxlength(32)
 }
 
 entity Law {
-	lawName String required maxlength(64),
-	lawContent String required maxlength(4096),
+    lawName String required maxlength(64),
+    lawContent String required maxlength(4096),
     description String maxlength(1024)
 }
 
 relationship OneToOne {
-	DoubleRandomResult{company} to Company{doubleRandomResult}
+    DoubleRandomResult{company} to Company{doubleRandomResult},
+    DoubleRandomResult{sign} to Sign
 }
 
 relationship ManyToMany {
-	DoubleRandomResult{manager} to Manager{doubleRandomResult}
+    DoubleRandomResult{manager} to Manager{doubleRandomResult}
 }
 
 relationship OneToMany {
-	DoubleRandomResult{task} to Task{doubleRandomResult}
+    DoubleRandomResult{task} to Task{doubleRandomResult}
 }
 
 relationship ManyToMany {
-	Task{law} to Law{task}
+    Task{law} to Law{task}
 }
 
 relationship OneToMany {
-	TaskProject{task} to Task{taskProject}
+    TaskProject{task} to Task{taskProject}
 }
 
 relationship OneToMany {
-	DoubleRandom{task} to Task{doubleRandom}
+    DoubleRandom{task} to Task{doubleRandom}
 }
 
 relationship OneToMany {
-	DoubleRandom{doubleRandomResult} to DoubleRandomResult{doubleRandom}
+    DoubleRandom{doubleRandomResult} to DoubleRandomResult{doubleRandom}
 }
 
 relationship ManyToOne {
-	Company{companyType} to CompanyType{company}
+    Company{companyType} to CompanyType{company}
 }
 
 relationship ManyToOne {
-	Company{industryType} to IndustryType{company}
+    Company{industryType} to IndustryType{company}
 }
 
 relationship ManyToOne {
-	Company{companyArea} to LawenforceArea{company}
+    Company{companyArea} to LawenforceArea{company}
 }
 
 relationship ManyToOne {
-	Company{companySupervisory} to LawenforceDepartment{company}
+    Company{companySupervisory} to LawenforceDepartment{company}
 }
 
 relationship ManyToOne {
-	Manager{managerLawenforceDepartment} to LawenforceDepartment{manager}
+    Manager{managerLawenforceDepartment} to LawenforceDepartment{manager}
 }
 
 relationship ManyToMany {
-	Manager{managerLawenforceArea} to LawenforceArea{manager}
+    Manager{managerLawenforceArea} to LawenforceArea{manager}
 }
 
 relationship OneToOne {
-	Manager{managerUser} to User{manager}
+    Manager{managerUser} to User{manager}
 }
 
 service Manager with serviceClass

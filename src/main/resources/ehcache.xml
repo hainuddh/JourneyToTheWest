@@ -76,5 +76,7 @@
 
     <cache alias="com.yyh.domain.DoubleRandomResult.companies" uses-template="simple"/>
 
+    <cache alias="com.yyh.domain.Sign" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

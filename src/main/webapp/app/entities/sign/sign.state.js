@@ -9,73 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('double-random-result', {
+        .state('sign', {
             parent: 'entity',
-            url: '/double-random-result?page&sort&search',
+            url: '/sign',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'journeyToTheWestApp.doubleRandomResult.home.title'
+                pageTitle: 'journeyToTheWestApp.sign.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/double-random-result/double-random-results.html',
-                    controller: 'DoubleRandomResultController',
+                    templateUrl: 'app/entities/sign/signs.html',
+                    controller: 'SignController',
                     controllerAs: 'vm'
                 }
             },
-            params: {
-                page: {
-                    value: '1',
-                    squash: true
-                },
-                sort: {
-                    value: 'id,asc',
-                    squash: true
-                },
-                search: null
-            },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                    return {
-                        page: PaginationUtil.parsePage($stateParams.page),
-                        sort: $stateParams.sort,
-                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                        ascending: PaginationUtil.parseAscending($stateParams.sort),
-                        search: $stateParams.search
-                    };
-                }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('doubleRandomResult');
+                    $translatePartialLoader.addPart('sign');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('double-random-result-detail', {
+        .state('sign-detail', {
             parent: 'entity',
-            url: '/double-random-result/{id}',
+            url: '/sign/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'journeyToTheWestApp.doubleRandomResult.detail.title'
+                pageTitle: 'journeyToTheWestApp.sign.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/double-random-result/double-random-result-detail.html',
-                    controller: 'DoubleRandomResultDetailController',
+                    templateUrl: 'app/entities/sign/sign-detail.html',
+                    controller: 'SignDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('doubleRandomResult');
+                    $translatePartialLoader.addPart('sign');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'DoubleRandomResult', function($stateParams, DoubleRandomResult) {
-                    return DoubleRandomResult.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Sign', function($stateParams, Sign) {
+                    return Sign.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'double-random-result',
+                        name: $state.current.name || 'sign',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -83,22 +63,22 @@
                 }]
             }
         })
-        .state('double-random-result-detail.edit', {
-            parent: 'double-random-result-detail',
+        .state('sign-detail.edit', {
+            parent: 'sign-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/double-random-result/double-random-result-dialog.html',
-                    controller: 'DoubleRandomResultDialogController',
+                    templateUrl: 'app/entities/sign/sign-dialog.html',
+                    controller: 'SignDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['DoubleRandomResult', function(DoubleRandomResult) {
-                            return DoubleRandomResult.get({id : $stateParams.id}).$promise;
+                        entity: ['Sign', function(Sign) {
+                            return Sign.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -108,82 +88,79 @@
                 });
             }]
         })
-        .state('double-random-result.new', {
-            parent: 'double-random-result',
+        .state('sign.new', {
+            parent: 'sign',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/double-random-result/double-random-result-dialog.html',
-                    controller: 'DoubleRandomResultDialogController',
+                    templateUrl: 'app/entities/sign/sign-dialog.html',
+                    controller: 'SignDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                companyName: null,
-                                companyRegisterId: null,
-                                people: null,
-                                task: null,
-                                finishDate: null,
+                                signName: null,
+                                signConfig: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('double-random-result', null, { reload: 'double-random-result' });
+                    $state.go('sign', null, { reload: 'sign' });
                 }, function() {
-                    $state.go('double-random-result');
+                    $state.go('sign');
                 });
             }]
         })
-        .state('double-random-result.edit', {
-            parent: 'double-random-result',
+        .state('sign.edit', {
+            parent: 'sign',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/double-random-result/double-random-result-dialog.html',
-                    controller: 'DoubleRandomResultDialogController',
+                    templateUrl: 'app/entities/sign/sign-dialog.html',
+                    controller: 'SignDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['DoubleRandomResult', function(DoubleRandomResult) {
-                            return DoubleRandomResult.get({id : $stateParams.id}).$promise;
+                        entity: ['Sign', function(Sign) {
+                            return Sign.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('double-random-result', null, { reload: 'double-random-result' });
+                    $state.go('sign', null, { reload: 'sign' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('double-random-result.delete', {
-            parent: 'double-random-result',
+        .state('sign.delete', {
+            parent: 'sign',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/double-random-result/double-random-result-delete-dialog.html',
-                    controller: 'DoubleRandomResultDeleteController',
+                    templateUrl: 'app/entities/sign/sign-delete-dialog.html',
+                    controller: 'SignDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['DoubleRandomResult', function(DoubleRandomResult) {
-                            return DoubleRandomResult.get({id : $stateParams.id}).$promise;
+                        entity: ['Sign', function(Sign) {
+                            return Sign.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('double-random-result', null, { reload: 'double-random-result' });
+                    $state.go('sign', null, { reload: 'sign' });
                 }, function() {
                     $state.go('^');
                 });

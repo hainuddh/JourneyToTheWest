@@ -1,4 +1,3 @@
-/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -30,13 +29,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
 /**
  * Test class for the CompanyTypeResource REST controller.
  *
  * @see CompanyTypeResource
- *//*
-
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class CompanyTypeResourceIntTest {
@@ -74,14 +71,12 @@ public class CompanyTypeResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
-/**
+    /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
-
+     */
     public static CompanyType createEntity(EntityManager em) {
         CompanyType companyType = new CompanyType()
                 .typeName(DEFAULT_TYPE_NAME);
@@ -275,4 +270,3 @@ public class CompanyTypeResourceIntTest {
             .andExpect(jsonPath("$.[*].typeName").value(hasItem(DEFAULT_TYPE_NAME.toString())));
     }
 }
-*/

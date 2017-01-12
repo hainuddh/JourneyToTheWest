@@ -1,4 +1,3 @@
-/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -30,13 +29,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
 /**
  * Test class for the LawenforceAreaResource REST controller.
  *
  * @see LawenforceAreaResource
- *//*
-
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class LawenforceAreaResourceIntTest {
@@ -74,14 +71,12 @@ public class LawenforceAreaResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
-/**
+    /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
-
+     */
     public static LawenforceArea createEntity(EntityManager em) {
         LawenforceArea lawenforceArea = new LawenforceArea()
                 .areaName(DEFAULT_AREA_NAME);
@@ -275,4 +270,3 @@ public class LawenforceAreaResourceIntTest {
             .andExpect(jsonPath("$.[*].areaName").value(hasItem(DEFAULT_AREA_NAME.toString())));
     }
 }
-*/
