@@ -5,6 +5,9 @@ package com.yyh.config;
  */
 public final class Constants {
 
+    public static final String COMPANY_NORMAL = "0";
+    public static final String COMPANY_ABNORMAL = "1";
+
     //Regex for acceptable logins
     public static final String LOGIN_REGEX = "^[_'.@A-Za-z0-9-]*$";
     // Spring profiles for development, test and production, see http://jhipster.github.io/profiles/

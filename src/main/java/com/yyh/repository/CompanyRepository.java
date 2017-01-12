@@ -3,7 +3,6 @@ package com.yyh.repository;
 import com.yyh.domain.Company;
 
 import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -12,4 +11,5 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface CompanyRepository extends JpaRepository<Company,Long> {
+
 }

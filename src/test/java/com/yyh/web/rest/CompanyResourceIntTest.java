@@ -1,4 +1,3 @@
-/*
 package com.yyh.web.rest;
 
 import com.yyh.JourneyToTheWestApp;
@@ -31,13 +30,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
 /**
  * Test class for the CompanyResource REST controller.
  *
  * @see CompanyResource
- *//*
-
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class CompanyResourceIntTest {
@@ -116,14 +113,12 @@ public class CompanyResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
-/**
+    /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
-
+     */
     public static Company createEntity(EntityManager em) {
         Company company = new Company()
                 .companyName(DEFAULT_COMPANY_NAME)
@@ -385,6 +380,7 @@ public class CompanyResourceIntTest {
         assertThat(companyList).hasSize(databaseSizeBeforeTest);
     }
 
+    @Test
     @Transactional
     public void getAllCompanies() throws Exception {
         // Initialize the database
@@ -568,4 +564,3 @@ public class CompanyResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
-*/

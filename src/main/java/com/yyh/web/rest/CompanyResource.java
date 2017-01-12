@@ -1,20 +1,19 @@
 package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.yyh.config.Constants;
 import com.yyh.domain.Company;
 import com.yyh.repository.CompanyRepository;
-import com.yyh.repository.search.CompanySearchRepository;
 import com.yyh.service.CompanyService;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
+
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +23,13 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Company.
@@ -44,23 +46,57 @@ public class CompanyResource {
     @Inject
     private CompanyRepository companyRepository;
 
-    @Inject
-    private CompanySearchRepository companySearchRepository;
-
     /**
      * POST  /companies/import : Import company list.
      *
-     * @return the ResponseEntity with status 200 (OK) and with body the new company
+     * @return the ResponseEntity with status 200 (OK)
+     * @throws URISyntaxException if there is an error
      */
     @PostMapping("/companies/import")
     @Timed
     public ResponseEntity<?> importCompany() {
-        List<Company> companyList = companyService.createCompanyList("E:\\市场主体名单(市场主体查询).xls");
-        if (companyList.size() > 0) {
-            companyRepository.save(companyList);
-            companySearchRepository.save(companyList);
-        }
+        companyService.importCompanyList("E:\\万宁市市场主体名录(市场主体查询).xls");
         return ResponseEntity.ok().body("ok");
+    }
+
+    /**
+     * GET  /companies/normal : get the normal companies.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/companies/normal")
+    @Timed
+    public ResponseEntity<?> getNormalCompanies(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Companies");
+        Company company = new Company();
+        company.setCompanyStatus(Constants.COMPANY_NORMAL);
+        Example<Company> ex = Example.of(company);
+        Page<Company> page = companyRepository.findAll(ex, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /companies/abnormal : get the abnormal companies.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/companies/abnormal")
+    @Timed
+    public ResponseEntity<?> getAbnormalCompanies(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Companies");
+        Company company = new Company();
+        company.setCompanyStatus(Constants.COMPANY_ABNORMAL);
+        Example<Company> ex = Example.of(company);
+        Page<Company> page = companyRepository.findAll(ex, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -109,66 +145,23 @@ public class CompanyResource {
      * GET  /companies : get all the companies.
      *
      * @param pageable the pagination information
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of companies in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/companies")
     @Timed
-    public ResponseEntity<?> getAllCompanies(@ApiParam Pageable pageable)
+    public ResponseEntity<List<Company>> getAllCompanies(@ApiParam Pageable pageable, @RequestParam(required = false) String filter)
         throws URISyntaxException {
+        if ("doublerandomresult-is-null".equals(filter)) {
+            log.debug("REST request to get all Companys where doubleRandomResult is null");
+            return new ResponseEntity<>(companyService.findAllWhereDoubleRandomResultIsNull(),
+                    HttpStatus.OK);
+        }
         log.debug("REST request to get a page of Companies");
-        Map<String, Object> result = new HashMap<>();
         Page<Company> page = companyService.findAll(pageable);
-        result.put("companies", page.getContent());
-        result.put("totalPages", page.getTotalPages());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
-    }
-
-    /**
-     * GET  /companies/normal : get the normal companies.
-     *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @GetMapping("/companies/normal")
-    @Timed
-    public ResponseEntity<?> getNormalCompanies(@ApiParam Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of Companies");
-        Map<String, Object> result = new HashMap<>();
-        Company company = new Company();
-        company.setCompanyStatus("否");
-        Example<Company> ex = Example.of(company);
-        Page<Company> page = companyRepository.findAll(ex, pageable);
-        result.put("companies", page.getContent());
-        result.put("totalPages", page.getTotalPages());
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
-    }
-
-    /**
-     * GET  /companies/abnormal : get the abnormal companies.
-     *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @GetMapping("/companies/abnormal")
-    @Timed
-    public ResponseEntity<?> getAbnormalCompanies(@ApiParam Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of Companies");
-        Map<String, Object> result = new HashMap<>();
-        Company company = new Company();
-        company.setCompanyStatus("是");
-        Example<Company> ex = Example.of(company);
-        Page<Company> page = companyRepository.findAll(ex, pageable);
-        result.put("companies", page.getContent());
-        result.put("totalPages", page.getTotalPages());
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -214,15 +207,12 @@ public class CompanyResource {
      */
     @GetMapping("/_search/companies")
     @Timed
-    public ResponseEntity<?> searchCompanies(@RequestParam String query, @ApiParam Pageable pageable)
+    public ResponseEntity<List<Company>> searchCompanies(@RequestParam String query, @ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Companies for query {}", query);
         Page<Company> page = companyService.search(query, pageable);
-        Map<String, Object> result = new HashMap<>();
-        result.put("companies", page.getContent());
-        result.put("totalPages", page.getTotalPages());
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/companies");
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 

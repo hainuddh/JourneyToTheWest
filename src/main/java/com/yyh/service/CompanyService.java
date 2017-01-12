@@ -1,13 +1,16 @@
 package com.yyh.service;
 
+import com.yyh.config.Constants;
 import com.yyh.domain.Company;
 import com.yyh.domain.CompanyType;
+import com.yyh.domain.IndustryType;
 import com.yyh.domain.LawenforceDepartment;
 import com.yyh.repository.CompanyRepository;
 import com.yyh.repository.CompanyTypeRepository;
+import com.yyh.repository.IndustryTypeRepository;
 import com.yyh.repository.LawenforceDepartmentRepository;
 import com.yyh.repository.search.CompanySearchRepository;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import com.yyh.service.util.ExcelLoadUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,8 +24,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,35 +54,23 @@ public class CompanyService {
     @Inject
     private CompanyTypeRepository companyTypeRepository;
 
+    @Inject
+    private IndustryTypeRepository industryTypeRepository;
+
+
+
     /**
      * Create a company list
      *
      * @param filepath the file to convert
      * @return the company list
      */
-    public List<Company> createCompanyList(String filepath) {
+    public List<Company> importCompanyList(String filepath) {
         List<Company> companies = new ArrayList<>();
         /**
-        * 第一部分：找到文件，加载EXCEL文件到内存
-        */
-        Workbook workbook = null;
-        try {
-            FileInputStream fis = new FileInputStream(filepath);
-            // 读取2007版，以.xlsx 结尾
-            if (filepath.toLowerCase().endsWith("xlsx")) {
-                workbook = new XSSFWorkbook(fis);
-            }
-            // 读取2003版，以.xls 结尾
-            else if (filepath.toLowerCase().endsWith("xls")) {
-                workbook = new HSSFWorkbook(fis);
-            }
-        } catch (FileNotFoundException ex0) {
-            ex0.printStackTrace();
-            return null;
-        } catch (IOException ex1) {
-            ex1.printStackTrace();
-            return null;
-        }
+         * 第一部分：找到文件，加载EXCEL文件到内存
+         */
+        Workbook workbook = ExcelLoadUtil.loadExcel(filepath);
         /**
          * 第二部分：加载相关对象到内存中，以键值对存储，降低时间复杂度
          */
@@ -99,6 +88,11 @@ public class CompanyService {
         Map<String, CompanyType> companyTypeMap = new HashMap<>();
         for (CompanyType companyType : companyTypeList) {
             companyTypeMap.put(companyType.getTypeName(), companyType);
+        }
+        List<IndustryType> industryTypeList = industryTypeRepository.findAll();
+        Map<String, IndustryType> industryTypeMap = new HashMap<>();
+        for (IndustryType industryType : industryTypeList) {
+            industryTypeMap.put(industryType.getTypeName(), industryType);
         }
         /**
          * 第三部分：读取并解析Excel表格
@@ -151,8 +145,27 @@ public class CompanyService {
                         company.setBusinessAddress(row.getCell(9).getStringCellValue());
                         company.setCompanyDate(row.getCell(10).getStringCellValue());
                         company.setBusinessScope(row.getCell(11).getStringCellValue());
-                        company.setCompanyPhone(row.getCell(12).getStringCellValue());
-                        company.setCompanyStatus(row.getCell(16).getStringCellValue());
+                        String industryTypeName = row.getCell(12).getStringCellValue();
+                        /**
+                         * 存储行业类型
+                         */
+                        if (industryTypeMap.get(industryTypeName) != null) {
+                            company.setIndustryType(industryTypeMap.get(industryTypeName));
+                        } else {
+                            IndustryType industryType = new IndustryType();
+                            industryType.setTypeName(industryTypeName);
+                            IndustryType result = industryTypeRepository.save(industryType);
+                            industryTypeMap.put(result.getTypeName(), result);
+                            company.setIndustryType(result);
+                        }
+                        company.setCompanyPhone(row.getCell(13).getStringCellValue());
+                        if (row.getCell(16).getStringCellValue() != null || !row.getCell(16).getStringCellValue().trim().equals("")) {
+                            if (row.getCell(16).getStringCellValue().trim().equals("是")) {
+                                company.setCompanyStatus(Constants.COMPANY_ABNORMAL);
+                            } else {
+                                company.setCompanyStatus(Constants.COMPANY_NORMAL);
+                            }
+                        }
                         companies.add(company);
                     }
                 } catch (IllegalStateException ex2) {
@@ -160,7 +173,12 @@ public class CompanyService {
                 }
             }
         }
-        return companies;
+        List<Company> result = new ArrayList<>();
+        if (companies.size() > 0) {
+            result = companyRepository.save(companies);
+            companySearchRepository.save(companies);
+        }
+        return result;
     }
 
     /**
@@ -177,10 +195,10 @@ public class CompanyService {
     }
 
     /**
-     * Get all the companies.
+     *  Get all the companies.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     *  @param pageable the pagination information
+     *  @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Company> findAll(Pageable pageable) {
@@ -189,11 +207,25 @@ public class CompanyService {
         return result;
     }
 
+
     /**
-     * Get one company by id.
+     *  get all the companies where DoubleRandomResult is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<Company> findAllWhereDoubleRandomResultIsNull() {
+        log.debug("Request to get all companies where DoubleRandomResult is null");
+        return StreamSupport
+            .stream(companyRepository.findAll().spliterator(), false)
+            .filter(company -> company.getDoubleRandomResult() == null)
+            .collect(Collectors.toList());
+    }
+
+    /**
+     *  Get one company by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     *  @param id the id of the entity
+     *  @return the entity
      */
     @Transactional(readOnly = true)
     public Company findOne(Long id) {
@@ -203,9 +235,9 @@ public class CompanyService {
     }
 
     /**
-     * Delete the  company by id.
+     *  Delete the  company by id.
      *
-     * @param id the id of the entity
+     *  @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete Company : {}", id);
@@ -216,8 +248,8 @@ public class CompanyService {
     /**
      * Search for the company corresponding to the query.
      *
-     * @param query the query of the search
-     * @return the list of entities
+     *  @param query the query of the search
+     *  @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Company> search(String query, Pageable pageable) {
