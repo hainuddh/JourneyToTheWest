@@ -67,7 +67,7 @@ public class ManagerService {
     @Transactional(readOnly = true) 
     public Manager findOne(Long id) {
         log.debug("Request to get Manager : {}", id);
-        Manager manager = managerRepository.findOneWithEagerRelationships(id);
+        Manager manager = managerRepository.findOne(id);
         return manager;
     }
 

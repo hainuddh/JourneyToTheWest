@@ -117,8 +117,7 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-    DoubleRandomResult{manager} to Manager,
-    Manager{doubleRandomResult} to DoubleRandomResult,
+    DoubleRandomResult{manager} to Manager{doubleRandomResult},
     Task{law} to Law,
     DoubleRandom{task} to Task
 }

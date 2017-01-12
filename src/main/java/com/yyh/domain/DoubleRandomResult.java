@@ -249,11 +249,13 @@ public class DoubleRandomResult implements Serializable {
 
     public DoubleRandomResult addManager(Manager manager) {
         managers.add(manager);
+        manager.getDoubleRandomResults().add(this);
         return this;
     }
 
     public DoubleRandomResult removeManager(Manager manager) {
         managers.remove(manager);
+        manager.getDoubleRandomResults().remove(this);
         return this;
     }
 

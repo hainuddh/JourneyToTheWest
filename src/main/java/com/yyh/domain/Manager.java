@@ -1,5 +1,6 @@
 package com.yyh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -70,11 +71,9 @@ public class Manager implements Serializable {
     @ManyToOne
     private LawenforceDepartment managerLawenforceDepartment;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "managers")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "manager_double_random_result",
-               joinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="double_random_results_id", referencedColumnName="ID"))
     private Set<DoubleRandomResult> doubleRandomResults = new HashSet<>();
 
     public Long getId() {
@@ -226,11 +225,13 @@ public class Manager implements Serializable {
 
     public Manager addDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
         doubleRandomResults.add(doubleRandomResult);
+        doubleRandomResult.getManagers().add(this);
         return this;
     }
 
     public Manager removeDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
         doubleRandomResults.remove(doubleRandomResult);
+        doubleRandomResult.getManagers().remove(this);
         return this;
     }
 
