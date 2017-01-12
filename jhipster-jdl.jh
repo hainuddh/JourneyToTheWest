@@ -68,6 +68,10 @@ entity DoubleRandomResult {
     finishDate String maxlength(64)
 }
 
+entity Lawenforcement {
+    enforcementName String required maxlength(32)
+}
+
 entity Punish {
     punishId String required maxlength(32),
     personName String required maxlength(32),
@@ -107,7 +111,9 @@ entity Law {
 relationship OneToOne {
     DoubleRandomResult{sign} to Sign,
     Punish{department} to LawenforceDepartment,
-    Manager{managerUser} to User{manager}
+    Manager{managerUser} to User,
+    DoubleRandomResult{lawenforcement} to Lawenforcement,
+    Lawenforcement{punish} to Punish
 }
 
 relationship ManyToMany {
@@ -118,7 +124,6 @@ relationship ManyToMany {
 
 relationship OneToMany {
     Company{doubleRandomResult} to DoubleRandomResult{company},
-    DoubleRandomResult{task} to Task{doubleRandomResult},
     Company{punish} to Punish{company},
     TaskProject{task} to Task{taskProject},
     DoubleRandom{doubleRandomResult} to DoubleRandomResult{doubleRandom}

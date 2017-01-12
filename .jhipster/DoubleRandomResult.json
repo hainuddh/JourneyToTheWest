@@ -10,9 +10,11 @@
             "otherEntityRelationshipName": "doubleRandomResult"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "task",
-            "otherEntityName": "task",
+            "relationshipType": "one-to-one",
+            "relationshipName": "lawenforcement",
+            "otherEntityName": "lawenforcement",
+            "otherEntityField": "id",
+            "ownerSide": true,
             "otherEntityRelationshipName": "doubleRandomResult"
         },
         {

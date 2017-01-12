@@ -145,6 +145,12 @@
             </select>
         </div>
         <div class="form-group">
+            <label data-translate="journeyToTheWestApp.doubleRandomResult.lawenforcement" for="field_lawenforcement">Lawenforcement</label>
+            <select class="form-control" id="field_lawenforcement" name="lawenforcement" ng-model="vm.doubleRandomResult.lawenforcement" ng-options="lawenforcement as lawenforcement.id for lawenforcement in vm.lawenforcements | orderBy:'id' track by lawenforcement.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
             <label data-translate="journeyToTheWestApp.doubleRandomResult.manager" for="field_manager">Manager</label>
             <select class="form-control" id="field_manager" multiple name="manager" ng-model="vm.doubleRandomResult.managers" ng-options="manager as manager.id for manager in vm.managers track by manager.id"></select>
         </div>

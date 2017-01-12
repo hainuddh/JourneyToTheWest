@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "punish",
+            "otherEntityName": "punish",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "lawenforcement"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "enforcementName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        }
+    ],
+    "changelogDate": "20170112084924",
+    "entityTableName": "lawenforcement",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

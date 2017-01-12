@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('Task Management Detail Controller', function() {
+    describe('Lawenforcement Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockTask, MockLaw, MockTaskProject, MockDoubleRandom;
+        var MockEntity, MockPreviousState, MockLawenforcement, MockPunish;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,10 +12,8 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockTask = jasmine.createSpy('MockTask');
-            MockLaw = jasmine.createSpy('MockLaw');
-            MockTaskProject = jasmine.createSpy('MockTaskProject');
-            MockDoubleRandom = jasmine.createSpy('MockDoubleRandom');
+            MockLawenforcement = jasmine.createSpy('MockLawenforcement');
+            MockPunish = jasmine.createSpy('MockPunish');
             
 
             var locals = {
@@ -23,20 +21,18 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'Task': MockTask,
-                'Law': MockLaw,
-                'TaskProject': MockTaskProject,
-                'DoubleRandom': MockDoubleRandom
+                'Lawenforcement': MockLawenforcement,
+                'Punish': MockPunish
             };
             createController = function() {
-                $injector.get('$controller')("TaskDetailController", locals);
+                $injector.get('$controller')("LawenforcementDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'journeyToTheWestApp:taskUpdate';
+                var eventType = 'journeyToTheWestApp:lawenforcementUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

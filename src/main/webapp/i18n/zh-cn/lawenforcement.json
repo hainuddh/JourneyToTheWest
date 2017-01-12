@@ -1,0 +1,23 @@
+{
+    "journeyToTheWestApp": {
+        "lawenforcement" : {
+            "home": {
+                "title": "Lawenforcements",
+                "createLabel": "Create a new Lawenforcement",
+                "createOrEditLabel": "Create or edit a Lawenforcement",
+                "search": "Search for Lawenforcement"
+            },
+            "created": "A new Lawenforcement is created with identifier {{ param }}",
+            "updated": "A Lawenforcement is updated with identifier {{ param }}",
+            "deleted": "A Lawenforcement is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lawenforcement {{ id }}?"
+            },
+            "detail": {
+                "title": "Lawenforcement"
+            },
+            "enforcementName": "Enforcement Name",
+            "punish": "Punish"
+        }
+    }
+}

@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('DoubleRandomResultDetailController', DoubleRandomResultDetailController);
 
-    DoubleRandomResultDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'DoubleRandomResult', 'Sign', 'Task', 'Manager', 'Company', 'DoubleRandom'];
+    DoubleRandomResultDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'DoubleRandomResult', 'Sign', 'Lawenforcement', 'Manager', 'Company', 'DoubleRandom'];
 
-    function DoubleRandomResultDetailController($scope, $rootScope, $stateParams, previousState, entity, DoubleRandomResult, Sign, Task, Manager, Company, DoubleRandom) {
+    function DoubleRandomResultDetailController($scope, $rootScope, $stateParams, previousState, entity, DoubleRandomResult, Sign, Lawenforcement, Manager, Company, DoubleRandom) {
         var vm = this;
 
         vm.doubleRandomResult = entity;

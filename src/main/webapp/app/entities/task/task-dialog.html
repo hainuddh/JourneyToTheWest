@@ -63,12 +63,6 @@
             <select class="form-control" id="field_law" multiple name="law" ng-model="vm.task.laws" ng-options="law as law.id for law in vm.laws track by law.id"></select>
         </div>
         <div class="form-group">
-            <label data-translate="journeyToTheWestApp.task.doubleRandomResult" for="field_doubleRandomResult">Double Random Result</label>
-            <select class="form-control" id="field_doubleRandomResult" name="doubleRandomResult" ng-model="vm.task.doubleRandomResult" ng-options="doubleRandomResult as doubleRandomResult.id for doubleRandomResult in vm.doublerandomresults track by doubleRandomResult.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
             <label data-translate="journeyToTheWestApp.task.taskProject" for="field_taskProject">Task Project</label>
             <select class="form-control" id="field_taskProject" name="taskProject" ng-model="vm.task.taskProject" ng-options="taskProject as taskProject.id for taskProject in vm.taskprojects track by taskProject.id">
                 <option value=""></option>

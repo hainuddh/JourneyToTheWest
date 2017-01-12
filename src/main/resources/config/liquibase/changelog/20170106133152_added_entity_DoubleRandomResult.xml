@@ -61,6 +61,8 @@
             </column>
                         <column name="sign_id" type="bigint">
                 <constraints unique="true" nullable="true" />
+            </column>            <column name="lawenforcement_id" type="bigint">
+                <constraints unique="true" nullable="true" />
             </column>
             <column name="company_id" type="bigint">
                 <constraints nullable="true" />

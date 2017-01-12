@@ -1,6 +1,5 @@
 package com.yyh.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -71,10 +70,9 @@ public class DoubleRandomResult implements Serializable {
     @JoinColumn(unique = true)
     private Sign sign;
 
-    @OneToMany(mappedBy = "doubleRandomResult")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Task> tasks = new HashSet<>();
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Lawenforcement lawenforcement;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -227,29 +225,17 @@ public class DoubleRandomResult implements Serializable {
         this.sign = sign;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
+    public Lawenforcement getLawenforcement() {
+        return lawenforcement;
     }
 
-    public DoubleRandomResult tasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public DoubleRandomResult lawenforcement(Lawenforcement lawenforcement) {
+        this.lawenforcement = lawenforcement;
         return this;
     }
 
-    public DoubleRandomResult addTask(Task task) {
-        tasks.add(task);
-        task.setDoubleRandomResult(this);
-        return this;
-    }
-
-    public DoubleRandomResult removeTask(Task task) {
-        tasks.remove(task);
-        task.setDoubleRandomResult(null);
-        return this;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public void setLawenforcement(Lawenforcement lawenforcement) {
+        this.lawenforcement = lawenforcement;
     }
 
     public Set<Manager> getManagers() {
