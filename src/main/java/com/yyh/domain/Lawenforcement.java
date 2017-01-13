@@ -29,6 +29,10 @@ public class Lawenforcement implements Serializable {
     @Column(name = "enforcement_name", length = 32, nullable = false)
     private String enforcementName;
 
+    @Size(max = 128)
+    @Column(name = "enforcement_file", length = 128)
+    private String enforcementFile;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Punish punish;
@@ -52,6 +56,19 @@ public class Lawenforcement implements Serializable {
 
     public void setEnforcementName(String enforcementName) {
         this.enforcementName = enforcementName;
+    }
+
+    public String getEnforcementFile() {
+        return enforcementFile;
+    }
+
+    public Lawenforcement enforcementFile(String enforcementFile) {
+        this.enforcementFile = enforcementFile;
+        return this;
+    }
+
+    public void setEnforcementFile(String enforcementFile) {
+        this.enforcementFile = enforcementFile;
     }
 
     public Punish getPunish() {
@@ -92,6 +109,7 @@ public class Lawenforcement implements Serializable {
         return "Lawenforcement{" +
             "id=" + id +
             ", enforcementName='" + enforcementName + "'" +
+            ", enforcementFile='" + enforcementFile + "'" +
             '}';
     }
 }

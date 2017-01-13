@@ -41,6 +41,9 @@ public class LawenforcementResourceIntTest {
     private static final String DEFAULT_ENFORCEMENT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_ENFORCEMENT_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_ENFORCEMENT_FILE = "AAAAAAAAAA";
+    private static final String UPDATED_ENFORCEMENT_FILE = "BBBBBBBBBB";
+
     @Inject
     private LawenforcementRepository lawenforcementRepository;
 
@@ -79,7 +82,8 @@ public class LawenforcementResourceIntTest {
      */
     public static Lawenforcement createEntity(EntityManager em) {
         Lawenforcement lawenforcement = new Lawenforcement()
-                .enforcementName(DEFAULT_ENFORCEMENT_NAME);
+                .enforcementName(DEFAULT_ENFORCEMENT_NAME)
+                .enforcementFile(DEFAULT_ENFORCEMENT_FILE);
         return lawenforcement;
     }
 
@@ -106,6 +110,7 @@ public class LawenforcementResourceIntTest {
         assertThat(lawenforcementList).hasSize(databaseSizeBeforeCreate + 1);
         Lawenforcement testLawenforcement = lawenforcementList.get(lawenforcementList.size() - 1);
         assertThat(testLawenforcement.getEnforcementName()).isEqualTo(DEFAULT_ENFORCEMENT_NAME);
+        assertThat(testLawenforcement.getEnforcementFile()).isEqualTo(DEFAULT_ENFORCEMENT_FILE);
 
         // Validate the Lawenforcement in ElasticSearch
         Lawenforcement lawenforcementEs = lawenforcementSearchRepository.findOne(testLawenforcement.getId());
@@ -161,7 +166,8 @@ public class LawenforcementResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(lawenforcement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].enforcementName").value(hasItem(DEFAULT_ENFORCEMENT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].enforcementName").value(hasItem(DEFAULT_ENFORCEMENT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].enforcementFile").value(hasItem(DEFAULT_ENFORCEMENT_FILE.toString())));
     }
 
     @Test
@@ -175,7 +181,8 @@ public class LawenforcementResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(lawenforcement.getId().intValue()))
-            .andExpect(jsonPath("$.enforcementName").value(DEFAULT_ENFORCEMENT_NAME.toString()));
+            .andExpect(jsonPath("$.enforcementName").value(DEFAULT_ENFORCEMENT_NAME.toString()))
+            .andExpect(jsonPath("$.enforcementFile").value(DEFAULT_ENFORCEMENT_FILE.toString()));
     }
 
     @Test
@@ -197,7 +204,8 @@ public class LawenforcementResourceIntTest {
         // Update the lawenforcement
         Lawenforcement updatedLawenforcement = lawenforcementRepository.findOne(lawenforcement.getId());
         updatedLawenforcement
-                .enforcementName(UPDATED_ENFORCEMENT_NAME);
+                .enforcementName(UPDATED_ENFORCEMENT_NAME)
+                .enforcementFile(UPDATED_ENFORCEMENT_FILE);
 
         restLawenforcementMockMvc.perform(put("/api/lawenforcements")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -209,6 +217,7 @@ public class LawenforcementResourceIntTest {
         assertThat(lawenforcementList).hasSize(databaseSizeBeforeUpdate);
         Lawenforcement testLawenforcement = lawenforcementList.get(lawenforcementList.size() - 1);
         assertThat(testLawenforcement.getEnforcementName()).isEqualTo(UPDATED_ENFORCEMENT_NAME);
+        assertThat(testLawenforcement.getEnforcementFile()).isEqualTo(UPDATED_ENFORCEMENT_FILE);
 
         // Validate the Lawenforcement in ElasticSearch
         Lawenforcement lawenforcementEs = lawenforcementSearchRepository.findOne(testLawenforcement.getId());
@@ -267,6 +276,7 @@ public class LawenforcementResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(lawenforcement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].enforcementName").value(hasItem(DEFAULT_ENFORCEMENT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].enforcementName").value(hasItem(DEFAULT_ENFORCEMENT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].enforcementFile").value(hasItem(DEFAULT_ENFORCEMENT_FILE.toString())));
     }
 }

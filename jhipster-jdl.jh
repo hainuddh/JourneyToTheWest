@@ -68,7 +68,8 @@ entity DoubleRandomResult {
 }
 
 entity Lawenforcement {
-    enforcementName String required maxlength(32)
+    enforcementName String required maxlength(32),
+    enforcementFile String maxlength(128)
 }
 
 entity Punish {
@@ -85,7 +86,7 @@ entity Punish {
 
 entity Sign {
     signName String required maxlength(10),
-    signConfig String required maxlength(10),
+    signConfig Integer required max(100),
 }
 
 entity LawenforceDepartment {

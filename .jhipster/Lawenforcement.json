@@ -19,6 +19,14 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 32
+        },
+        {
+            "fieldName": "enforcementFile",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 128
         }
     ],
     "changelogDate": "20170112084924",

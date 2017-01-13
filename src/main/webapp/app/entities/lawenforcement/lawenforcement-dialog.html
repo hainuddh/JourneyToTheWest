@@ -29,6 +29,18 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.lawenforcement.enforcementFile" for="field_enforcementFile">Enforcement File</label>
+            <input type="text" class="form-control" name="enforcementFile" id="field_enforcementFile"
+                    ng-model="vm.lawenforcement.enforcementFile"
+                    ng-maxlength="128" />
+            <div ng-show="editForm.enforcementFile.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.enforcementFile.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="128">
+                    This field cannot be longer than 128 characters.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label data-translate="journeyToTheWestApp.lawenforcement.punish" for="field_punish">Punish</label>

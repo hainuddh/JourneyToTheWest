@@ -105,6 +105,7 @@
                         entity: function () {
                             return {
                                 enforcementName: null,
+                                enforcementFile: null,
                                 id: null
                             };
                         }

@@ -17,6 +17,7 @@
                 "title": "Lawenforcement"
             },
             "enforcementName": "Enforcement Name",
+            "enforcementFile": "Enforcement File",
             "punish": "Punish"
         }
     }

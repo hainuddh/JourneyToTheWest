@@ -37,6 +37,7 @@
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
                     <th><span data-translate="journeyToTheWestApp.lawenforcement.enforcementName">Enforcement Name</span></th>
+                    <th><span data-translate="journeyToTheWestApp.lawenforcement.enforcementFile">Enforcement File</span></th>
                     <th><span data-translate="journeyToTheWestApp.lawenforcement.punish">Punish</span></th>
                     <th></th>
                 </tr>
@@ -45,6 +46,7 @@
                 <tr ng-repeat="lawenforcement in vm.lawenforcements track by lawenforcement.id">
                     <td><a ui-sref="lawenforcement-detail({id:lawenforcement.id})">{{lawenforcement.id}}</a></td>
                     <td>{{lawenforcement.enforcementName}}</td>
+                    <td>{{lawenforcement.enforcementFile}}</td>
                     <td>
                         <a ui-sref="punish-detail({id:lawenforcement.punish.id})">{{lawenforcement.punish.id}}</a>
                     </td>

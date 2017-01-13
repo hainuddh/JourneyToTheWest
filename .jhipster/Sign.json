@@ -13,12 +13,12 @@
         },
         {
             "fieldName": "signConfig",
-            "fieldType": "String",
+            "fieldType": "Integer",
             "fieldValidateRules": [
                 "required",
-                "maxlength"
+                "max"
             ],
-            "fieldValidateRulesMaxlength": 10
+            "fieldValidateRulesMax": 100
         }
     ],
     "changelogDate": "20170112063831",

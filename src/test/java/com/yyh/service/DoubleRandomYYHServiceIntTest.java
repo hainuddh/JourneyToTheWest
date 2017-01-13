@@ -53,7 +53,7 @@ public class DoubleRandomYYHServiceIntTest {
         doubleRandomVM.setDoubleRandomCompanyName("万宁");
         doubleRandomVM.setDoubleRandomManagerRatio("1");
         DoubleRandom doubleRandom = doubleRandomYYHService.saveDoubleRandomWithResult(doubleRandomVM);
-        assertThat(doubleRandom != null);
-        assertThat(doubleRandom.getTasks().size() == 2);
+        assertThat(doubleRandom).isNotNull();
+        assertThat(doubleRandom.getTasks().size()).isEqualTo(2);
     }
 }

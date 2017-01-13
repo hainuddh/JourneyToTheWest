@@ -2,17 +2,29 @@ package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.config.Constants;
+import com.yyh.domain.Company;
+import com.yyh.repository.CompanyRepository;
 import com.yyh.service.CompanyService;
+import com.yyh.service.CompanyYYHService;
 import com.yyh.service.FileUploadService;
+import com.yyh.web.rest.util.PaginationUtil;
 import com.yyh.web.rest.vm.FileInfoVM;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * REST controller for managing Company.
@@ -27,9 +39,27 @@ public class CompanyYYHResource {
     private CompanyService companyService;
 
     @Inject
+    private CompanyYYHService companyYYHService;
+
+    @Inject
     private FileUploadService fileUploadService;
 
+    @Inject
+    private CompanyRepository companyRepository;
+
+    /**
+     * POST  /companies/import : Import company list.
+     *
+     * @return the ResponseEntity with status 200 (OK)
+     */
     @PostMapping("/companies/import")
+    @Timed
+    public ResponseEntity<?> importCompany() {
+        companyYYHService.importCompanies("E:\\万宁市市场主体名录(市场主体查询).xls");
+        return ResponseEntity.ok().body("ok");
+    }
+
+    @PostMapping("/companies/upload")
     @Timed
     public String importCompanies(String status, FileInfoVM fileInfoVM, @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
         if (status == null) {   //文件上传
@@ -80,5 +110,44 @@ public class CompanyYYHResource {
         return "{\"status\": 0, \"message\": \"请求参数不完整\"}";
     }
 
+    /**
+     * GET  /companies/normal : get the normal companies.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/companies/normal")
+    @Timed
+    public ResponseEntity<?> getNormalCompanies(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Companies");
+        Company company = new Company();
+        company.setCompanyStatus(Constants.COMPANY_NORMAL);
+        Example<Company> ex = Example.of(company);
+        Page<Company> page = companyRepository.findAll(ex, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/normal");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /companies/abnormal : get the abnormal companies.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/companies/abnormal")
+    @Timed
+    public ResponseEntity<?> getAbnormalCompanies(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Companies");
+        Company company = new Company();
+        company.setCompanyStatus(Constants.COMPANY_ABNORMAL);
+        Example<Company> ex = Example.of(company);
+        Page<Company> page = companyRepository.findAll(ex, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
 }

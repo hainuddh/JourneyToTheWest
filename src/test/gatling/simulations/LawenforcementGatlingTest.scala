@@ -68,7 +68,7 @@ class LawenforcementGatlingTest extends Simulation {
             .exec(http("Create new lawenforcement")
             .post("/api/lawenforcements")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "enforcementName":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "enforcementName":"SAMPLE_TEXT", "enforcementFile":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_lawenforcement_url"))).exitHereIfFailed
             .pause(10)

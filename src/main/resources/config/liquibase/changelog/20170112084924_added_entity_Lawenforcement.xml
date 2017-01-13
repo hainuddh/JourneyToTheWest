@@ -27,6 +27,10 @@
             <column name="enforcement_name" type="varchar(32)">
                 <constraints nullable="false" />
             </column>
+            
+            <column name="enforcement_file" type="varchar(128)">
+                <constraints nullable="true" />
+            </column>
                         <column name="punish_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>

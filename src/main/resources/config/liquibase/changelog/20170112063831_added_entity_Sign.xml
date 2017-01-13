@@ -28,7 +28,7 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="sign_config" type="varchar(10)">
+            <column name="sign_config" type="integer">
                 <constraints nullable="false" />
             </column>
             

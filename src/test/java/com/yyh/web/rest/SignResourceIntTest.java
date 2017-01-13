@@ -41,8 +41,8 @@ public class SignResourceIntTest {
     private static final String DEFAULT_SIGN_NAME = "AAAAAAAAAA";
     private static final String UPDATED_SIGN_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SIGN_CONFIG = "AAAAAAAAAA";
-    private static final String UPDATED_SIGN_CONFIG = "BBBBBBBBBB";
+    private static final Integer DEFAULT_SIGN_CONFIG = 100;
+    private static final Integer UPDATED_SIGN_CONFIG = 99;
 
     @Inject
     private SignRepository signRepository;
@@ -185,7 +185,7 @@ public class SignResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sign.getId().intValue())))
             .andExpect(jsonPath("$.[*].signName").value(hasItem(DEFAULT_SIGN_NAME.toString())))
-            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG.toString())));
+            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG)));
     }
 
     @Test
@@ -200,7 +200,7 @@ public class SignResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sign.getId().intValue()))
             .andExpect(jsonPath("$.signName").value(DEFAULT_SIGN_NAME.toString()))
-            .andExpect(jsonPath("$.signConfig").value(DEFAULT_SIGN_CONFIG.toString()));
+            .andExpect(jsonPath("$.signConfig").value(DEFAULT_SIGN_CONFIG));
     }
 
     @Test
@@ -295,6 +295,6 @@ public class SignResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sign.getId().intValue())))
             .andExpect(jsonPath("$.[*].signName").value(hasItem(DEFAULT_SIGN_NAME.toString())))
-            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG.toString())));
+            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG)));
     }
 }

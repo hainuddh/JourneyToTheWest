@@ -31,17 +31,21 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.sign.signConfig" for="field_signConfig">Sign Config</label>
-            <input type="text" class="form-control" name="signConfig" id="field_signConfig"
+            <input type="number" class="form-control" name="signConfig" id="field_signConfig"
                     ng-model="vm.sign.signConfig"
-                    required ng-maxlength="10" />
+                    required max="100" />
             <div ng-show="editForm.signConfig.$invalid">
                 <p class="help-block"
                     ng-show="editForm.signConfig.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.signConfig.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
-                    This field cannot be longer than 10 characters.
+                    ng-show="editForm.signConfig.$error.max" data-translate="entity.validation.max" translate-value-max="100">
+                    This field cannot be more than 100.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.signConfig.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
                 </p>
             </div>
         </div>

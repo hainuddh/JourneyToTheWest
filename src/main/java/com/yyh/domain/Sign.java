@@ -30,9 +30,9 @@ public class Sign implements Serializable {
     private String signName;
 
     @NotNull
-    @Size(max = 10)
-    @Column(name = "sign_config", length = 10, nullable = false)
-    private String signConfig;
+    @Max(value = 100)
+    @Column(name = "sign_config", nullable = false)
+    private Integer signConfig;
 
     public Long getId() {
         return id;
@@ -55,16 +55,16 @@ public class Sign implements Serializable {
         this.signName = signName;
     }
 
-    public String getSignConfig() {
+    public Integer getSignConfig() {
         return signConfig;
     }
 
-    public Sign signConfig(String signConfig) {
+    public Sign signConfig(Integer signConfig) {
         this.signConfig = signConfig;
         return this;
     }
 
-    public void setSignConfig(String signConfig) {
+    public void setSignConfig(Integer signConfig) {
         this.signConfig = signConfig;
     }
 
