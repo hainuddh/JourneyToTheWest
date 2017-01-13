@@ -124,7 +124,6 @@
                     resolve: {
                         entity: function () {
                             return {
-                                doubleRandomName: null,
                                 doubleRandomDate: null,
                                 doubleRandomNotary: null,
                                 doubleRandomCompanyName: null,

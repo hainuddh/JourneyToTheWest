@@ -14,22 +14,6 @@
                     ng-model="vm.doubleRandom.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandom.doubleRandomName" for="field_doubleRandomName">Double Random Name</label>
-            <input type="text" class="form-control" name="doubleRandomName" id="field_doubleRandomName"
-                    ng-model="vm.doubleRandom.doubleRandomName"
-                    required ng-maxlength="32" />
-            <div ng-show="editForm.doubleRandomName.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.doubleRandomName.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.doubleRandomName.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
-                    This field cannot be longer than 32 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.doubleRandom.doubleRandomDate" for="field_doubleRandomDate">Double Random Date</label>
             <input type="text" class="form-control" name="doubleRandomDate" id="field_doubleRandomDate"
                     ng-model="vm.doubleRandom.doubleRandomDate"
@@ -49,12 +33,8 @@
             <label class="control-label" data-translate="journeyToTheWestApp.doubleRandom.doubleRandomNotary" for="field_doubleRandomNotary">Double Random Notary</label>
             <input type="text" class="form-control" name="doubleRandomNotary" id="field_doubleRandomNotary"
                     ng-model="vm.doubleRandom.doubleRandomNotary"
-                    required ng-maxlength="32" />
+                    ng-maxlength="32" />
             <div ng-show="editForm.doubleRandomNotary.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.doubleRandomNotary.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
                 <p class="help-block"
                     ng-show="editForm.doubleRandomNotary.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
                     This field cannot be longer than 32 characters.
@@ -171,17 +151,21 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerNumber" for="field_doubleRandomManagerNumber">Double Random Manager Number</label>
-            <input type="text" class="form-control" name="doubleRandomManagerNumber" id="field_doubleRandomManagerNumber"
+            <input type="number" class="form-control" name="doubleRandomManagerNumber" id="field_doubleRandomManagerNumber"
                     ng-model="vm.doubleRandom.doubleRandomManagerNumber"
-                    required ng-maxlength="64" />
+                    required max="10" />
             <div ng-show="editForm.doubleRandomManagerNumber.$invalid">
                 <p class="help-block"
                     ng-show="editForm.doubleRandomManagerNumber.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.doubleRandomManagerNumber.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
-                    This field cannot be longer than 64 characters.
+                    ng-show="editForm.doubleRandomManagerNumber.$error.max" data-translate="entity.validation.max" translate-value-max="10">
+                    This field cannot be more than 10.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.doubleRandomManagerNumber.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
                 </p>
             </div>
         </div>

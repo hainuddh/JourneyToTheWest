@@ -68,7 +68,7 @@ class DoubleRandomGatlingTest extends Simulation {
             .exec(http("Create new doubleRandom")
             .post("/api/double-randoms")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "doubleRandomName":"SAMPLE_TEXT", "doubleRandomDate":"SAMPLE_TEXT", "doubleRandomNotary":"SAMPLE_TEXT", "doubleRandomCompanyName":"SAMPLE_TEXT", "doubleRandomCompanyArea":"SAMPLE_TEXT", "doubleRandomCompanySupervisory":"SAMPLE_TEXT", "doubleRandomCompanyType":"SAMPLE_TEXT", "doubleRandomCompanyIndustryType":"SAMPLE_TEXT", "doubleRandomCompanyRatio":"SAMPLE_TEXT", "doubleRandomCompanyCount":"0", "doubleRandomManagerName":"SAMPLE_TEXT", "doubleRandomManagerNumber":"SAMPLE_TEXT", "doubleRandomManagerDepartment":"SAMPLE_TEXT", "doubleRandomManagerRatio":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "doubleRandomDate":"SAMPLE_TEXT", "doubleRandomNotary":"SAMPLE_TEXT", "doubleRandomCompanyName":"SAMPLE_TEXT", "doubleRandomCompanyArea":"SAMPLE_TEXT", "doubleRandomCompanySupervisory":"SAMPLE_TEXT", "doubleRandomCompanyType":"SAMPLE_TEXT", "doubleRandomCompanyIndustryType":"SAMPLE_TEXT", "doubleRandomCompanyRatio":"SAMPLE_TEXT", "doubleRandomCompanyCount":"0", "doubleRandomManagerName":"SAMPLE_TEXT", "doubleRandomManagerNumber":"0", "doubleRandomManagerDepartment":"SAMPLE_TEXT", "doubleRandomManagerRatio":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_doubleRandom_url"))).exitHereIfFailed
             .pause(10)

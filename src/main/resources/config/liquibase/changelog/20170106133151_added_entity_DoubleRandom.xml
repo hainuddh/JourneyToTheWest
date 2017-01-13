@@ -24,16 +24,12 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="double_random_name" type="varchar(32)">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="double_random_date" type="varchar(32)">
                 <constraints nullable="false" />
             </column>
             
             <column name="double_random_notary" type="varchar(32)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             
             <column name="double_random_company_name" type="varchar(64)">
@@ -68,7 +64,7 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="double_random_manager_number" type="varchar(64)">
+            <column name="double_random_manager_number" type="integer">
                 <constraints nullable="false" />
             </column>
             

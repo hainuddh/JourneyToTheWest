@@ -24,26 +24,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 @Transactional
-public class DoubleRandomServiceIntTest {
+public class DoubleRandomYYHServiceIntTest {
 
     @Inject
-    private DoubleRandomService doubleRandomService;
+    private DoubleRandomYYHService doubleRandomYYHService;
 
     @Inject
     private TaskRepository taskRepository;
 
     @Test
     public void assertThatStartDoubleRandom() {
-
-        Task task = new Task();
-        task.setTaskName("清单1");
-        task.setTaskContent("这是一项任务1");
-        Task result1 = taskRepository.save(task);
-        task.setTaskName("清单2");
-        task.setTaskContent("这是一项任务2");
-        Task result2 = taskRepository.save(task);
+        Task task1 = new Task();
+        task1.setTaskName("清单1");
+        task1.setTaskContent("这是一项任务1");
+        Task result1 = taskRepository.save(task1);
+        Task task2 = new Task();
+        task2.setTaskName("清单2");
+        task2.setTaskContent("这是一项任务2");
+        Task result2 = taskRepository.save(task2);
         DoubleRandomVM doubleRandomVM = new DoubleRandomVM();
-        doubleRandomVM.setDoubleRandomName("双随机抽查");
         doubleRandomVM.setDoubleRandomNotary("公证人");
         doubleRandomVM.setDoubleRandomDate("2016-12-12");
         doubleRandomVM.setTasksString(result1.getId() + "|" + result2.getId());
@@ -52,7 +51,9 @@ public class DoubleRandomServiceIntTest {
         doubleRandomVM.setDoubleRandomCompanySupervisory("1");
         doubleRandomVM.setDoubleRandomCompanyIndustryType("1");
         doubleRandomVM.setDoubleRandomCompanyName("万宁");
-        /*DoubleRandom doubleRandom = doubleRandomService.saveDoubleRandomWithResult(doubleRandomVM);*/
-        assertThat(doubleRandomVM != null);
+        doubleRandomVM.setDoubleRandomManagerRatio("1");
+        DoubleRandom doubleRandom = doubleRandomYYHService.saveDoubleRandomWithResult(doubleRandomVM);
+        assertThat(doubleRandom != null);
+        assertThat(doubleRandom.getTasks().size() == 2);
     }
 }

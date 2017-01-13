@@ -39,9 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 public class DoubleRandomResourceIntTest {
 
-    private static final String DEFAULT_DOUBLE_RANDOM_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_DOUBLE_RANDOM_NAME = "BBBBBBBBBB";
-
     private static final String DEFAULT_DOUBLE_RANDOM_DATE = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_DATE = "BBBBBBBBBB";
 
@@ -72,8 +69,8 @@ public class DoubleRandomResourceIntTest {
     private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_MANAGER_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER = "BBBBBBBBBB";
+    private static final Integer DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER = 10;
+    private static final Integer UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER = 9;
 
     private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_MANAGER_DEPARTMENT = "BBBBBBBBBB";
@@ -124,7 +121,6 @@ public class DoubleRandomResourceIntTest {
      */
     public static DoubleRandom createEntity(EntityManager em) {
         DoubleRandom doubleRandom = new DoubleRandom()
-                .doubleRandomName(DEFAULT_DOUBLE_RANDOM_NAME)
                 .doubleRandomDate(DEFAULT_DOUBLE_RANDOM_DATE)
                 .doubleRandomNotary(DEFAULT_DOUBLE_RANDOM_NOTARY)
                 .doubleRandomCompanyName(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME)
@@ -164,7 +160,6 @@ public class DoubleRandomResourceIntTest {
         List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
         assertThat(doubleRandomList).hasSize(databaseSizeBeforeCreate + 1);
         DoubleRandom testDoubleRandom = doubleRandomList.get(doubleRandomList.size() - 1);
-        assertThat(testDoubleRandom.getDoubleRandomName()).isEqualTo(DEFAULT_DOUBLE_RANDOM_NAME);
         assertThat(testDoubleRandom.getDoubleRandomDate()).isEqualTo(DEFAULT_DOUBLE_RANDOM_DATE);
         assertThat(testDoubleRandom.getDoubleRandomNotary()).isEqualTo(DEFAULT_DOUBLE_RANDOM_NOTARY);
         assertThat(testDoubleRandom.getDoubleRandomCompanyName()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME);
@@ -207,46 +202,10 @@ public class DoubleRandomResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDoubleRandomNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomName(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkDoubleRandomDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
         // set the field null
         doubleRandom.setDoubleRandomDate(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomNotaryIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomNotary(null);
 
         // Create the DoubleRandom, which fails.
 
@@ -342,7 +301,6 @@ public class DoubleRandomResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(doubleRandom.getId().intValue())))
-            .andExpect(jsonPath("$.[*].doubleRandomName").value(hasItem(DEFAULT_DOUBLE_RANDOM_NAME.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomDate").value(hasItem(DEFAULT_DOUBLE_RANDOM_DATE.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomNotary").value(hasItem(DEFAULT_DOUBLE_RANDOM_NOTARY.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyName").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME.toString())))
@@ -353,7 +311,7 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.[*].doubleRandomCompanyRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyCount").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerName").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerDepartment").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
@@ -370,7 +328,6 @@ public class DoubleRandomResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(doubleRandom.getId().intValue()))
-            .andExpect(jsonPath("$.doubleRandomName").value(DEFAULT_DOUBLE_RANDOM_NAME.toString()))
             .andExpect(jsonPath("$.doubleRandomDate").value(DEFAULT_DOUBLE_RANDOM_DATE.toString()))
             .andExpect(jsonPath("$.doubleRandomNotary").value(DEFAULT_DOUBLE_RANDOM_NOTARY.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanyName").value(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME.toString()))
@@ -381,7 +338,7 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.doubleRandomCompanyRatio").value(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanyCount").value(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT))
             .andExpect(jsonPath("$.doubleRandomManagerName").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString()))
-            .andExpect(jsonPath("$.doubleRandomManagerNumber").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER.toString()))
+            .andExpect(jsonPath("$.doubleRandomManagerNumber").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER))
             .andExpect(jsonPath("$.doubleRandomManagerDepartment").value(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString()))
             .andExpect(jsonPath("$.doubleRandomManagerRatio").value(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
@@ -406,7 +363,6 @@ public class DoubleRandomResourceIntTest {
         // Update the doubleRandom
         DoubleRandom updatedDoubleRandom = doubleRandomRepository.findOne(doubleRandom.getId());
         updatedDoubleRandom
-                .doubleRandomName(UPDATED_DOUBLE_RANDOM_NAME)
                 .doubleRandomDate(UPDATED_DOUBLE_RANDOM_DATE)
                 .doubleRandomNotary(UPDATED_DOUBLE_RANDOM_NOTARY)
                 .doubleRandomCompanyName(UPDATED_DOUBLE_RANDOM_COMPANY_NAME)
@@ -431,7 +387,6 @@ public class DoubleRandomResourceIntTest {
         List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
         assertThat(doubleRandomList).hasSize(databaseSizeBeforeUpdate);
         DoubleRandom testDoubleRandom = doubleRandomList.get(doubleRandomList.size() - 1);
-        assertThat(testDoubleRandom.getDoubleRandomName()).isEqualTo(UPDATED_DOUBLE_RANDOM_NAME);
         assertThat(testDoubleRandom.getDoubleRandomDate()).isEqualTo(UPDATED_DOUBLE_RANDOM_DATE);
         assertThat(testDoubleRandom.getDoubleRandomNotary()).isEqualTo(UPDATED_DOUBLE_RANDOM_NOTARY);
         assertThat(testDoubleRandom.getDoubleRandomCompanyName()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_NAME);
@@ -503,7 +458,6 @@ public class DoubleRandomResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(doubleRandom.getId().intValue())))
-            .andExpect(jsonPath("$.[*].doubleRandomName").value(hasItem(DEFAULT_DOUBLE_RANDOM_NAME.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomDate").value(hasItem(DEFAULT_DOUBLE_RANDOM_DATE.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomNotary").value(hasItem(DEFAULT_DOUBLE_RANDOM_NOTARY.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyName").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME.toString())))
@@ -514,7 +468,7 @@ public class DoubleRandomResourceIntTest {
             .andExpect(jsonPath("$.[*].doubleRandomCompanyRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyCount").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerName").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerDepartment").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));

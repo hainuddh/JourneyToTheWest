@@ -4,6 +4,7 @@ import com.yyh.JourneyToTheWestApp;
 
 import com.yyh.domain.DoubleRandomResult;
 import com.yyh.repository.DoubleRandomResultRepository;
+import com.yyh.service.DoubleRandomResultService;
 import com.yyh.repository.search.DoubleRandomResultSearchRepository;
 
 import org.junit.Before;
@@ -69,6 +70,9 @@ public class DoubleRandomResultResourceIntTest {
     private DoubleRandomResultRepository doubleRandomResultRepository;
 
     @Inject
+    private DoubleRandomResultService doubleRandomResultService;
+
+    @Inject
     private DoubleRandomResultSearchRepository doubleRandomResultSearchRepository;
 
     @Inject
@@ -88,8 +92,7 @@ public class DoubleRandomResultResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         DoubleRandomResultResource doubleRandomResultResource = new DoubleRandomResultResource();
-        ReflectionTestUtils.setField(doubleRandomResultResource, "doubleRandomResultSearchRepository", doubleRandomResultSearchRepository);
-        ReflectionTestUtils.setField(doubleRandomResultResource, "doubleRandomResultRepository", doubleRandomResultRepository);
+        ReflectionTestUtils.setField(doubleRandomResultResource, "doubleRandomResultService", doubleRandomResultService);
         this.restDoubleRandomResultMockMvc = MockMvcBuilders.standaloneSetup(doubleRandomResultResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -300,8 +303,8 @@ public class DoubleRandomResultResourceIntTest {
     @Transactional
     public void updateDoubleRandomResult() throws Exception {
         // Initialize the database
-        doubleRandomResultRepository.saveAndFlush(doubleRandomResult);
-        doubleRandomResultSearchRepository.save(doubleRandomResult);
+        doubleRandomResultService.save(doubleRandomResult);
+
         int databaseSizeBeforeUpdate = doubleRandomResultRepository.findAll().size();
 
         // Update the doubleRandomResult
@@ -363,8 +366,8 @@ public class DoubleRandomResultResourceIntTest {
     @Transactional
     public void deleteDoubleRandomResult() throws Exception {
         // Initialize the database
-        doubleRandomResultRepository.saveAndFlush(doubleRandomResult);
-        doubleRandomResultSearchRepository.save(doubleRandomResult);
+        doubleRandomResultService.save(doubleRandomResult);
+
         int databaseSizeBeforeDelete = doubleRandomResultRepository.findAll().size();
 
         // Get the doubleRandomResult
@@ -385,8 +388,7 @@ public class DoubleRandomResultResourceIntTest {
     @Transactional
     public void searchDoubleRandomResult() throws Exception {
         // Initialize the database
-        doubleRandomResultRepository.saveAndFlush(doubleRandomResult);
-        doubleRandomResultSearchRepository.save(doubleRandomResult);
+        doubleRandomResultService.save(doubleRandomResult);
 
         // Search the doubleRandomResult
         restDoubleRandomResultMockMvc.perform(get("/api/_search/double-random-results?query=id:" + doubleRandomResult.getId()))

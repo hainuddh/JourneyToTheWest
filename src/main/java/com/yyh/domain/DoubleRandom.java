@@ -29,17 +29,11 @@ public class DoubleRandom implements Serializable {
 
     @NotNull
     @Size(max = 32)
-    @Column(name = "double_random_name", length = 32, nullable = false)
-    private String doubleRandomName;
-
-    @NotNull
-    @Size(max = 32)
     @Column(name = "double_random_date", length = 32, nullable = false)
     private String doubleRandomDate;
 
-    @NotNull
     @Size(max = 32)
-    @Column(name = "double_random_notary", length = 32, nullable = false)
+    @Column(name = "double_random_notary", length = 32)
     private String doubleRandomNotary;
 
     @Size(max = 64)
@@ -77,9 +71,9 @@ public class DoubleRandom implements Serializable {
     private String doubleRandomManagerName;
 
     @NotNull
-    @Size(max = 64)
-    @Column(name = "double_random_manager_number", length = 64, nullable = false)
-    private String doubleRandomManagerNumber;
+    @Max(value = 10)
+    @Column(name = "double_random_manager_number", nullable = false)
+    private Integer doubleRandomManagerNumber;
 
     @Size(max = 64)
     @Column(name = "double_random_manager_department", length = 64)
@@ -112,19 +106,6 @@ public class DoubleRandom implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDoubleRandomName() {
-        return doubleRandomName;
-    }
-
-    public DoubleRandom doubleRandomName(String doubleRandomName) {
-        this.doubleRandomName = doubleRandomName;
-        return this;
-    }
-
-    public void setDoubleRandomName(String doubleRandomName) {
-        this.doubleRandomName = doubleRandomName;
     }
 
     public String getDoubleRandomDate() {
@@ -257,16 +238,16 @@ public class DoubleRandom implements Serializable {
         this.doubleRandomManagerName = doubleRandomManagerName;
     }
 
-    public String getDoubleRandomManagerNumber() {
+    public Integer getDoubleRandomManagerNumber() {
         return doubleRandomManagerNumber;
     }
 
-    public DoubleRandom doubleRandomManagerNumber(String doubleRandomManagerNumber) {
+    public DoubleRandom doubleRandomManagerNumber(Integer doubleRandomManagerNumber) {
         this.doubleRandomManagerNumber = doubleRandomManagerNumber;
         return this;
     }
 
-    public void setDoubleRandomManagerNumber(String doubleRandomManagerNumber) {
+    public void setDoubleRandomManagerNumber(Integer doubleRandomManagerNumber) {
         this.doubleRandomManagerNumber = doubleRandomManagerNumber;
     }
 
@@ -381,7 +362,6 @@ public class DoubleRandom implements Serializable {
     public String toString() {
         return "DoubleRandom{" +
             "id=" + id +
-            ", doubleRandomName='" + doubleRandomName + "'" +
             ", doubleRandomDate='" + doubleRandomDate + "'" +
             ", doubleRandomNotary='" + doubleRandomNotary + "'" +
             ", doubleRandomCompanyName='" + doubleRandomCompanyName + "'" +

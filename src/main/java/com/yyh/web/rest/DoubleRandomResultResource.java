@@ -2,9 +2,7 @@ package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.domain.DoubleRandomResult;
-
-import com.yyh.repository.DoubleRandomResultRepository;
-import com.yyh.repository.search.DoubleRandomResultSearchRepository;
+import com.yyh.service.DoubleRandomResultService;
 import com.yyh.web.rest.util.HeaderUtil;
 import com.yyh.web.rest.util.PaginationUtil;
 
@@ -39,10 +37,7 @@ public class DoubleRandomResultResource {
     private final Logger log = LoggerFactory.getLogger(DoubleRandomResultResource.class);
         
     @Inject
-    private DoubleRandomResultRepository doubleRandomResultRepository;
-
-    @Inject
-    private DoubleRandomResultSearchRepository doubleRandomResultSearchRepository;
+    private DoubleRandomResultService doubleRandomResultService;
 
     /**
      * POST  /double-random-results : Create a new doubleRandomResult.
@@ -58,8 +53,7 @@ public class DoubleRandomResultResource {
         if (doubleRandomResult.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("doubleRandomResult", "idexists", "A new doubleRandomResult cannot already have an ID")).body(null);
         }
-        DoubleRandomResult result = doubleRandomResultRepository.save(doubleRandomResult);
-        doubleRandomResultSearchRepository.save(result);
+        DoubleRandomResult result = doubleRandomResultService.save(doubleRandomResult);
         return ResponseEntity.created(new URI("/api/double-random-results/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("doubleRandomResult", result.getId().toString()))
             .body(result);
@@ -81,8 +75,7 @@ public class DoubleRandomResultResource {
         if (doubleRandomResult.getId() == null) {
             return createDoubleRandomResult(doubleRandomResult);
         }
-        DoubleRandomResult result = doubleRandomResultRepository.save(doubleRandomResult);
-        doubleRandomResultSearchRepository.save(result);
+        DoubleRandomResult result = doubleRandomResultService.save(doubleRandomResult);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("doubleRandomResult", doubleRandomResult.getId().toString()))
             .body(result);
@@ -100,7 +93,7 @@ public class DoubleRandomResultResource {
     public ResponseEntity<List<DoubleRandomResult>> getAllDoubleRandomResults(@ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of DoubleRandomResults");
-        Page<DoubleRandomResult> page = doubleRandomResultRepository.findAll(pageable);
+        Page<DoubleRandomResult> page = doubleRandomResultService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/double-random-results");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -115,7 +108,7 @@ public class DoubleRandomResultResource {
     @Timed
     public ResponseEntity<DoubleRandomResult> getDoubleRandomResult(@PathVariable Long id) {
         log.debug("REST request to get DoubleRandomResult : {}", id);
-        DoubleRandomResult doubleRandomResult = doubleRandomResultRepository.findOneWithEagerRelationships(id);
+        DoubleRandomResult doubleRandomResult = doubleRandomResultService.findOne(id);
         return Optional.ofNullable(doubleRandomResult)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -133,8 +126,7 @@ public class DoubleRandomResultResource {
     @Timed
     public ResponseEntity<Void> deleteDoubleRandomResult(@PathVariable Long id) {
         log.debug("REST request to delete DoubleRandomResult : {}", id);
-        doubleRandomResultRepository.delete(id);
-        doubleRandomResultSearchRepository.delete(id);
+        doubleRandomResultService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("doubleRandomResult", id.toString())).build();
     }
 
@@ -152,7 +144,7 @@ public class DoubleRandomResultResource {
     public ResponseEntity<List<DoubleRandomResult>> searchDoubleRandomResults(@RequestParam String query, @ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of DoubleRandomResults for query {}", query);
-        Page<DoubleRandomResult> page = doubleRandomResultSearchRepository.search(queryStringQuery(query), pageable);
+        Page<DoubleRandomResult> page = doubleRandomResultService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/double-random-results");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

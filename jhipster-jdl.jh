@@ -39,9 +39,8 @@ entity Task {
 }
 
 entity DoubleRandom {
-    doubleRandomName String required maxlength(32),
     doubleRandomDate String required maxlength(32),
-    doubleRandomNotary String required maxlength(32),
+    doubleRandomNotary String maxlength(32),
     doubleRandomCompanyName String maxlength(64),
     doubleRandomCompanyArea String maxlength(64),
     doubleRandomCompanySupervisory String maxlength(64),
@@ -50,7 +49,7 @@ entity DoubleRandom {
     doubleRandomCompanyRatio String required maxlength(64),
     doubleRandomCompanyCount Integer required max(100000),
     doubleRandomManagerName String maxlength(64),
-    doubleRandomManagerNumber String required maxlength(64),
+    doubleRandomManagerNumber Integer required max(10),
     doubleRandomManagerDepartment String maxlength(64),
     doubleRandomManagerRatio String required maxlength(64),
     description String maxlength(1024)
@@ -141,6 +140,7 @@ service Task with serviceClass
 service TaskProject with serviceClass
 service Company with serviceClass
 service DoubleRandom with serviceClass
+service DoubleRandomResult with serviceClass
 
 paginate Company with pager
 paginate TaskProject with pager

@@ -36,7 +36,6 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="doubleRandomName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomName">Double Random Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomDate"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomDate">Double Random Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomNotary"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomNotary">Double Random Notary</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomCompanyName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyName">Double Random Company Name</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -57,7 +56,6 @@
             <tbody>
                 <tr ng-repeat="doubleRandom in vm.doubleRandoms track by doubleRandom.id">
                     <td><a ui-sref="double-random-detail({id:doubleRandom.id})">{{doubleRandom.id}}</a></td>
-                    <td>{{doubleRandom.doubleRandomName}}</td>
                     <td>{{doubleRandom.doubleRandomDate}}</td>
                     <td>{{doubleRandom.doubleRandomNotary}}</td>
                     <td>{{doubleRandom.doubleRandomCompanyName}}</td>
