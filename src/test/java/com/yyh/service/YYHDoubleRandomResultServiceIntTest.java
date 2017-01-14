@@ -50,10 +50,10 @@ public class YYHDoubleRandomResultServiceIntTest {
         yellow.setSignConfig(5);
         yellow.setSignCss("warning");
         yellow.setSignName("黄牌");
-        signRepository.save(red);
+        signRepository.save(yellow);
         Sort sort = new Sort(Sort.Direction.DESC, "signConfig");
         List<Sign> signs = signRepository.findAll(sort);
-//        assertThat(signs.get(0).getSignConfig()).isEqualTo("5");
+        assertThat(signs.get(0).getSignConfig()).isEqualTo(5);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();

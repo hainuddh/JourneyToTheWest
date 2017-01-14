@@ -50,9 +50,9 @@ public class YYHDoubleRandomResultService {
         */
         for (DoubleRandomResult doubleRandomResult : doubleRandomResultList) {
             if (doubleRandomResult.getFinishDate() == null || doubleRandomResult.getFinishDate().trim().equals("")) {
-                Integer day = DateUtil.daysBetween(doubleRandomResult.getDoubleRandom().getDoubleRandomDate(), sdf.format(date));
+                Integer day = DateUtil.daysBetween(sdf.format(date), doubleRandomResult.getDoubleRandom().getDoubleRandomDate());
                 for (Sign sign : signs) {
-                    if (day > sign.getSignConfig()) {
+                    if (day <= sign.getSignConfig()) {
                         doubleRandomResult.setSign(sign);
                     }
                 }
