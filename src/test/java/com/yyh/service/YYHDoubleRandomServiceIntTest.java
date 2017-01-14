@@ -3,8 +3,6 @@ package com.yyh.service;
 import com.yyh.JourneyToTheWestApp;
 import com.yyh.domain.DoubleRandom;
 import com.yyh.domain.Task;
-import com.yyh.domain.TaskProject;
-import com.yyh.domain.User;
 import com.yyh.repository.TaskRepository;
 import com.yyh.web.rest.vm.DoubleRandomVM;
 import org.junit.Test;
@@ -14,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,10 +21,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 @Transactional
-public class DoubleRandomYYHServiceIntTest {
+public class YYHDoubleRandomServiceIntTest {
 
     @Inject
-    private DoubleRandomYYHService doubleRandomYYHService;
+    private YYHDoubleRandomService YYHDoubleRandomService;
 
     @Inject
     private TaskRepository taskRepository;
@@ -44,15 +41,15 @@ public class DoubleRandomYYHServiceIntTest {
         Task result2 = taskRepository.save(task2);
         DoubleRandomVM doubleRandomVM = new DoubleRandomVM();
         doubleRandomVM.setDoubleRandomNotary("公证人");
-        doubleRandomVM.setDoubleRandomDate("2016-12-12");
+        doubleRandomVM.setDoubleRandomDate("2017-02-11");
         doubleRandomVM.setTasksString(result1.getId() + "|" + result2.getId());
-        doubleRandomVM.setDoubleRandomCompanyType("1");
-        doubleRandomVM.setDoubleRandomCompanyRatio("1");
-        doubleRandomVM.setDoubleRandomCompanySupervisory("1");
-        doubleRandomVM.setDoubleRandomCompanyIndustryType("1");
-        doubleRandomVM.setDoubleRandomCompanyName("万宁");
-        doubleRandomVM.setDoubleRandomManagerRatio("1");
-        DoubleRandom doubleRandom = doubleRandomYYHService.saveDoubleRandomWithResult(doubleRandomVM);
+//        doubleRandomVM.setDoubleRandomCompanyType("1");
+        doubleRandomVM.setDoubleRandomCompanyRatio(1);
+//        doubleRandomVM.setDoubleRandomCompanySupervisory("1");
+//        doubleRandomVM.setDoubleRandomCompanyIndustryType("1");
+//        doubleRandomVM.setDoubleRandomCompanyName("万宁");
+        doubleRandomVM.setDoubleRandomManagerRatio(100);
+        DoubleRandom doubleRandom = YYHDoubleRandomService.saveDoubleRandomWithResult(doubleRandomVM);
         assertThat(doubleRandom).isNotNull();
         assertThat(doubleRandom.getTasks().size()).isEqualTo(2);
     }

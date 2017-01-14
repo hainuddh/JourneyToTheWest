@@ -3,14 +3,6 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "sign",
-            "otherEntityName": "sign",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "doubleRandomResult"
-        },
-        {
-            "relationshipType": "one-to-one",
             "relationshipName": "lawenforcement",
             "otherEntityName": "lawenforcement",
             "otherEntityField": "id",
@@ -24,6 +16,12 @@
             "otherEntityName": "manager",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "sign",
+            "otherEntityName": "sign",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",

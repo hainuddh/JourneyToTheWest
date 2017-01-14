@@ -1,0 +1,26 @@
+{
+    "journeyToTheWestApp": {
+        "headPerson" : {
+            "home": {
+                "title": "Head People",
+                "createLabel": "Create a new Head Person",
+                "createOrEditLabel": "Create or edit a Head Person",
+                "search": "Search for Head Person"
+            },
+            "created": "A new Head Person is created with identifier {{ param }}",
+            "updated": "A Head Person is updated with identifier {{ param }}",
+            "deleted": "A Head Person is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Head Person {{ id }}?"
+            },
+            "detail": {
+                "title": "Head Person"
+            },
+            "name": "Name",
+            "job": "Job",
+            "email": "Email",
+            "phone": "Phone",
+            "office": "Office"
+        }
+    }
+}

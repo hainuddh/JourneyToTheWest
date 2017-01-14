@@ -125,18 +125,19 @@
                         entity: function () {
                             return {
                                 doubleRandomDate: null,
+                                doubleRandomCompanyRatio: null,
+                                doubleRandomManagerRatio: null,
+                                doubleRandomManagerNumber: null,
+                                doubleRandomCompanyCount: null,
                                 doubleRandomNotary: null,
+                                doubleRandomTaskContent: null,
                                 doubleRandomCompanyName: null,
                                 doubleRandomCompanyArea: null,
                                 doubleRandomCompanySupervisory: null,
                                 doubleRandomCompanyType: null,
                                 doubleRandomCompanyIndustryType: null,
-                                doubleRandomCompanyRatio: null,
-                                doubleRandomCompanyCount: null,
                                 doubleRandomManagerName: null,
-                                doubleRandomManagerNumber: null,
                                 doubleRandomManagerDepartment: null,
-                                doubleRandomManagerRatio: null,
                                 description: null,
                                 id: null
                             };

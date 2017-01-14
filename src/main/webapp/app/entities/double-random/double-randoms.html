@@ -37,18 +37,19 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomDate"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomDate">Double Random Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyRatio"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyRatio">Double Random Company Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomManagerRatio"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerRatio">Double Random Manager Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomManagerNumber"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerNumber">Double Random Manager Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomCompanyCount"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyCount">Double Random Company Count</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomNotary"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomNotary">Double Random Notary</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doubleRandomTaskContent"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomTaskContent">Double Random Task Content</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomCompanyName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyName">Double Random Company Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomCompanyArea"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyArea">Double Random Company Area</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomCompanySupervisory"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanySupervisory">Double Random Company Supervisory</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomCompanyType"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyType">Double Random Company Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomCompanyIndustryType"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyIndustryType">Double Random Company Industry Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="doubleRandomCompanyRatio"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyRatio">Double Random Company Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="doubleRandomCompanyCount"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomCompanyCount">Double Random Company Count</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomManagerName"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerName">Double Random Manager Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="doubleRandomManagerNumber"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerNumber">Double Random Manager Number</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="doubleRandomManagerDepartment"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerDepartment">Double Random Manager Department</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="doubleRandomManagerRatio"><span data-translate="journeyToTheWestApp.doubleRandom.doubleRandomManagerRatio">Double Random Manager Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.doubleRandom.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -57,18 +58,19 @@
                 <tr ng-repeat="doubleRandom in vm.doubleRandoms track by doubleRandom.id">
                     <td><a ui-sref="double-random-detail({id:doubleRandom.id})">{{doubleRandom.id}}</a></td>
                     <td>{{doubleRandom.doubleRandomDate}}</td>
+                    <td>{{doubleRandom.doubleRandomCompanyRatio}}</td>
+                    <td>{{doubleRandom.doubleRandomManagerRatio}}</td>
+                    <td>{{doubleRandom.doubleRandomManagerNumber}}</td>
+                    <td>{{doubleRandom.doubleRandomCompanyCount}}</td>
                     <td>{{doubleRandom.doubleRandomNotary}}</td>
+                    <td>{{doubleRandom.doubleRandomTaskContent}}</td>
                     <td>{{doubleRandom.doubleRandomCompanyName}}</td>
                     <td>{{doubleRandom.doubleRandomCompanyArea}}</td>
                     <td>{{doubleRandom.doubleRandomCompanySupervisory}}</td>
                     <td>{{doubleRandom.doubleRandomCompanyType}}</td>
                     <td>{{doubleRandom.doubleRandomCompanyIndustryType}}</td>
-                    <td>{{doubleRandom.doubleRandomCompanyRatio}}</td>
-                    <td>{{doubleRandom.doubleRandomCompanyCount}}</td>
                     <td>{{doubleRandom.doubleRandomManagerName}}</td>
-                    <td>{{doubleRandom.doubleRandomManagerNumber}}</td>
                     <td>{{doubleRandom.doubleRandomManagerDepartment}}</td>
-                    <td>{{doubleRandom.doubleRandomManagerRatio}}</td>
                     <td>{{doubleRandom.description}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

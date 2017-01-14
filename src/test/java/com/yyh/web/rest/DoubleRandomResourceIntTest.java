@@ -42,8 +42,23 @@ public class DoubleRandomResourceIntTest {
     private static final String DEFAULT_DOUBLE_RANDOM_DATE = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_DATE = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO = 1;
+    private static final Integer UPDATED_DOUBLE_RANDOM_COMPANY_RATIO = 2;
+
+    private static final Integer DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO = 1;
+    private static final Integer UPDATED_DOUBLE_RANDOM_MANAGER_RATIO = 2;
+
+    private static final Integer DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER = 10;
+    private static final Integer UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER = 9;
+
+    private static final Integer DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT = 100000;
+    private static final Integer UPDATED_DOUBLE_RANDOM_COMPANY_COUNT = 99999;
+
     private static final String DEFAULT_DOUBLE_RANDOM_NOTARY = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_NOTARY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DOUBLE_RANDOM_TASK_CONTENT = "AAAAAAAAAA";
+    private static final String UPDATED_DOUBLE_RANDOM_TASK_CONTENT = "BBBBBBBBBB";
 
     private static final String DEFAULT_DOUBLE_RANDOM_COMPANY_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_COMPANY_NAME = "BBBBBBBBBB";
@@ -60,23 +75,11 @@ public class DoubleRandomResourceIntTest {
     private static final String DEFAULT_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO = "AAAAAAAAAA";
-    private static final String UPDATED_DOUBLE_RANDOM_COMPANY_RATIO = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT = 100000;
-    private static final Integer UPDATED_DOUBLE_RANDOM_COMPANY_COUNT = 99999;
-
     private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_MANAGER_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER = 10;
-    private static final Integer UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER = 9;
-
     private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT = "AAAAAAAAAA";
     private static final String UPDATED_DOUBLE_RANDOM_MANAGER_DEPARTMENT = "BBBBBBBBBB";
-
-    private static final String DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO = "AAAAAAAAAA";
-    private static final String UPDATED_DOUBLE_RANDOM_MANAGER_RATIO = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -122,18 +125,19 @@ public class DoubleRandomResourceIntTest {
     public static DoubleRandom createEntity(EntityManager em) {
         DoubleRandom doubleRandom = new DoubleRandom()
                 .doubleRandomDate(DEFAULT_DOUBLE_RANDOM_DATE)
+                .doubleRandomCompanyRatio(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO)
+                .doubleRandomManagerRatio(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO)
+                .doubleRandomManagerNumber(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)
+                .doubleRandomCompanyCount(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)
                 .doubleRandomNotary(DEFAULT_DOUBLE_RANDOM_NOTARY)
+                .doubleRandomTaskContent(DEFAULT_DOUBLE_RANDOM_TASK_CONTENT)
                 .doubleRandomCompanyName(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME)
                 .doubleRandomCompanyArea(DEFAULT_DOUBLE_RANDOM_COMPANY_AREA)
                 .doubleRandomCompanySupervisory(DEFAULT_DOUBLE_RANDOM_COMPANY_SUPERVISORY)
                 .doubleRandomCompanyType(DEFAULT_DOUBLE_RANDOM_COMPANY_TYPE)
                 .doubleRandomCompanyIndustryType(DEFAULT_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE)
-                .doubleRandomCompanyRatio(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO)
-                .doubleRandomCompanyCount(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)
                 .doubleRandomManagerName(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME)
-                .doubleRandomManagerNumber(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)
                 .doubleRandomManagerDepartment(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT)
-                .doubleRandomManagerRatio(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO)
                 .description(DEFAULT_DESCRIPTION);
         return doubleRandom;
     }
@@ -161,18 +165,19 @@ public class DoubleRandomResourceIntTest {
         assertThat(doubleRandomList).hasSize(databaseSizeBeforeCreate + 1);
         DoubleRandom testDoubleRandom = doubleRandomList.get(doubleRandomList.size() - 1);
         assertThat(testDoubleRandom.getDoubleRandomDate()).isEqualTo(DEFAULT_DOUBLE_RANDOM_DATE);
+        assertThat(testDoubleRandom.getDoubleRandomCompanyRatio()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO);
+        assertThat(testDoubleRandom.getDoubleRandomManagerRatio()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO);
+        assertThat(testDoubleRandom.getDoubleRandomManagerNumber()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER);
+        assertThat(testDoubleRandom.getDoubleRandomCompanyCount()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT);
         assertThat(testDoubleRandom.getDoubleRandomNotary()).isEqualTo(DEFAULT_DOUBLE_RANDOM_NOTARY);
+        assertThat(testDoubleRandom.getDoubleRandomTaskContent()).isEqualTo(DEFAULT_DOUBLE_RANDOM_TASK_CONTENT);
         assertThat(testDoubleRandom.getDoubleRandomCompanyName()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME);
         assertThat(testDoubleRandom.getDoubleRandomCompanyArea()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_AREA);
         assertThat(testDoubleRandom.getDoubleRandomCompanySupervisory()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_SUPERVISORY);
         assertThat(testDoubleRandom.getDoubleRandomCompanyType()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_TYPE);
         assertThat(testDoubleRandom.getDoubleRandomCompanyIndustryType()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE);
-        assertThat(testDoubleRandom.getDoubleRandomCompanyRatio()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO);
-        assertThat(testDoubleRandom.getDoubleRandomCompanyCount()).isEqualTo(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT);
         assertThat(testDoubleRandom.getDoubleRandomManagerName()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME);
-        assertThat(testDoubleRandom.getDoubleRandomManagerNumber()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER);
         assertThat(testDoubleRandom.getDoubleRandomManagerDepartment()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT);
-        assertThat(testDoubleRandom.getDoubleRandomManagerRatio()).isEqualTo(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO);
         assertThat(testDoubleRandom.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the DoubleRandom in ElasticSearch
@@ -238,42 +243,6 @@ public class DoubleRandomResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDoubleRandomCompanyCountIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomCompanyCount(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDoubleRandomManagerNumberIsRequired() throws Exception {
-        int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
-        // set the field null
-        doubleRandom.setDoubleRandomManagerNumber(null);
-
-        // Create the DoubleRandom, which fails.
-
-        restDoubleRandomMockMvc.perform(post("/api/double-randoms")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(doubleRandom)))
-            .andExpect(status().isBadRequest());
-
-        List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        assertThat(doubleRandomList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkDoubleRandomManagerRatioIsRequired() throws Exception {
         int databaseSizeBeforeTest = doubleRandomRepository.findAll().size();
         // set the field null
@@ -302,18 +271,19 @@ public class DoubleRandomResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(doubleRandom.getId().intValue())))
             .andExpect(jsonPath("$.[*].doubleRandomDate").value(hasItem(DEFAULT_DOUBLE_RANDOM_DATE.toString())))
+            .andExpect(jsonPath("$.[*].doubleRandomCompanyRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO)))
+            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO)))
+            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)))
+            .andExpect(jsonPath("$.[*].doubleRandomCompanyCount").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)))
             .andExpect(jsonPath("$.[*].doubleRandomNotary").value(hasItem(DEFAULT_DOUBLE_RANDOM_NOTARY.toString())))
+            .andExpect(jsonPath("$.[*].doubleRandomTaskContent").value(hasItem(DEFAULT_DOUBLE_RANDOM_TASK_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyName").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyArea").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_AREA.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanySupervisory").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_SUPERVISORY.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyType").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_TYPE.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyIndustryType").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomCompanyRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomCompanyCount").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerName").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerDepartment").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -329,18 +299,19 @@ public class DoubleRandomResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(doubleRandom.getId().intValue()))
             .andExpect(jsonPath("$.doubleRandomDate").value(DEFAULT_DOUBLE_RANDOM_DATE.toString()))
+            .andExpect(jsonPath("$.doubleRandomCompanyRatio").value(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO))
+            .andExpect(jsonPath("$.doubleRandomManagerRatio").value(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO))
+            .andExpect(jsonPath("$.doubleRandomManagerNumber").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER))
+            .andExpect(jsonPath("$.doubleRandomCompanyCount").value(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT))
             .andExpect(jsonPath("$.doubleRandomNotary").value(DEFAULT_DOUBLE_RANDOM_NOTARY.toString()))
+            .andExpect(jsonPath("$.doubleRandomTaskContent").value(DEFAULT_DOUBLE_RANDOM_TASK_CONTENT.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanyName").value(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanyArea").value(DEFAULT_DOUBLE_RANDOM_COMPANY_AREA.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanySupervisory").value(DEFAULT_DOUBLE_RANDOM_COMPANY_SUPERVISORY.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanyType").value(DEFAULT_DOUBLE_RANDOM_COMPANY_TYPE.toString()))
             .andExpect(jsonPath("$.doubleRandomCompanyIndustryType").value(DEFAULT_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE.toString()))
-            .andExpect(jsonPath("$.doubleRandomCompanyRatio").value(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO.toString()))
-            .andExpect(jsonPath("$.doubleRandomCompanyCount").value(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT))
             .andExpect(jsonPath("$.doubleRandomManagerName").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString()))
-            .andExpect(jsonPath("$.doubleRandomManagerNumber").value(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER))
             .andExpect(jsonPath("$.doubleRandomManagerDepartment").value(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString()))
-            .andExpect(jsonPath("$.doubleRandomManagerRatio").value(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -364,18 +335,19 @@ public class DoubleRandomResourceIntTest {
         DoubleRandom updatedDoubleRandom = doubleRandomRepository.findOne(doubleRandom.getId());
         updatedDoubleRandom
                 .doubleRandomDate(UPDATED_DOUBLE_RANDOM_DATE)
+                .doubleRandomCompanyRatio(UPDATED_DOUBLE_RANDOM_COMPANY_RATIO)
+                .doubleRandomManagerRatio(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO)
+                .doubleRandomManagerNumber(UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER)
+                .doubleRandomCompanyCount(UPDATED_DOUBLE_RANDOM_COMPANY_COUNT)
                 .doubleRandomNotary(UPDATED_DOUBLE_RANDOM_NOTARY)
+                .doubleRandomTaskContent(UPDATED_DOUBLE_RANDOM_TASK_CONTENT)
                 .doubleRandomCompanyName(UPDATED_DOUBLE_RANDOM_COMPANY_NAME)
                 .doubleRandomCompanyArea(UPDATED_DOUBLE_RANDOM_COMPANY_AREA)
                 .doubleRandomCompanySupervisory(UPDATED_DOUBLE_RANDOM_COMPANY_SUPERVISORY)
                 .doubleRandomCompanyType(UPDATED_DOUBLE_RANDOM_COMPANY_TYPE)
                 .doubleRandomCompanyIndustryType(UPDATED_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE)
-                .doubleRandomCompanyRatio(UPDATED_DOUBLE_RANDOM_COMPANY_RATIO)
-                .doubleRandomCompanyCount(UPDATED_DOUBLE_RANDOM_COMPANY_COUNT)
                 .doubleRandomManagerName(UPDATED_DOUBLE_RANDOM_MANAGER_NAME)
-                .doubleRandomManagerNumber(UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER)
                 .doubleRandomManagerDepartment(UPDATED_DOUBLE_RANDOM_MANAGER_DEPARTMENT)
-                .doubleRandomManagerRatio(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO)
                 .description(UPDATED_DESCRIPTION);
 
         restDoubleRandomMockMvc.perform(put("/api/double-randoms")
@@ -388,18 +360,19 @@ public class DoubleRandomResourceIntTest {
         assertThat(doubleRandomList).hasSize(databaseSizeBeforeUpdate);
         DoubleRandom testDoubleRandom = doubleRandomList.get(doubleRandomList.size() - 1);
         assertThat(testDoubleRandom.getDoubleRandomDate()).isEqualTo(UPDATED_DOUBLE_RANDOM_DATE);
+        assertThat(testDoubleRandom.getDoubleRandomCompanyRatio()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_RATIO);
+        assertThat(testDoubleRandom.getDoubleRandomManagerRatio()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO);
+        assertThat(testDoubleRandom.getDoubleRandomManagerNumber()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER);
+        assertThat(testDoubleRandom.getDoubleRandomCompanyCount()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_COUNT);
         assertThat(testDoubleRandom.getDoubleRandomNotary()).isEqualTo(UPDATED_DOUBLE_RANDOM_NOTARY);
+        assertThat(testDoubleRandom.getDoubleRandomTaskContent()).isEqualTo(UPDATED_DOUBLE_RANDOM_TASK_CONTENT);
         assertThat(testDoubleRandom.getDoubleRandomCompanyName()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_NAME);
         assertThat(testDoubleRandom.getDoubleRandomCompanyArea()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_AREA);
         assertThat(testDoubleRandom.getDoubleRandomCompanySupervisory()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_SUPERVISORY);
         assertThat(testDoubleRandom.getDoubleRandomCompanyType()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_TYPE);
         assertThat(testDoubleRandom.getDoubleRandomCompanyIndustryType()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE);
-        assertThat(testDoubleRandom.getDoubleRandomCompanyRatio()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_RATIO);
-        assertThat(testDoubleRandom.getDoubleRandomCompanyCount()).isEqualTo(UPDATED_DOUBLE_RANDOM_COMPANY_COUNT);
         assertThat(testDoubleRandom.getDoubleRandomManagerName()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_NAME);
-        assertThat(testDoubleRandom.getDoubleRandomManagerNumber()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_NUMBER);
         assertThat(testDoubleRandom.getDoubleRandomManagerDepartment()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_DEPARTMENT);
-        assertThat(testDoubleRandom.getDoubleRandomManagerRatio()).isEqualTo(UPDATED_DOUBLE_RANDOM_MANAGER_RATIO);
         assertThat(testDoubleRandom.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the DoubleRandom in ElasticSearch
@@ -459,18 +432,19 @@ public class DoubleRandomResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(doubleRandom.getId().intValue())))
             .andExpect(jsonPath("$.[*].doubleRandomDate").value(hasItem(DEFAULT_DOUBLE_RANDOM_DATE.toString())))
+            .andExpect(jsonPath("$.[*].doubleRandomCompanyRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO)))
+            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO)))
+            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)))
+            .andExpect(jsonPath("$.[*].doubleRandomCompanyCount").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)))
             .andExpect(jsonPath("$.[*].doubleRandomNotary").value(hasItem(DEFAULT_DOUBLE_RANDOM_NOTARY.toString())))
+            .andExpect(jsonPath("$.[*].doubleRandomTaskContent").value(hasItem(DEFAULT_DOUBLE_RANDOM_TASK_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyName").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyArea").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_AREA.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanySupervisory").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_SUPERVISORY.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyType").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_TYPE.toString())))
             .andExpect(jsonPath("$.[*].doubleRandomCompanyIndustryType").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_INDUSTRY_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomCompanyRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_RATIO.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomCompanyCount").value(hasItem(DEFAULT_DOUBLE_RANDOM_COMPANY_COUNT)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerName").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerNumber").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_NUMBER)))
             .andExpect(jsonPath("$.[*].doubleRandomManagerDepartment").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_DEPARTMENT.toString())))
-            .andExpect(jsonPath("$.[*].doubleRandomManagerRatio").value(hasItem(DEFAULT_DOUBLE_RANDOM_MANAGER_RATIO.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }

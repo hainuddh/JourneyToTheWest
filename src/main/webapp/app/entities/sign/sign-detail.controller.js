@@ -5,9 +5,9 @@
         .module('journeyToTheWestApp')
         .controller('SignDetailController', SignDetailController);
 
-    SignDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Sign'];
+    SignDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Sign', 'DoubleRandomResult'];
 
-    function SignDetailController($scope, $rootScope, $stateParams, previousState, entity, Sign) {
+    function SignDetailController($scope, $rootScope, $stateParams, previousState, entity, Sign, DoubleRandomResult) {
         var vm = this;
 
         vm.sign = entity;

@@ -1,5 +1,6 @@
 package com.yyh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -7,6 +8,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -33,6 +36,16 @@ public class Sign implements Serializable {
     @Max(value = 100)
     @Column(name = "sign_config", nullable = false)
     private Integer signConfig;
+
+    @NotNull
+    @Size(max = 20)
+    @Column(name = "sign_css", length = 20, nullable = false)
+    private String signCss;
+
+    @OneToMany(mappedBy = "sign")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DoubleRandomResult> doubleRandomResults = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -68,6 +81,44 @@ public class Sign implements Serializable {
         this.signConfig = signConfig;
     }
 
+    public String getSignCss() {
+        return signCss;
+    }
+
+    public Sign signCss(String signCss) {
+        this.signCss = signCss;
+        return this;
+    }
+
+    public void setSignCss(String signCss) {
+        this.signCss = signCss;
+    }
+
+    public Set<DoubleRandomResult> getDoubleRandomResults() {
+        return doubleRandomResults;
+    }
+
+    public Sign doubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
+        this.doubleRandomResults = doubleRandomResults;
+        return this;
+    }
+
+    public Sign addDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        doubleRandomResults.add(doubleRandomResult);
+        doubleRandomResult.setSign(this);
+        return this;
+    }
+
+    public Sign removeDoubleRandomResult(DoubleRandomResult doubleRandomResult) {
+        doubleRandomResults.remove(doubleRandomResult);
+        doubleRandomResult.setSign(null);
+        return this;
+    }
+
+    public void setDoubleRandomResults(Set<DoubleRandomResult> doubleRandomResults) {
+        this.doubleRandomResults = doubleRandomResults;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -94,6 +145,7 @@ public class Sign implements Serializable {
             "id=" + id +
             ", signName='" + signName + "'" +
             ", signConfig='" + signConfig + "'" +
+            ", signCss='" + signCss + "'" +
             '}';
     }
 }

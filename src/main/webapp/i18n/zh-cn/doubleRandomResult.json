@@ -25,9 +25,9 @@
             "resultStatus": "Result Status",
             "checkDate": "Check Date",
             "finishDate": "Finish Date",
-            "sign": "Sign",
             "lawenforcement": "Lawenforcement",
             "manager": "Manager",
+            "sign": "Sign",
             "company": "Company",
             "doubleRandom": "Double Random"
         }

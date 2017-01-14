@@ -44,6 +44,9 @@ public class SignResourceIntTest {
     private static final Integer DEFAULT_SIGN_CONFIG = 100;
     private static final Integer UPDATED_SIGN_CONFIG = 99;
 
+    private static final String DEFAULT_SIGN_CSS = "AAAAAAAAAA";
+    private static final String UPDATED_SIGN_CSS = "BBBBBBBBBB";
+
     @Inject
     private SignRepository signRepository;
 
@@ -83,7 +86,8 @@ public class SignResourceIntTest {
     public static Sign createEntity(EntityManager em) {
         Sign sign = new Sign()
                 .signName(DEFAULT_SIGN_NAME)
-                .signConfig(DEFAULT_SIGN_CONFIG);
+                .signConfig(DEFAULT_SIGN_CONFIG)
+                .signCss(DEFAULT_SIGN_CSS);
         return sign;
     }
 
@@ -111,6 +115,7 @@ public class SignResourceIntTest {
         Sign testSign = signList.get(signList.size() - 1);
         assertThat(testSign.getSignName()).isEqualTo(DEFAULT_SIGN_NAME);
         assertThat(testSign.getSignConfig()).isEqualTo(DEFAULT_SIGN_CONFIG);
+        assertThat(testSign.getSignCss()).isEqualTo(DEFAULT_SIGN_CSS);
 
         // Validate the Sign in ElasticSearch
         Sign signEs = signSearchRepository.findOne(testSign.getId());
@@ -175,6 +180,24 @@ public class SignResourceIntTest {
 
     @Test
     @Transactional
+    public void checkSignCssIsRequired() throws Exception {
+        int databaseSizeBeforeTest = signRepository.findAll().size();
+        // set the field null
+        sign.setSignCss(null);
+
+        // Create the Sign, which fails.
+
+        restSignMockMvc.perform(post("/api/signs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sign)))
+            .andExpect(status().isBadRequest());
+
+        List<Sign> signList = signRepository.findAll();
+        assertThat(signList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllSigns() throws Exception {
         // Initialize the database
         signRepository.saveAndFlush(sign);
@@ -185,7 +208,8 @@ public class SignResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sign.getId().intValue())))
             .andExpect(jsonPath("$.[*].signName").value(hasItem(DEFAULT_SIGN_NAME.toString())))
-            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG)));
+            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG)))
+            .andExpect(jsonPath("$.[*].signCss").value(hasItem(DEFAULT_SIGN_CSS.toString())));
     }
 
     @Test
@@ -200,7 +224,8 @@ public class SignResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sign.getId().intValue()))
             .andExpect(jsonPath("$.signName").value(DEFAULT_SIGN_NAME.toString()))
-            .andExpect(jsonPath("$.signConfig").value(DEFAULT_SIGN_CONFIG));
+            .andExpect(jsonPath("$.signConfig").value(DEFAULT_SIGN_CONFIG))
+            .andExpect(jsonPath("$.signCss").value(DEFAULT_SIGN_CSS.toString()));
     }
 
     @Test
@@ -223,7 +248,8 @@ public class SignResourceIntTest {
         Sign updatedSign = signRepository.findOne(sign.getId());
         updatedSign
                 .signName(UPDATED_SIGN_NAME)
-                .signConfig(UPDATED_SIGN_CONFIG);
+                .signConfig(UPDATED_SIGN_CONFIG)
+                .signCss(UPDATED_SIGN_CSS);
 
         restSignMockMvc.perform(put("/api/signs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -236,6 +262,7 @@ public class SignResourceIntTest {
         Sign testSign = signList.get(signList.size() - 1);
         assertThat(testSign.getSignName()).isEqualTo(UPDATED_SIGN_NAME);
         assertThat(testSign.getSignConfig()).isEqualTo(UPDATED_SIGN_CONFIG);
+        assertThat(testSign.getSignCss()).isEqualTo(UPDATED_SIGN_CSS);
 
         // Validate the Sign in ElasticSearch
         Sign signEs = signSearchRepository.findOne(testSign.getId());
@@ -295,6 +322,7 @@ public class SignResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sign.getId().intValue())))
             .andExpect(jsonPath("$.[*].signName").value(hasItem(DEFAULT_SIGN_NAME.toString())))
-            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG)));
+            .andExpect(jsonPath("$.[*].signConfig").value(hasItem(DEFAULT_SIGN_CONFIG)))
+            .andExpect(jsonPath("$.[*].signCss").value(hasItem(DEFAULT_SIGN_CSS.toString())));
     }
 }

@@ -5,7 +5,7 @@ import com.yyh.config.Constants;
 import com.yyh.domain.Company;
 import com.yyh.repository.CompanyRepository;
 import com.yyh.service.CompanyService;
-import com.yyh.service.CompanyYYHService;
+import com.yyh.service.YYHCompanyService;
 import com.yyh.service.FileUploadService;
 import com.yyh.web.rest.util.PaginationUtil;
 import com.yyh.web.rest.vm.FileInfoVM;
@@ -31,15 +31,15 @@ import java.net.URISyntaxException;
  */
 @RestController
 @RequestMapping("/api")
-public class CompanyYYHResource {
+public class YYHCompanyResource {
 
-    private final Logger log = LoggerFactory.getLogger(CompanyYYHResource.class);
+    private final Logger log = LoggerFactory.getLogger(YYHCompanyResource.class);
 
     @Inject
     private CompanyService companyService;
 
     @Inject
-    private CompanyYYHService companyYYHService;
+    private YYHCompanyService YYHCompanyService;
 
     @Inject
     private FileUploadService fileUploadService;
@@ -55,7 +55,7 @@ public class CompanyYYHResource {
     @PostMapping("/companies/import")
     @Timed
     public ResponseEntity<?> importCompany() {
-        companyYYHService.importCompanies("E:\\万宁市市场主体名录(市场主体查询).xls");
+        YYHCompanyService.importCompanies("E:\\万宁市市场主体名录(市场主体查询).xls");
         return ResponseEntity.ok().body("ok");
     }
 

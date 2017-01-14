@@ -3,6 +3,7 @@ entity Manager {
     managerName String required maxlength(32),
     managerCardId String required maxlength(32),
     managerCardType String required maxlength(64),
+    managerICCard String required maxlength(32),
     managerSex String required maxlength(1),
     managerFlag String maxlength(1),
     checkCount Integer max(10000)
@@ -40,18 +41,19 @@ entity Task {
 
 entity DoubleRandom {
     doubleRandomDate String required maxlength(32),
+    doubleRandomCompanyRatio Integer required min(1) max(100),
+    doubleRandomManagerRatio Integer required min(1) max(100),
+    doubleRandomManagerNumber Integer max(10),
+    doubleRandomCompanyCount Integer max(100000),
     doubleRandomNotary String maxlength(32),
+    doubleRandomTaskContent String maxlength(2048),
     doubleRandomCompanyName String maxlength(64),
     doubleRandomCompanyArea String maxlength(64),
     doubleRandomCompanySupervisory String maxlength(64),
     doubleRandomCompanyType String maxlength(64),
     doubleRandomCompanyIndustryType String maxlength(64),
-    doubleRandomCompanyRatio String required maxlength(64),
-    doubleRandomCompanyCount Integer required max(100000),
     doubleRandomManagerName String maxlength(64),
-    doubleRandomManagerNumber Integer required max(10),
     doubleRandomManagerDepartment String maxlength(64),
-    doubleRandomManagerRatio String required maxlength(64),
     description String maxlength(1024)
 }
 
@@ -72,6 +74,19 @@ entity Lawenforcement {
     enforcementFile String maxlength(128)
 }
 
+entity Office {
+    officeName String required maxlength(32),
+    officeDuty String required maxlength(2048)
+}
+
+entity HeadPerson {
+    name String required maxlength(32),
+    job String required maxlength(32),
+    email String required maxlength(32),
+    phone String required maxlength(32),
+    mobile String required maxlength(32)
+}
+
 entity Punish {
     punishId String required maxlength(32),
     personName String required maxlength(32),
@@ -87,6 +102,7 @@ entity Punish {
 entity Sign {
     signName String required maxlength(10),
     signConfig Integer required max(100),
+    signCss String required maxlength(20)
 }
 
 entity LawenforceDepartment {
@@ -109,7 +125,6 @@ entity Law {
 }
 
 relationship OneToOne {
-    DoubleRandomResult{sign} to Sign,
     Punish{department} to LawenforceDepartment,
     Manager{managerUser} to User,
     DoubleRandomResult{lawenforcement} to Lawenforcement,
@@ -119,10 +134,12 @@ relationship OneToOne {
 relationship ManyToMany {
     DoubleRandomResult{manager} to Manager{doubleRandomResult},
     Task{law} to Law,
-    DoubleRandom{task} to Task
+    DoubleRandom{task} to Task,
+    Office{headPerson} to HeadPerson{office}
 }
 
 relationship OneToMany {
+    Sign{DoubleRandomResult} to DoubleRandomResult{sign},
     Company{doubleRandomResult} to DoubleRandomResult{company},
     Company{punish} to Punish{company},
     TaskProject{task} to Task{taskProject},

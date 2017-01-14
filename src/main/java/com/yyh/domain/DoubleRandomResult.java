@@ -68,10 +68,6 @@ public class DoubleRandomResult implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Sign sign;
-
-    @OneToOne
-    @JoinColumn(unique = true)
     private Lawenforcement lawenforcement;
 
     @ManyToMany
@@ -80,6 +76,9 @@ public class DoubleRandomResult implements Serializable {
                joinColumns = @JoinColumn(name="double_random_results_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="managers_id", referencedColumnName="ID"))
     private Set<Manager> managers = new HashSet<>();
+
+    @ManyToOne
+    private Sign sign;
 
     @ManyToOne
     private Company company;
@@ -212,19 +211,6 @@ public class DoubleRandomResult implements Serializable {
         this.finishDate = finishDate;
     }
 
-    public Sign getSign() {
-        return sign;
-    }
-
-    public DoubleRandomResult sign(Sign sign) {
-        this.sign = sign;
-        return this;
-    }
-
-    public void setSign(Sign sign) {
-        this.sign = sign;
-    }
-
     public Lawenforcement getLawenforcement() {
         return lawenforcement;
     }
@@ -261,6 +247,19 @@ public class DoubleRandomResult implements Serializable {
 
     public void setManagers(Set<Manager> managers) {
         this.managers = managers;
+    }
+
+    public Sign getSign() {
+        return sign;
+    }
+
+    public DoubleRandomResult sign(Sign sign) {
+        this.sign = sign;
+        return this;
+    }
+
+    public void setSign(Sign sign) {
+        this.sign = sign;
     }
 
     public Company getCompany() {

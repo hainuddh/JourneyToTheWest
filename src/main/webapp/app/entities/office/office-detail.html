@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span data-translate="journeyToTheWestApp.office.detail.title">Office</span> {{vm.office.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="journeyToTheWestApp.office.officeName">Office Name</span></dt>
+        <dd>
+            <span>{{vm.office.officeName}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.office.officeDuty">Office Duty</span></dt>
+        <dd>
+            <span>{{vm.office.officeDuty}}</span>
+        </dd>
+        <dt><span data-translate="journeyToTheWestApp.office.headPerson">Head Person</span></dt>
+        <dd>
+            <span ng-repeat="headPerson in vm.office.headPeople">
+                <a ui-sref="head-person-detail({id: headPerson.id})">{{headPerson.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="office-detail.edit({id:vm.office.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

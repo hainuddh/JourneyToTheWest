@@ -1,7 +1,6 @@
 package com.yyh.service;
 
 import com.yyh.JourneyToTheWestApp;
-import com.yyh.domain.Company;
 import com.yyh.domain.Manager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,15 +21,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JourneyToTheWestApp.class)
 @Transactional
-public class CompanyYYHServiceIntTest {
+public class YYHManagerServiceIntTest {
 
     @Inject
-    private CompanyYYHService companyYYHService;
+    private YYHManagerService YYHManagerService;
 
     @Test
-    public void assertThatImportCompanyService() {
-        List<Company> companyList = companyYYHService.importCompanies("E://万宁市市场主体名录(市场主体查询).xls");
-        assertThat(companyList.size() > 0);
+    public void assertThatImportManagerService() {
+        List<Manager> managerList = YYHManagerService.importManagers("E://万宁市工商局执法检查人员名录库.xls");
+        assertThat(managerList.size() > 0);
     }
 
 }

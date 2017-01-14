@@ -128,6 +128,7 @@
                                 managerName: null,
                                 managerCardId: null,
                                 managerCardType: null,
+                                managerICCard: null,
                                 managerSex: null,
                                 managerFlag: null,
                                 checkCount: null,

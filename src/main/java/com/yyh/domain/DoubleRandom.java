@@ -32,9 +32,33 @@ public class DoubleRandom implements Serializable {
     @Column(name = "double_random_date", length = 32, nullable = false)
     private String doubleRandomDate;
 
+    @NotNull
+    @Min(value = 1)
+    @Max(value = 100)
+    @Column(name = "double_random_company_ratio", nullable = false)
+    private Integer doubleRandomCompanyRatio;
+
+    @NotNull
+    @Min(value = 1)
+    @Max(value = 100)
+    @Column(name = "double_random_manager_ratio", nullable = false)
+    private Integer doubleRandomManagerRatio;
+
+    @Max(value = 10)
+    @Column(name = "double_random_manager_number")
+    private Integer doubleRandomManagerNumber;
+
+    @Max(value = 100000)
+    @Column(name = "double_random_company_count")
+    private Integer doubleRandomCompanyCount;
+
     @Size(max = 32)
     @Column(name = "double_random_notary", length = 32)
     private String doubleRandomNotary;
+
+    @Size(max = 2048)
+    @Column(name = "double_random_task_content", length = 2048)
+    private String doubleRandomTaskContent;
 
     @Size(max = 64)
     @Column(name = "double_random_company_name", length = 64)
@@ -56,33 +80,13 @@ public class DoubleRandom implements Serializable {
     @Column(name = "double_random_company_industry_type", length = 64)
     private String doubleRandomCompanyIndustryType;
 
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "double_random_company_ratio", length = 64, nullable = false)
-    private String doubleRandomCompanyRatio;
-
-    @NotNull
-    @Max(value = 100000)
-    @Column(name = "double_random_company_count", nullable = false)
-    private Integer doubleRandomCompanyCount;
-
     @Size(max = 64)
     @Column(name = "double_random_manager_name", length = 64)
     private String doubleRandomManagerName;
 
-    @NotNull
-    @Max(value = 10)
-    @Column(name = "double_random_manager_number", nullable = false)
-    private Integer doubleRandomManagerNumber;
-
     @Size(max = 64)
     @Column(name = "double_random_manager_department", length = 64)
     private String doubleRandomManagerDepartment;
-
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "double_random_manager_ratio", length = 64, nullable = false)
-    private String doubleRandomManagerRatio;
 
     @Size(max = 1024)
     @Column(name = "description", length = 1024)
@@ -121,6 +125,58 @@ public class DoubleRandom implements Serializable {
         this.doubleRandomDate = doubleRandomDate;
     }
 
+    public Integer getDoubleRandomCompanyRatio() {
+        return doubleRandomCompanyRatio;
+    }
+
+    public DoubleRandom doubleRandomCompanyRatio(Integer doubleRandomCompanyRatio) {
+        this.doubleRandomCompanyRatio = doubleRandomCompanyRatio;
+        return this;
+    }
+
+    public void setDoubleRandomCompanyRatio(Integer doubleRandomCompanyRatio) {
+        this.doubleRandomCompanyRatio = doubleRandomCompanyRatio;
+    }
+
+    public Integer getDoubleRandomManagerRatio() {
+        return doubleRandomManagerRatio;
+    }
+
+    public DoubleRandom doubleRandomManagerRatio(Integer doubleRandomManagerRatio) {
+        this.doubleRandomManagerRatio = doubleRandomManagerRatio;
+        return this;
+    }
+
+    public void setDoubleRandomManagerRatio(Integer doubleRandomManagerRatio) {
+        this.doubleRandomManagerRatio = doubleRandomManagerRatio;
+    }
+
+    public Integer getDoubleRandomManagerNumber() {
+        return doubleRandomManagerNumber;
+    }
+
+    public DoubleRandom doubleRandomManagerNumber(Integer doubleRandomManagerNumber) {
+        this.doubleRandomManagerNumber = doubleRandomManagerNumber;
+        return this;
+    }
+
+    public void setDoubleRandomManagerNumber(Integer doubleRandomManagerNumber) {
+        this.doubleRandomManagerNumber = doubleRandomManagerNumber;
+    }
+
+    public Integer getDoubleRandomCompanyCount() {
+        return doubleRandomCompanyCount;
+    }
+
+    public DoubleRandom doubleRandomCompanyCount(Integer doubleRandomCompanyCount) {
+        this.doubleRandomCompanyCount = doubleRandomCompanyCount;
+        return this;
+    }
+
+    public void setDoubleRandomCompanyCount(Integer doubleRandomCompanyCount) {
+        this.doubleRandomCompanyCount = doubleRandomCompanyCount;
+    }
+
     public String getDoubleRandomNotary() {
         return doubleRandomNotary;
     }
@@ -132,6 +188,19 @@ public class DoubleRandom implements Serializable {
 
     public void setDoubleRandomNotary(String doubleRandomNotary) {
         this.doubleRandomNotary = doubleRandomNotary;
+    }
+
+    public String getDoubleRandomTaskContent() {
+        return doubleRandomTaskContent;
+    }
+
+    public DoubleRandom doubleRandomTaskContent(String doubleRandomTaskContent) {
+        this.doubleRandomTaskContent = doubleRandomTaskContent;
+        return this;
+    }
+
+    public void setDoubleRandomTaskContent(String doubleRandomTaskContent) {
+        this.doubleRandomTaskContent = doubleRandomTaskContent;
     }
 
     public String getDoubleRandomCompanyName() {
@@ -199,32 +268,6 @@ public class DoubleRandom implements Serializable {
         this.doubleRandomCompanyIndustryType = doubleRandomCompanyIndustryType;
     }
 
-    public String getDoubleRandomCompanyRatio() {
-        return doubleRandomCompanyRatio;
-    }
-
-    public DoubleRandom doubleRandomCompanyRatio(String doubleRandomCompanyRatio) {
-        this.doubleRandomCompanyRatio = doubleRandomCompanyRatio;
-        return this;
-    }
-
-    public void setDoubleRandomCompanyRatio(String doubleRandomCompanyRatio) {
-        this.doubleRandomCompanyRatio = doubleRandomCompanyRatio;
-    }
-
-    public Integer getDoubleRandomCompanyCount() {
-        return doubleRandomCompanyCount;
-    }
-
-    public DoubleRandom doubleRandomCompanyCount(Integer doubleRandomCompanyCount) {
-        this.doubleRandomCompanyCount = doubleRandomCompanyCount;
-        return this;
-    }
-
-    public void setDoubleRandomCompanyCount(Integer doubleRandomCompanyCount) {
-        this.doubleRandomCompanyCount = doubleRandomCompanyCount;
-    }
-
     public String getDoubleRandomManagerName() {
         return doubleRandomManagerName;
     }
@@ -238,19 +281,6 @@ public class DoubleRandom implements Serializable {
         this.doubleRandomManagerName = doubleRandomManagerName;
     }
 
-    public Integer getDoubleRandomManagerNumber() {
-        return doubleRandomManagerNumber;
-    }
-
-    public DoubleRandom doubleRandomManagerNumber(Integer doubleRandomManagerNumber) {
-        this.doubleRandomManagerNumber = doubleRandomManagerNumber;
-        return this;
-    }
-
-    public void setDoubleRandomManagerNumber(Integer doubleRandomManagerNumber) {
-        this.doubleRandomManagerNumber = doubleRandomManagerNumber;
-    }
-
     public String getDoubleRandomManagerDepartment() {
         return doubleRandomManagerDepartment;
     }
@@ -262,19 +292,6 @@ public class DoubleRandom implements Serializable {
 
     public void setDoubleRandomManagerDepartment(String doubleRandomManagerDepartment) {
         this.doubleRandomManagerDepartment = doubleRandomManagerDepartment;
-    }
-
-    public String getDoubleRandomManagerRatio() {
-        return doubleRandomManagerRatio;
-    }
-
-    public DoubleRandom doubleRandomManagerRatio(String doubleRandomManagerRatio) {
-        this.doubleRandomManagerRatio = doubleRandomManagerRatio;
-        return this;
-    }
-
-    public void setDoubleRandomManagerRatio(String doubleRandomManagerRatio) {
-        this.doubleRandomManagerRatio = doubleRandomManagerRatio;
     }
 
     public String getDescription() {
@@ -363,18 +380,19 @@ public class DoubleRandom implements Serializable {
         return "DoubleRandom{" +
             "id=" + id +
             ", doubleRandomDate='" + doubleRandomDate + "'" +
+            ", doubleRandomCompanyRatio='" + doubleRandomCompanyRatio + "'" +
+            ", doubleRandomManagerRatio='" + doubleRandomManagerRatio + "'" +
+            ", doubleRandomManagerNumber='" + doubleRandomManagerNumber + "'" +
+            ", doubleRandomCompanyCount='" + doubleRandomCompanyCount + "'" +
             ", doubleRandomNotary='" + doubleRandomNotary + "'" +
+            ", doubleRandomTaskContent='" + doubleRandomTaskContent + "'" +
             ", doubleRandomCompanyName='" + doubleRandomCompanyName + "'" +
             ", doubleRandomCompanyArea='" + doubleRandomCompanyArea + "'" +
             ", doubleRandomCompanySupervisory='" + doubleRandomCompanySupervisory + "'" +
             ", doubleRandomCompanyType='" + doubleRandomCompanyType + "'" +
             ", doubleRandomCompanyIndustryType='" + doubleRandomCompanyIndustryType + "'" +
-            ", doubleRandomCompanyRatio='" + doubleRandomCompanyRatio + "'" +
-            ", doubleRandomCompanyCount='" + doubleRandomCompanyCount + "'" +
             ", doubleRandomManagerName='" + doubleRandomManagerName + "'" +
-            ", doubleRandomManagerNumber='" + doubleRandomManagerNumber + "'" +
             ", doubleRandomManagerDepartment='" + doubleRandomManagerDepartment + "'" +
-            ", doubleRandomManagerRatio='" + doubleRandomManagerRatio + "'" +
             ", description='" + description + "'" +
             '}';
     }

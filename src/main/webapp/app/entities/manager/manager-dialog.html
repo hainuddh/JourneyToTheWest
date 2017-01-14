@@ -78,6 +78,22 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.manager.managerICCard" for="field_managerICCard">Manager IC Card</label>
+            <input type="text" class="form-control" name="managerICCard" id="field_managerICCard"
+                    ng-model="vm.manager.managerICCard"
+                    required ng-maxlength="32" />
+            <div ng-show="editForm.managerICCard.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.managerICCard.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.managerICCard.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    This field cannot be longer than 32 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.manager.managerSex" for="field_managerSex">Manager Sex</label>
             <input type="text" class="form-control" name="managerSex" id="field_managerSex"
                     ng-model="vm.manager.managerSex"

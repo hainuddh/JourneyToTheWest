@@ -139,12 +139,6 @@
         </div>
 
         <div class="form-group">
-            <label data-translate="journeyToTheWestApp.doubleRandomResult.sign" for="field_sign">Sign</label>
-            <select class="form-control" id="field_sign" name="sign" ng-model="vm.doubleRandomResult.sign" ng-options="sign as sign.id for sign in vm.signs | orderBy:'id' track by sign.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
             <label data-translate="journeyToTheWestApp.doubleRandomResult.lawenforcement" for="field_lawenforcement">Lawenforcement</label>
             <select class="form-control" id="field_lawenforcement" name="lawenforcement" ng-model="vm.doubleRandomResult.lawenforcement" ng-options="lawenforcement as lawenforcement.id for lawenforcement in vm.lawenforcements | orderBy:'id' track by lawenforcement.id">
                 <option value=""></option>
@@ -153,6 +147,12 @@
         <div class="form-group">
             <label data-translate="journeyToTheWestApp.doubleRandomResult.manager" for="field_manager">Manager</label>
             <select class="form-control" id="field_manager" multiple name="manager" ng-model="vm.doubleRandomResult.managers" ng-options="manager as manager.id for manager in vm.managers track by manager.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="journeyToTheWestApp.doubleRandomResult.sign" for="field_sign">Sign</label>
+            <select class="form-control" id="field_sign" name="sign" ng-model="vm.doubleRandomResult.sign" ng-options="sign as sign.id for sign in vm.signs track by sign.id">
+                <option value=""></option>
+            </select>
         </div>
         <div class="form-group">
             <label data-translate="journeyToTheWestApp.doubleRandomResult.company" for="field_company">Company</label>

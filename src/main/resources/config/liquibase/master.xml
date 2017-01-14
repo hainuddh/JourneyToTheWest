@@ -18,6 +18,8 @@
     <include file="classpath:config/liquibase/changelog/20170112063831_added_entity_Sign.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170112074149_added_entity_Punish.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170112084924_added_entity_Lawenforcement.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170114052640_added_entity_Office.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170114052641_added_entity_HeadPerson.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170106133145_added_entity_constraints_Manager.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170106133148_added_entity_constraints_Company.xml" relativeToChangelogFile="false"/>
@@ -26,5 +28,6 @@
     <include file="classpath:config/liquibase/changelog/20170106133153_added_entity_constraints_Task.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170112074149_added_entity_constraints_Punish.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170112084924_added_entity_constraints_Lawenforcement.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170114052640_added_entity_constraints_Office.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "doubleRandomResult",
+            "otherEntityName": "doubleRandomResult",
+            "otherEntityRelationshipName": "sign"
+        }
+    ],
     "fields": [
         {
             "fieldName": "signName",
@@ -19,6 +26,15 @@
                 "max"
             ],
             "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "signCss",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
         }
     ],
     "changelogDate": "20170112063831",

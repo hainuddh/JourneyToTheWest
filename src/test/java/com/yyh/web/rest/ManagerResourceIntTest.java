@@ -51,6 +51,9 @@ public class ManagerResourceIntTest {
     private static final String DEFAULT_MANAGER_CARD_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_MANAGER_CARD_TYPE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MANAGER_IC_CARD = "AAAAAAAAAA";
+    private static final String UPDATED_MANAGER_IC_CARD = "BBBBBBBBBB";
+
     private static final String DEFAULT_MANAGER_SEX = "A";
     private static final String UPDATED_MANAGER_SEX = "B";
 
@@ -107,6 +110,7 @@ public class ManagerResourceIntTest {
                 .managerName(DEFAULT_MANAGER_NAME)
                 .managerCardId(DEFAULT_MANAGER_CARD_ID)
                 .managerCardType(DEFAULT_MANAGER_CARD_TYPE)
+                .managerICCard(DEFAULT_MANAGER_IC_CARD)
                 .managerSex(DEFAULT_MANAGER_SEX)
                 .managerFlag(DEFAULT_MANAGER_FLAG)
                 .checkCount(DEFAULT_CHECK_COUNT)
@@ -140,6 +144,7 @@ public class ManagerResourceIntTest {
         assertThat(testManager.getManagerName()).isEqualTo(DEFAULT_MANAGER_NAME);
         assertThat(testManager.getManagerCardId()).isEqualTo(DEFAULT_MANAGER_CARD_ID);
         assertThat(testManager.getManagerCardType()).isEqualTo(DEFAULT_MANAGER_CARD_TYPE);
+        assertThat(testManager.getManagerICCard()).isEqualTo(DEFAULT_MANAGER_IC_CARD);
         assertThat(testManager.getManagerSex()).isEqualTo(DEFAULT_MANAGER_SEX);
         assertThat(testManager.getManagerFlag()).isEqualTo(DEFAULT_MANAGER_FLAG);
         assertThat(testManager.getCheckCount()).isEqualTo(DEFAULT_CHECK_COUNT);
@@ -244,6 +249,24 @@ public class ManagerResourceIntTest {
 
     @Test
     @Transactional
+    public void checkManagerICCardIsRequired() throws Exception {
+        int databaseSizeBeforeTest = managerRepository.findAll().size();
+        // set the field null
+        manager.setManagerICCard(null);
+
+        // Create the Manager, which fails.
+
+        restManagerMockMvc.perform(post("/api/managers")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(manager)))
+            .andExpect(status().isBadRequest());
+
+        List<Manager> managerList = managerRepository.findAll();
+        assertThat(managerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkManagerSexIsRequired() throws Exception {
         int databaseSizeBeforeTest = managerRepository.findAll().size();
         // set the field null
@@ -275,6 +298,7 @@ public class ManagerResourceIntTest {
             .andExpect(jsonPath("$.[*].managerName").value(hasItem(DEFAULT_MANAGER_NAME.toString())))
             .andExpect(jsonPath("$.[*].managerCardId").value(hasItem(DEFAULT_MANAGER_CARD_ID.toString())))
             .andExpect(jsonPath("$.[*].managerCardType").value(hasItem(DEFAULT_MANAGER_CARD_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].managerICCard").value(hasItem(DEFAULT_MANAGER_IC_CARD.toString())))
             .andExpect(jsonPath("$.[*].managerSex").value(hasItem(DEFAULT_MANAGER_SEX.toString())))
             .andExpect(jsonPath("$.[*].managerFlag").value(hasItem(DEFAULT_MANAGER_FLAG.toString())))
             .andExpect(jsonPath("$.[*].checkCount").value(hasItem(DEFAULT_CHECK_COUNT)))
@@ -296,6 +320,7 @@ public class ManagerResourceIntTest {
             .andExpect(jsonPath("$.managerName").value(DEFAULT_MANAGER_NAME.toString()))
             .andExpect(jsonPath("$.managerCardId").value(DEFAULT_MANAGER_CARD_ID.toString()))
             .andExpect(jsonPath("$.managerCardType").value(DEFAULT_MANAGER_CARD_TYPE.toString()))
+            .andExpect(jsonPath("$.managerICCard").value(DEFAULT_MANAGER_IC_CARD.toString()))
             .andExpect(jsonPath("$.managerSex").value(DEFAULT_MANAGER_SEX.toString()))
             .andExpect(jsonPath("$.managerFlag").value(DEFAULT_MANAGER_FLAG.toString()))
             .andExpect(jsonPath("$.checkCount").value(DEFAULT_CHECK_COUNT))
@@ -325,6 +350,7 @@ public class ManagerResourceIntTest {
                 .managerName(UPDATED_MANAGER_NAME)
                 .managerCardId(UPDATED_MANAGER_CARD_ID)
                 .managerCardType(UPDATED_MANAGER_CARD_TYPE)
+                .managerICCard(UPDATED_MANAGER_IC_CARD)
                 .managerSex(UPDATED_MANAGER_SEX)
                 .managerFlag(UPDATED_MANAGER_FLAG)
                 .checkCount(UPDATED_CHECK_COUNT)
@@ -343,6 +369,7 @@ public class ManagerResourceIntTest {
         assertThat(testManager.getManagerName()).isEqualTo(UPDATED_MANAGER_NAME);
         assertThat(testManager.getManagerCardId()).isEqualTo(UPDATED_MANAGER_CARD_ID);
         assertThat(testManager.getManagerCardType()).isEqualTo(UPDATED_MANAGER_CARD_TYPE);
+        assertThat(testManager.getManagerICCard()).isEqualTo(UPDATED_MANAGER_IC_CARD);
         assertThat(testManager.getManagerSex()).isEqualTo(UPDATED_MANAGER_SEX);
         assertThat(testManager.getManagerFlag()).isEqualTo(UPDATED_MANAGER_FLAG);
         assertThat(testManager.getCheckCount()).isEqualTo(UPDATED_CHECK_COUNT);
@@ -408,6 +435,7 @@ public class ManagerResourceIntTest {
             .andExpect(jsonPath("$.[*].managerName").value(hasItem(DEFAULT_MANAGER_NAME.toString())))
             .andExpect(jsonPath("$.[*].managerCardId").value(hasItem(DEFAULT_MANAGER_CARD_ID.toString())))
             .andExpect(jsonPath("$.[*].managerCardType").value(hasItem(DEFAULT_MANAGER_CARD_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].managerICCard").value(hasItem(DEFAULT_MANAGER_IC_CARD.toString())))
             .andExpect(jsonPath("$.[*].managerSex").value(hasItem(DEFAULT_MANAGER_SEX.toString())))
             .andExpect(jsonPath("$.[*].managerFlag").value(hasItem(DEFAULT_MANAGER_FLAG.toString())))
             .andExpect(jsonPath("$.[*].checkCount").value(hasItem(DEFAULT_CHECK_COUNT)))

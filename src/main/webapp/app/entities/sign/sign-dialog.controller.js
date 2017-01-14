@@ -5,14 +5,15 @@
         .module('journeyToTheWestApp')
         .controller('SignDialogController', SignDialogController);
 
-    SignDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Sign'];
+    SignDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Sign', 'DoubleRandomResult'];
 
-    function SignDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Sign) {
+    function SignDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Sign, DoubleRandomResult) {
         var vm = this;
 
         vm.sign = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.doublerandomresults = DoubleRandomResult.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

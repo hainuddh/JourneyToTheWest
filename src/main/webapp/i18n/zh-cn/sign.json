@@ -17,7 +17,9 @@
                 "title": "Sign"
             },
             "signName": "Sign Name",
-            "signConfig": "Sign Config"
+            "signConfig": "Sign Config",
+            "signCss": "Sign Css",
+            "doubleRandomResult": "Double Random Result"
         }
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Office.
+    -->
+    <changeSet id="20170114052640-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="offices_id"
+                                 baseTableName="office_head_person"
+                                 constraintName="fk_office_head_person_offices_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="office"/>
+        <addForeignKeyConstraint baseColumnNames="head_people_id"
+                                 baseTableName="office_head_person"
+                                 constraintName="fk_office_head_person_head_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="head_person"/>
+        
+    </changeSet>
+</databaseChangeLog>

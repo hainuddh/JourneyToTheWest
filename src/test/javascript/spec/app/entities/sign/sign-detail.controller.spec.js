@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Sign Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockSign;
+        var MockEntity, MockPreviousState, MockSign, MockDoubleRandomResult;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,6 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockSign = jasmine.createSpy('MockSign');
+            MockDoubleRandomResult = jasmine.createSpy('MockDoubleRandomResult');
             
 
             var locals = {
@@ -20,7 +21,8 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'Sign': MockSign
+                'Sign': MockSign,
+                'DoubleRandomResult': MockDoubleRandomResult
             };
             createController = function() {
                 $injector.get('$controller')("SignDetailController", locals);

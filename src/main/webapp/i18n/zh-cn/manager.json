@@ -20,6 +20,7 @@
             "managerName": "Manager Name",
             "managerCardId": "Manager Card Id",
             "managerCardType": "Manager Card Type",
+            "managerICCard": "Manager IC Card",
             "managerSex": "Manager Sex",
             "managerFlag": "Manager Flag",
             "checkCount": "Check Count",

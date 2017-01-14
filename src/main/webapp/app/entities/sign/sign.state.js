@@ -106,6 +106,7 @@
                             return {
                                 signName: null,
                                 signConfig: null,
+                                signCss: null,
                                 id: null
                             };
                         }

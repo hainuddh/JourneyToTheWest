@@ -68,7 +68,7 @@ class SignGatlingTest extends Simulation {
             .exec(http("Create new sign")
             .post("/api/signs")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "signName":"SAMPLE_TEXT", "signConfig":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "signName":"SAMPLE_TEXT", "signConfig":"0", "signCss":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_sign_url"))).exitHereIfFailed
             .pause(10)

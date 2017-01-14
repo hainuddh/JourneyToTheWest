@@ -20,6 +20,8 @@
                 "sign": "Sign",
                 "punish": "Punish",
                 "lawenforcement": "Lawenforcement",
+                "office": "Office",
+                "headPerson": "Head Person",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

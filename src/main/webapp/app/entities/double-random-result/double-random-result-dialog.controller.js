@@ -5,23 +5,14 @@
         .module('journeyToTheWestApp')
         .controller('DoubleRandomResultDialogController', DoubleRandomResultDialogController);
 
-    DoubleRandomResultDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DoubleRandomResult', 'Sign', 'Lawenforcement', 'Manager', 'Company', 'DoubleRandom'];
+    DoubleRandomResultDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'DoubleRandomResult', 'Lawenforcement', 'Manager', 'Sign', 'Company', 'DoubleRandom'];
 
-    function DoubleRandomResultDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DoubleRandomResult, Sign, Lawenforcement, Manager, Company, DoubleRandom) {
+    function DoubleRandomResultDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, DoubleRandomResult, Lawenforcement, Manager, Sign, Company, DoubleRandom) {
         var vm = this;
 
         vm.doubleRandomResult = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.signs = Sign.query({filter: 'doublerandomresult-is-null'});
-        $q.all([vm.doubleRandomResult.$promise, vm.signs.$promise]).then(function() {
-            if (!vm.doubleRandomResult.sign || !vm.doubleRandomResult.sign.id) {
-                return $q.reject();
-            }
-            return Sign.get({id : vm.doubleRandomResult.sign.id}).$promise;
-        }).then(function(sign) {
-            vm.signs.push(sign);
-        });
         vm.lawenforcements = Lawenforcement.query({filter: 'doublerandomresult-is-null'});
         $q.all([vm.doubleRandomResult.$promise, vm.lawenforcements.$promise]).then(function() {
             if (!vm.doubleRandomResult.lawenforcement || !vm.doubleRandomResult.lawenforcement.id) {
@@ -32,6 +23,7 @@
             vm.lawenforcements.push(lawenforcement);
         });
         vm.managers = Manager.query();
+        vm.signs = Sign.query();
         vm.companies = Company.query();
         vm.doublerandoms = DoubleRandom.query();
 

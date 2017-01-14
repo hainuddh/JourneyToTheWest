@@ -13,8 +13,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,16 +22,14 @@ import javax.inject.Inject;
 import java.text.DecimalFormat;
 import java.util.*;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-
 /**
  * Service Implementation for managing Manager.
  */
 @Service
 @Transactional
-public class ManagerYYHService {
+public class YYHManagerService {
 
-    private final Logger log = LoggerFactory.getLogger(ManagerYYHService.class);
+    private final Logger log = LoggerFactory.getLogger(YYHManagerService.class);
 
     @Inject
     private PasswordEncoder passwordEncoder;
@@ -118,6 +114,7 @@ public class ManagerYYHService {
                         userRepository.save(user);
                         manager.setManagerUser(user);
                         userMap.put(login, user);
+                        manager.setManagerICCard(login);
                         manager.setManagerId(String.valueOf((int) row.getCell(0).getNumericCellValue()));
                         manager.setManagerName(row.getCell(1).getStringCellValue());
                         String departmentName = row.getCell(2).getStringCellValue();

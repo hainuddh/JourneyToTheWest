@@ -2,18 +2,14 @@ package com.yyh.service;
 
 import com.yyh.config.Constants;
 import com.yyh.domain.*;
-import com.yyh.repository.CompanyRepository;
-import com.yyh.repository.DoubleRandomRepository;
-import com.yyh.repository.DoubleRandomResultRepository;
-import com.yyh.repository.ManagerRepository;
+import com.yyh.repository.*;
 import com.yyh.repository.search.DoubleRandomSearchRepository;
+import com.yyh.web.rest.TaskResource;
 import com.yyh.web.rest.vm.DoubleRandomVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,16 +17,14 @@ import javax.inject.Inject;
 
 import java.util.*;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-
 /**
  * Service Implementation for managing DoubleRandom.
  */
 @Service
 @Transactional
-public class DoubleRandomYYHService {
+public class YYHDoubleRandomService {
 
-    private final Logger log = LoggerFactory.getLogger(DoubleRandomYYHService.class);
+    private final Logger log = LoggerFactory.getLogger(YYHDoubleRandomService.class);
 
     @Inject
     private DoubleRandomRepository doubleRandomRepository;
@@ -46,6 +40,9 @@ public class DoubleRandomYYHService {
 
     @Inject
     private DoubleRandomResultRepository doubleRandomResultRepository;
+
+    @Inject
+    private TaskRepository taskRepository;
 
     public DoubleRandom saveDoubleRandomWithResult(DoubleRandomVM doubleRandomVM) {
         log.debug("Request to save DoubleRandom : {}", doubleRandomVM);
@@ -100,11 +97,16 @@ public class DoubleRandomYYHService {
         //[抽选第三步]构造双随机
         DoubleRandom doubleRandom = new DoubleRandom();
         Set<Task> taskSet = new HashSet<>();
+        String taskString = new String();
         for (String taskId : doubleRandomVM.getTasksString().split("\\|")) {
-            Task task = new Task();
-            task.setId(Long.valueOf(taskId));
+            Task task = taskRepository.getOne(Long.valueOf(taskId));
             taskSet.add(task);
+            taskString = taskString + task.getTaskName();
         }
+        doubleRandom.setDoubleRandomTaskContent(taskString);
+        /**TODO
+         * 这里需要有个字段需要修改处理
+         */
         doubleRandom.setTasks(taskSet);
         doubleRandom.setDoubleRandomCompanyRatio(doubleRandomVM.getDoubleRandomCompanyRatio());
         doubleRandom.setDoubleRandomManagerRatio(doubleRandomVM.getDoubleRandomManagerRatio());
@@ -120,9 +122,10 @@ public class DoubleRandomYYHService {
             managers.add(managerList.get(drResultList.get(i)[2]));
             doubleRandomResult.setPeople(managerList.get(drResultList.get(i)[1]).getManagerName() + "," + managerList.get(drResultList.get(i)[2]).getManagerName());
             doubleRandomResult.setManagers(managers);
-            doubleRandomResult.setCompany(company);
-            doubleRandomResult.setCompanyRegisterId(company.getCompanyRegisterId());
-            doubleRandomResult.setCompanyName(company.getCompanyName());
+            doubleRandomResult.setDepartment(companyResult.getCompanySupervisory().getDepartmentName());
+            doubleRandomResult.setCompany(companyResult);
+            doubleRandomResult.setCompanyRegisterId(companyResult.getCompanyRegisterId());
+            doubleRandomResult.setCompanyName(companyResult.getCompanyName());
             doubleRandomResult.setCompany(companyResult);
             doubleRandomResult.setCompanyRegisterId(companyResult.getCompanyRegisterId());
             doubleRandomResult.setCompanyName(companyResult.getCompanyName());

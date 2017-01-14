@@ -61,6 +61,15 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "managerICCard",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
+        },
+        {
             "fieldName": "managerSex",
             "fieldType": "String",
             "fieldValidateRules": [

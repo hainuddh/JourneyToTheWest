@@ -48,6 +48,11 @@ public class Manager implements Serializable {
     private String managerCardType;
 
     @NotNull
+    @Size(max = 32)
+    @Column(name = "manager_ic_card", length = 32, nullable = false)
+    private String managerICCard;
+
+    @NotNull
     @Size(max = 1)
     @Column(name = "manager_sex", length = 1, nullable = false)
     private String managerSex;
@@ -134,6 +139,19 @@ public class Manager implements Serializable {
 
     public void setManagerCardType(String managerCardType) {
         this.managerCardType = managerCardType;
+    }
+
+    public String getManagerICCard() {
+        return managerICCard;
+    }
+
+    public Manager managerICCard(String managerICCard) {
+        this.managerICCard = managerICCard;
+        return this;
+    }
+
+    public void setManagerICCard(String managerICCard) {
+        this.managerICCard = managerICCard;
     }
 
     public String getManagerSex() {
@@ -267,6 +285,7 @@ public class Manager implements Serializable {
             ", managerName='" + managerName + "'" +
             ", managerCardId='" + managerCardId + "'" +
             ", managerCardType='" + managerCardType + "'" +
+            ", managerICCard='" + managerICCard + "'" +
             ", managerSex='" + managerSex + "'" +
             ", managerFlag='" + managerFlag + "'" +
             ", checkCount='" + checkCount + "'" +

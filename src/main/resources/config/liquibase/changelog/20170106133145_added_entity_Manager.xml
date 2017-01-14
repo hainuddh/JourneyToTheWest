@@ -40,6 +40,10 @@
                 <constraints nullable="false" />
             </column>
             
+            <column name="manager_ic_card" type="varchar(32)">
+                <constraints nullable="false" />
+            </column>
+            
             <column name="manager_sex" type="varchar(1)">
                 <constraints nullable="false" />
             </column>

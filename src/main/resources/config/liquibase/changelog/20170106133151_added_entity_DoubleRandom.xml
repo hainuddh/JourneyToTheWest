@@ -28,7 +28,27 @@
                 <constraints nullable="false" />
             </column>
             
+            <column name="double_random_company_ratio" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="double_random_manager_ratio" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="double_random_manager_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="double_random_company_count" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
             <column name="double_random_notary" type="varchar(32)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="double_random_task_content" type="varchar(2048)">
                 <constraints nullable="true" />
             </column>
             
@@ -52,28 +72,12 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="double_random_company_ratio" type="varchar(64)">
-                <constraints nullable="false" />
-            </column>
-            
-            <column name="double_random_company_count" type="integer">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="double_random_manager_name" type="varchar(64)">
                 <constraints nullable="true" />
             </column>
             
-            <column name="double_random_manager_number" type="integer">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="double_random_manager_department" type="varchar(64)">
                 <constraints nullable="true" />
-            </column>
-            
-            <column name="double_random_manager_ratio" type="varchar(64)">
-                <constraints nullable="false" />
             </column>
             
             <column name="description" type="varchar(1024)">

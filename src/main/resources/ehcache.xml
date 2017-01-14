@@ -76,5 +76,15 @@
 
     <cache alias="com.yyh.domain.Lawenforcement" uses-template="simple"/>
 
+    <cache alias="com.yyh.domain.Sign.doubleRandomResults" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Office" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.Office.headPeople" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.HeadPerson" uses-template="simple"/>
+
+    <cache alias="com.yyh.domain.HeadPerson.offices" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
