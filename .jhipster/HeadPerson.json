@@ -45,6 +45,15 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 32
+        },
+        {
+            "fieldName": "mobile",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 32
         }
     ],
     "changelogDate": "20170114052641",

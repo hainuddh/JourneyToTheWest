@@ -2,9 +2,7 @@ package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.domain.Sign;
-
-import com.yyh.repository.SignRepository;
-import com.yyh.repository.search.SignSearchRepository;
+import com.yyh.service.SignService;
 import com.yyh.web.rest.util.HeaderUtil;
 
 import org.slf4j.Logger;
@@ -18,6 +16,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,12 +32,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class SignResource {
 
     private final Logger log = LoggerFactory.getLogger(SignResource.class);
-        
-    @Inject
-    private SignRepository signRepository;
 
     @Inject
-    private SignSearchRepository signSearchRepository;
+    private SignService signService;
 
     /**
      * POST  /signs : Create a new sign.
@@ -49,13 +45,12 @@ public class SignResource {
      */
     @PostMapping("/signs")
     @Timed
-    public ResponseEntity<Sign> createSign(@Valid @RequestBody Sign sign) throws URISyntaxException {
+    public ResponseEntity<Sign> createSign(@Valid @RequestBody Sign sign) throws URISyntaxException, ParseException {
         log.debug("REST request to save Sign : {}", sign);
         if (sign.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("sign", "idexists", "A new sign cannot already have an ID")).body(null);
         }
-        Sign result = signRepository.save(sign);
-        signSearchRepository.save(result);
+        Sign result = signService.save(sign);
         return ResponseEntity.created(new URI("/api/signs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("sign", result.getId().toString()))
             .body(result);
@@ -72,13 +67,12 @@ public class SignResource {
      */
     @PutMapping("/signs")
     @Timed
-    public ResponseEntity<Sign> updateSign(@Valid @RequestBody Sign sign) throws URISyntaxException {
+    public ResponseEntity<Sign> updateSign(@Valid @RequestBody Sign sign) throws URISyntaxException, ParseException {
         log.debug("REST request to update Sign : {}", sign);
         if (sign.getId() == null) {
             return createSign(sign);
         }
-        Sign result = signRepository.save(sign);
-        signSearchRepository.save(result);
+        Sign result = signService.save(sign);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("sign", sign.getId().toString()))
             .body(result);
@@ -93,8 +87,7 @@ public class SignResource {
     @Timed
     public List<Sign> getAllSigns() {
         log.debug("REST request to get all Signs");
-        List<Sign> signs = signRepository.findAll();
-        return signs;
+        return signService.findAll();
     }
 
     /**
@@ -107,7 +100,7 @@ public class SignResource {
     @Timed
     public ResponseEntity<Sign> getSign(@PathVariable Long id) {
         log.debug("REST request to get Sign : {}", id);
-        Sign sign = signRepository.findOne(id);
+        Sign sign = signService.findOne(id);
         return Optional.ofNullable(sign)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -125,8 +118,7 @@ public class SignResource {
     @Timed
     public ResponseEntity<Void> deleteSign(@PathVariable Long id) {
         log.debug("REST request to delete Sign : {}", id);
-        signRepository.delete(id);
-        signSearchRepository.delete(id);
+        signService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("sign", id.toString())).build();
     }
 
@@ -134,16 +126,14 @@ public class SignResource {
      * SEARCH  /_search/signs?query=:query : search for the sign corresponding
      * to the query.
      *
-     * @param query the query of the sign search 
+     * @param query the query of the sign search
      * @return the result of the search
      */
     @GetMapping("/_search/signs")
     @Timed
     public List<Sign> searchSigns(@RequestParam String query) {
         log.debug("REST request to search Signs for query {}", query);
-        return StreamSupport
-            .stream(signSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        return signService.search(query);
     }
 
 

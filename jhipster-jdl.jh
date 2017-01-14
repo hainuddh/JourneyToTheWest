@@ -159,6 +159,7 @@ service TaskProject with serviceClass
 service Company with serviceClass
 service DoubleRandom with serviceClass
 service DoubleRandomResult with serviceClass
+service Sign with serviceClass
 
 paginate Company with pager
 paginate TaskProject with pager

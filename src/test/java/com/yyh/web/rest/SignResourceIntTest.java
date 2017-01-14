@@ -4,6 +4,7 @@ import com.yyh.JourneyToTheWestApp;
 
 import com.yyh.domain.Sign;
 import com.yyh.repository.SignRepository;
+import com.yyh.service.SignService;
 import com.yyh.repository.search.SignSearchRepository;
 
 import org.junit.Before;
@@ -51,6 +52,9 @@ public class SignResourceIntTest {
     private SignRepository signRepository;
 
     @Inject
+    private SignService signService;
+
+    @Inject
     private SignSearchRepository signSearchRepository;
 
     @Inject
@@ -70,8 +74,7 @@ public class SignResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         SignResource signResource = new SignResource();
-        ReflectionTestUtils.setField(signResource, "signSearchRepository", signSearchRepository);
-        ReflectionTestUtils.setField(signResource, "signRepository", signRepository);
+        ReflectionTestUtils.setField(signResource, "signService", signService);
         this.restSignMockMvc = MockMvcBuilders.standaloneSetup(signResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -240,8 +243,8 @@ public class SignResourceIntTest {
     @Transactional
     public void updateSign() throws Exception {
         // Initialize the database
-        signRepository.saveAndFlush(sign);
-        signSearchRepository.save(sign);
+        signService.save(sign);
+
         int databaseSizeBeforeUpdate = signRepository.findAll().size();
 
         // Update the sign
@@ -291,8 +294,8 @@ public class SignResourceIntTest {
     @Transactional
     public void deleteSign() throws Exception {
         // Initialize the database
-        signRepository.saveAndFlush(sign);
-        signSearchRepository.save(sign);
+        signService.save(sign);
+
         int databaseSizeBeforeDelete = signRepository.findAll().size();
 
         // Get the sign
@@ -313,8 +316,7 @@ public class SignResourceIntTest {
     @Transactional
     public void searchSign() throws Exception {
         // Initialize the database
-        signRepository.saveAndFlush(sign);
-        signSearchRepository.save(sign);
+        signService.save(sign);
 
         // Search the sign
         restSignMockMvc.perform(get("/api/_search/signs?query=id:" + sign.getId()))
