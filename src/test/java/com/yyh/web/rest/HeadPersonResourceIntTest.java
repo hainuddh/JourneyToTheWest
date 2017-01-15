@@ -50,6 +50,9 @@ public class HeadPersonResourceIntTest {
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MOBILE = "AAAAAAAAAA";
+    private static final String UPDATED_MOBILE = "BBBBBBBBBB";
+
     @Inject
     private HeadPersonRepository headPersonRepository;
 
@@ -91,7 +94,8 @@ public class HeadPersonResourceIntTest {
                 .name(DEFAULT_NAME)
                 .job(DEFAULT_JOB)
                 .email(DEFAULT_EMAIL)
-                .phone(DEFAULT_PHONE);
+                .phone(DEFAULT_PHONE)
+                .mobile(DEFAULT_MOBILE);
         return headPerson;
     }
 
@@ -121,6 +125,7 @@ public class HeadPersonResourceIntTest {
         assertThat(testHeadPerson.getJob()).isEqualTo(DEFAULT_JOB);
         assertThat(testHeadPerson.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testHeadPerson.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testHeadPerson.getMobile()).isEqualTo(DEFAULT_MOBILE);
 
         // Validate the HeadPerson in ElasticSearch
         HeadPerson headPersonEs = headPersonSearchRepository.findOne(testHeadPerson.getId());
@@ -221,6 +226,24 @@ public class HeadPersonResourceIntTest {
 
     @Test
     @Transactional
+    public void checkMobileIsRequired() throws Exception {
+        int databaseSizeBeforeTest = headPersonRepository.findAll().size();
+        // set the field null
+        headPerson.setMobile(null);
+
+        // Create the HeadPerson, which fails.
+
+        restHeadPersonMockMvc.perform(post("/api/head-people")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(headPerson)))
+            .andExpect(status().isBadRequest());
+
+        List<HeadPerson> headPersonList = headPersonRepository.findAll();
+        assertThat(headPersonList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllHeadPeople() throws Exception {
         // Initialize the database
         headPersonRepository.saveAndFlush(headPerson);
@@ -233,7 +256,8 @@ public class HeadPersonResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].job").value(hasItem(DEFAULT_JOB.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+            .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())));
     }
 
     @Test
@@ -250,7 +274,8 @@ public class HeadPersonResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.job").value(DEFAULT_JOB.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()));
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
+            .andExpect(jsonPath("$.mobile").value(DEFAULT_MOBILE.toString()));
     }
 
     @Test
@@ -275,7 +300,8 @@ public class HeadPersonResourceIntTest {
                 .name(UPDATED_NAME)
                 .job(UPDATED_JOB)
                 .email(UPDATED_EMAIL)
-                .phone(UPDATED_PHONE);
+                .phone(UPDATED_PHONE)
+                .mobile(UPDATED_MOBILE);
 
         restHeadPersonMockMvc.perform(put("/api/head-people")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -290,6 +316,7 @@ public class HeadPersonResourceIntTest {
         assertThat(testHeadPerson.getJob()).isEqualTo(UPDATED_JOB);
         assertThat(testHeadPerson.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testHeadPerson.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testHeadPerson.getMobile()).isEqualTo(UPDATED_MOBILE);
 
         // Validate the HeadPerson in ElasticSearch
         HeadPerson headPersonEs = headPersonSearchRepository.findOne(testHeadPerson.getId());
@@ -351,6 +378,7 @@ public class HeadPersonResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].job").value(hasItem(DEFAULT_JOB.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+            .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())));
     }
 }

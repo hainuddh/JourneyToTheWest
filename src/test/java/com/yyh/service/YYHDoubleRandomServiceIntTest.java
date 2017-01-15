@@ -1,8 +1,11 @@
 package com.yyh.service;
 
 import com.yyh.JourneyToTheWestApp;
+import com.yyh.domain.Company;
 import com.yyh.domain.DoubleRandom;
 import com.yyh.domain.Task;
+import com.yyh.repository.CompanyRepository;
+import com.yyh.repository.ManagerRepository;
 import com.yyh.repository.TaskRepository;
 import com.yyh.web.rest.vm.DoubleRandomVM;
 import org.junit.Test;
@@ -29,8 +32,21 @@ public class YYHDoubleRandomServiceIntTest {
     @Inject
     private TaskRepository taskRepository;
 
-    @Test
+    @Inject
+    private ManagerRepository managerRepository;
+
+    @Inject
+    private CompanyRepository companyRepository;
+
     public void assertThatStartDoubleRandom() {
+
+        Company company = new Company();
+        long i = 0;
+        do {
+            company.setId(i);
+            i++;
+        } while (i == 100);
+
         Task task1 = new Task();
         task1.setTaskName("清单1");
         task1.setTaskContent("这是一项任务1");

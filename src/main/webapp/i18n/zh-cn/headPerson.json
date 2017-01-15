@@ -20,6 +20,7 @@
             "job": "Job",
             "email": "Email",
             "phone": "Phone",
+            "mobile": "Mobile",
             "office": "Office"
         }
     }

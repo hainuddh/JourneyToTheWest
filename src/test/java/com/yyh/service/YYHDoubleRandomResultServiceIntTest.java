@@ -38,7 +38,6 @@ public class YYHDoubleRandomResultServiceIntTest {
     @Inject
     private SignRepository signRepository;
 
-    @Test
     public void assertThatDoubleRandomResultSign() throws ParseException {
 
         Sign red = new Sign();

@@ -47,6 +47,11 @@ public class HeadPerson implements Serializable {
     @Column(name = "phone", length = 32, nullable = false)
     private String phone;
 
+    @NotNull
+    @Size(max = 32)
+    @Column(name = "mobile", length = 32, nullable = false)
+    private String mobile;
+
     @ManyToMany(mappedBy = "headPeople")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -112,6 +117,19 @@ public class HeadPerson implements Serializable {
         this.phone = phone;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public HeadPerson mobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     public Set<Office> getOffices() {
         return offices;
     }
@@ -165,6 +183,7 @@ public class HeadPerson implements Serializable {
             ", job='" + job + "'" +
             ", email='" + email + "'" +
             ", phone='" + phone + "'" +
+            ", mobile='" + mobile + "'" +
             '}';
     }
 }

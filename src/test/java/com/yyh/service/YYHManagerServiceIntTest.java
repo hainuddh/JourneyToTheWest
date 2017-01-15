@@ -26,7 +26,6 @@ public class YYHManagerServiceIntTest {
     @Inject
     private YYHManagerService YYHManagerService;
 
-    @Test
     public void assertThatImportManagerService() {
         List<Manager> managerList = YYHManagerService.importManagers("E://万宁市工商局执法检查人员名录库.xls");
         assertThat(managerList.size() > 0);

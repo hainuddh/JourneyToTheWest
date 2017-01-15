@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,7 +31,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class SignResource {
 
     private final Logger log = LoggerFactory.getLogger(SignResource.class);
-
+        
     @Inject
     private SignService signService;
 
@@ -45,7 +44,7 @@ public class SignResource {
      */
     @PostMapping("/signs")
     @Timed
-    public ResponseEntity<Sign> createSign(@Valid @RequestBody Sign sign) throws URISyntaxException, ParseException {
+    public ResponseEntity<Sign> createSign(@Valid @RequestBody Sign sign) throws URISyntaxException {
         log.debug("REST request to save Sign : {}", sign);
         if (sign.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("sign", "idexists", "A new sign cannot already have an ID")).body(null);
@@ -67,7 +66,7 @@ public class SignResource {
      */
     @PutMapping("/signs")
     @Timed
-    public ResponseEntity<Sign> updateSign(@Valid @RequestBody Sign sign) throws URISyntaxException, ParseException {
+    public ResponseEntity<Sign> updateSign(@Valid @RequestBody Sign sign) throws URISyntaxException {
         log.debug("REST request to update Sign : {}", sign);
         if (sign.getId() == null) {
             return createSign(sign);
@@ -126,7 +125,7 @@ public class SignResource {
      * SEARCH  /_search/signs?query=:query : search for the sign corresponding
      * to the query.
      *
-     * @param query the query of the sign search
+     * @param query the query of the sign search 
      * @return the result of the search
      */
     @GetMapping("/_search/signs")
