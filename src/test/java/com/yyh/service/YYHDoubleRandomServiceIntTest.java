@@ -38,15 +38,8 @@ public class YYHDoubleRandomServiceIntTest {
     @Inject
     private CompanyRepository companyRepository;
 
+    @Test
     public void assertThatStartDoubleRandom() {
-
-        Company company = new Company();
-        long i = 0;
-        do {
-            company.setId(i);
-            i++;
-        } while (i == 100);
-
         Task task1 = new Task();
         task1.setTaskName("清单1");
         task1.setTaskContent("这是一项任务1");
