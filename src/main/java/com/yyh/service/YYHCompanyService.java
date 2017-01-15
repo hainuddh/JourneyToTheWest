@@ -136,7 +136,8 @@ public class YYHCompanyService {
                         company.setBusinessAddress(row.getCell(9).getStringCellValue());
                         company.setCompanyDate(row.getCell(10).getStringCellValue());
                         company.setBusinessScope(row.getCell(11).getStringCellValue());
-                        String industryTypeName = row.getCell(12).getStringCellValue();
+                        company.setCompanyPhone(String.valueOf(row.getCell(12).getStringCellValue()));
+                        String industryTypeName = row.getCell(13).getStringCellValue();
                         /**
                          * 存储行业类型
                          */
@@ -149,7 +150,6 @@ public class YYHCompanyService {
                             industryTypeMap.put(result.getTypeName(), result);
                             company.setIndustryType(result);
                         }
-                        company.setCompanyPhone(row.getCell(13).getStringCellValue());
                         if (row.getCell(16).getStringCellValue() != null || !row.getCell(16).getStringCellValue().trim().equals("")) {
                             if (row.getCell(16).getStringCellValue().trim().equals("是")) {
                                 company.setCompanyStatus(Constants.COMPANY_ABNORMAL);

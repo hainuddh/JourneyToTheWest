@@ -54,9 +54,9 @@ public class YYHDoubleRandomService {
             manager.setManagerLawenforceDepartment(lawenforceDepartmentM);
         }
         //[抽选条件]执法人员姓名
-        manager.setManagerName(doubleRandomVM.getDoubleRandomManagerName());
-        ExampleMatcher matcherM = ExampleMatcher.matching().withMatcher("managerName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING).ignoreCase());
-        Example<Manager> managerExample = Example.of(manager, matcherM);
+        /*manager.setManagerName(doubleRandomVM.getDoubleRandomManagerName());
+        ExampleMatcher matcherM = ExampleMatcher.matching().withMatcher("managerName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING).ignoreCase());*/
+        Example<Manager> managerExample = Example.of(manager);
         List<Manager> managerList = managerRepository.findAll(managerExample);
         Company company = new Company();
         //[抽选条件]所属机关
