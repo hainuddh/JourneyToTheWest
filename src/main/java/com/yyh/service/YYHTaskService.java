@@ -1,8 +1,6 @@
 package com.yyh.service;
 
-import com.yyh.domain.Company;
-import com.yyh.domain.Sign;
-import com.yyh.domain.Task;
+import com.yyh.domain.*;
 import com.yyh.repository.*;
 import com.yyh.repository.search.CompanySearchRepository;
 import com.yyh.service.util.ExcelLoadUtil;
@@ -50,11 +48,14 @@ public class YYHTaskService {
     @Inject
     private TaskRepository taskRepository;
 
+    @Inject
+    private TaskProjectRepository taskProjectRepository;
+
     /**
      * Import a tasks
      *
      * @param filepath the file to convert
-     * @return the sign list
+     * @return the task list
      */
     public List<Task> importTasks(String filepath) {
         List<Task> tasks = new ArrayList<>();
@@ -69,6 +70,11 @@ public class YYHTaskService {
         Map<String, Task> taskMap = new HashMap<>();
         for (Task task : taskList) {
             taskMap.put(task.getTaskName(), task);
+        }
+        List<TaskProject> taskProjects = taskProjectRepository.findAll();
+        Map<String, TaskProject> taskProjectMap = new HashMap<>();
+        for (TaskProject taskProject : taskProjects) {
+            taskProjectMap.put(taskProject.getTaskProjectName(), taskProject);
         }
         /**
          * 第三部分：读取并解析Excel表格
@@ -86,7 +92,22 @@ public class YYHTaskService {
                     } else {
                         Task task = new Task();
                         task.setTaskName(taskName);
+                        String taskProjectName = row.getCell(1).getStringCellValue();
+                        /**
+                         * 存储清单项目
+                         */
+                        if (taskProjectMap.get(taskProjectName) != null) {
+                            task.setTaskProject(taskProjectMap.get(taskProjectName));
+                        } else {
+                            TaskProject taskProject = new TaskProject();
+                            taskProject.setTaskProjectName(taskProjectName);
+                            TaskProject result = taskProjectRepository.save(taskProject);
+                            taskProjectMap.put(result.getTaskProjectName(), result);
+                            task.setTaskProject(taskProject);
+                        }
                         task.setTaskContent(row.getCell(2).getStringCellValue());
+                        task.setTaskCheckDepartment(row.getCell(3).getStringCellValue());
+                        task.setLawContent(row.getCell(4).getStringCellValue());
                         taskMap.put(taskName, task);
                         tasks.add(task);
                     }

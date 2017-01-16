@@ -29,13 +29,14 @@ entity Company {
 
 entity TaskProject {
     taskProjectName String required maxlength(64),
-    taskProjectCheckDepartment String required maxlength(256),
     description String maxlength(1024)
 }
 
 entity Task {
     taskName String required maxlength(64),
+    taskCheckDepartment String required maxlength(256),
     taskContent String required maxlength(1024),
+    lawContent String maxlength(1024),
     description String maxlength(1024)
 }
 

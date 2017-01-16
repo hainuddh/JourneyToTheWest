@@ -32,11 +32,6 @@ public class TaskProject implements Serializable {
     @Column(name = "task_project_name", length = 64, nullable = false)
     private String taskProjectName;
 
-    @NotNull
-    @Size(max = 256)
-    @Column(name = "task_project_check_department", length = 256, nullable = false)
-    private String taskProjectCheckDepartment;
-
     @Size(max = 1024)
     @Column(name = "description", length = 1024)
     private String description;
@@ -65,19 +60,6 @@ public class TaskProject implements Serializable {
 
     public void setTaskProjectName(String taskProjectName) {
         this.taskProjectName = taskProjectName;
-    }
-
-    public String getTaskProjectCheckDepartment() {
-        return taskProjectCheckDepartment;
-    }
-
-    public TaskProject taskProjectCheckDepartment(String taskProjectCheckDepartment) {
-        this.taskProjectCheckDepartment = taskProjectCheckDepartment;
-        return this;
-    }
-
-    public void setTaskProjectCheckDepartment(String taskProjectCheckDepartment) {
-        this.taskProjectCheckDepartment = taskProjectCheckDepartment;
     }
 
     public String getDescription() {
@@ -143,7 +125,6 @@ public class TaskProject implements Serializable {
         return "TaskProject{" +
             "id=" + id +
             ", taskProjectName='" + taskProjectName + "'" +
-            ", taskProjectCheckDepartment='" + taskProjectCheckDepartment + "'" +
             ", description='" + description + "'" +
             '}';
     }

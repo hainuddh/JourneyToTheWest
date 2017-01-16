@@ -37,7 +37,6 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="taskProjectName"><span data-translate="journeyToTheWestApp.taskProject.taskProjectName">Task Project Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="taskProjectCheckDepartment"><span data-translate="journeyToTheWestApp.taskProject.taskProjectCheckDepartment">Task Project Check Department</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.taskProject.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -46,7 +45,6 @@
                 <tr ng-repeat="taskProject in vm.taskProjects track by taskProject.id">
                     <td><a ui-sref="task-project-detail({id:taskProject.id})">{{taskProject.id}}</a></td>
                     <td>{{taskProject.taskProjectName}}</td>
-                    <td>{{taskProject.taskProjectCheckDepartment}}</td>
                     <td>{{taskProject.description}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

@@ -68,7 +68,7 @@ class TaskProjectGatlingTest extends Simulation {
             .exec(http("Create new taskProject")
             .post("/api/task-projects")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "taskProjectName":"SAMPLE_TEXT", "taskProjectCheckDepartment":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "taskProjectName":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_taskProject_url"))).exitHereIfFailed
             .pause(10)

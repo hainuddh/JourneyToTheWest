@@ -42,8 +42,14 @@ public class TaskResourceIntTest {
     private static final String DEFAULT_TASK_NAME = "AAAAAAAAAA";
     private static final String UPDATED_TASK_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TASK_CHECK_DEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_TASK_CHECK_DEPARTMENT = "BBBBBBBBBB";
+
     private static final String DEFAULT_TASK_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_TASK_CONTENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LAW_CONTENT = "AAAAAAAAAA";
+    private static final String UPDATED_LAW_CONTENT = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -89,7 +95,9 @@ public class TaskResourceIntTest {
     public static Task createEntity(EntityManager em) {
         Task task = new Task()
                 .taskName(DEFAULT_TASK_NAME)
+                .taskCheckDepartment(DEFAULT_TASK_CHECK_DEPARTMENT)
                 .taskContent(DEFAULT_TASK_CONTENT)
+                .lawContent(DEFAULT_LAW_CONTENT)
                 .description(DEFAULT_DESCRIPTION);
         return task;
     }
@@ -117,7 +125,9 @@ public class TaskResourceIntTest {
         assertThat(taskList).hasSize(databaseSizeBeforeCreate + 1);
         Task testTask = taskList.get(taskList.size() - 1);
         assertThat(testTask.getTaskName()).isEqualTo(DEFAULT_TASK_NAME);
+        assertThat(testTask.getTaskCheckDepartment()).isEqualTo(DEFAULT_TASK_CHECK_DEPARTMENT);
         assertThat(testTask.getTaskContent()).isEqualTo(DEFAULT_TASK_CONTENT);
+        assertThat(testTask.getLawContent()).isEqualTo(DEFAULT_LAW_CONTENT);
         assertThat(testTask.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the Task in ElasticSearch
@@ -165,6 +175,24 @@ public class TaskResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTaskCheckDepartmentIsRequired() throws Exception {
+        int databaseSizeBeforeTest = taskRepository.findAll().size();
+        // set the field null
+        task.setTaskCheckDepartment(null);
+
+        // Create the Task, which fails.
+
+        restTaskMockMvc.perform(post("/api/tasks")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(task)))
+            .andExpect(status().isBadRequest());
+
+        List<Task> taskList = taskRepository.findAll();
+        assertThat(taskList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkTaskContentIsRequired() throws Exception {
         int databaseSizeBeforeTest = taskRepository.findAll().size();
         // set the field null
@@ -193,7 +221,9 @@ public class TaskResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(task.getId().intValue())))
             .andExpect(jsonPath("$.[*].taskName").value(hasItem(DEFAULT_TASK_NAME.toString())))
+            .andExpect(jsonPath("$.[*].taskCheckDepartment").value(hasItem(DEFAULT_TASK_CHECK_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].taskContent").value(hasItem(DEFAULT_TASK_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].lawContent").value(hasItem(DEFAULT_LAW_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -209,7 +239,9 @@ public class TaskResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(task.getId().intValue()))
             .andExpect(jsonPath("$.taskName").value(DEFAULT_TASK_NAME.toString()))
+            .andExpect(jsonPath("$.taskCheckDepartment").value(DEFAULT_TASK_CHECK_DEPARTMENT.toString()))
             .andExpect(jsonPath("$.taskContent").value(DEFAULT_TASK_CONTENT.toString()))
+            .andExpect(jsonPath("$.lawContent").value(DEFAULT_LAW_CONTENT.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -233,7 +265,9 @@ public class TaskResourceIntTest {
         Task updatedTask = taskRepository.findOne(task.getId());
         updatedTask
                 .taskName(UPDATED_TASK_NAME)
+                .taskCheckDepartment(UPDATED_TASK_CHECK_DEPARTMENT)
                 .taskContent(UPDATED_TASK_CONTENT)
+                .lawContent(UPDATED_LAW_CONTENT)
                 .description(UPDATED_DESCRIPTION);
 
         restTaskMockMvc.perform(put("/api/tasks")
@@ -246,7 +280,9 @@ public class TaskResourceIntTest {
         assertThat(taskList).hasSize(databaseSizeBeforeUpdate);
         Task testTask = taskList.get(taskList.size() - 1);
         assertThat(testTask.getTaskName()).isEqualTo(UPDATED_TASK_NAME);
+        assertThat(testTask.getTaskCheckDepartment()).isEqualTo(UPDATED_TASK_CHECK_DEPARTMENT);
         assertThat(testTask.getTaskContent()).isEqualTo(UPDATED_TASK_CONTENT);
+        assertThat(testTask.getLawContent()).isEqualTo(UPDATED_LAW_CONTENT);
         assertThat(testTask.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the Task in ElasticSearch
@@ -306,7 +342,9 @@ public class TaskResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(task.getId().intValue())))
             .andExpect(jsonPath("$.[*].taskName").value(hasItem(DEFAULT_TASK_NAME.toString())))
+            .andExpect(jsonPath("$.[*].taskCheckDepartment").value(hasItem(DEFAULT_TASK_CHECK_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].taskContent").value(hasItem(DEFAULT_TASK_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].lawContent").value(hasItem(DEFAULT_LAW_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }

@@ -30,6 +30,22 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.task.taskCheckDepartment" for="field_taskCheckDepartment">Task Check Department</label>
+            <input type="text" class="form-control" name="taskCheckDepartment" id="field_taskCheckDepartment"
+                    ng-model="vm.task.taskCheckDepartment"
+                    required ng-maxlength="256" />
+            <div ng-show="editForm.taskCheckDepartment.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.taskCheckDepartment.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.taskCheckDepartment.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="256">
+                    This field cannot be longer than 256 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.task.taskContent" for="field_taskContent">Task Content</label>
             <input type="text" class="form-control" name="taskContent" id="field_taskContent"
                     ng-model="vm.task.taskContent"
@@ -41,6 +57,18 @@
                 </p>
                 <p class="help-block"
                     ng-show="editForm.taskContent.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1024">
+                    This field cannot be longer than 1024 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.task.lawContent" for="field_lawContent">Law Content</label>
+            <input type="text" class="form-control" name="lawContent" id="field_lawContent"
+                    ng-model="vm.task.lawContent"
+                    ng-maxlength="1024" />
+            <div ng-show="editForm.lawContent.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.lawContent.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1024">
                     This field cannot be longer than 1024 characters.
                 </p>
             </div>

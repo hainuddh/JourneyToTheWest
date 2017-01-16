@@ -125,7 +125,9 @@
                         entity: function () {
                             return {
                                 taskName: null,
+                                taskCheckDepartment: null,
                                 taskContent: null,
+                                lawContent: null,
                                 description: null,
                                 id: null
                             };

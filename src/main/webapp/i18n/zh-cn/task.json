@@ -17,7 +17,9 @@
                 "title": "Task"
             },
             "taskName": "Task Name",
+            "taskCheckDepartment": "Task Check Department",
             "taskContent": "Task Content",
+            "lawContent": "Law Content",
             "description": "Description",
             "law": "Law",
             "taskProject": "Task Project"

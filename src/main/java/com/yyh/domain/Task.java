@@ -32,9 +32,18 @@ public class Task implements Serializable {
     private String taskName;
 
     @NotNull
+    @Size(max = 256)
+    @Column(name = "task_check_department", length = 256, nullable = false)
+    private String taskCheckDepartment;
+
+    @NotNull
     @Size(max = 1024)
     @Column(name = "task_content", length = 1024, nullable = false)
     private String taskContent;
+
+    @Size(max = 1024)
+    @Column(name = "law_content", length = 1024)
+    private String lawContent;
 
     @Size(max = 1024)
     @Column(name = "description", length = 1024)
@@ -71,6 +80,19 @@ public class Task implements Serializable {
         this.taskName = taskName;
     }
 
+    public String getTaskCheckDepartment() {
+        return taskCheckDepartment;
+    }
+
+    public Task taskCheckDepartment(String taskCheckDepartment) {
+        this.taskCheckDepartment = taskCheckDepartment;
+        return this;
+    }
+
+    public void setTaskCheckDepartment(String taskCheckDepartment) {
+        this.taskCheckDepartment = taskCheckDepartment;
+    }
+
     public String getTaskContent() {
         return taskContent;
     }
@@ -82,6 +104,19 @@ public class Task implements Serializable {
 
     public void setTaskContent(String taskContent) {
         this.taskContent = taskContent;
+    }
+
+    public String getLawContent() {
+        return lawContent;
+    }
+
+    public Task lawContent(String lawContent) {
+        this.lawContent = lawContent;
+        return this;
+    }
+
+    public void setLawContent(String lawContent) {
+        this.lawContent = lawContent;
     }
 
     public String getDescription() {
@@ -158,7 +193,9 @@ public class Task implements Serializable {
         return "Task{" +
             "id=" + id +
             ", taskName='" + taskName + "'" +
+            ", taskCheckDepartment='" + taskCheckDepartment + "'" +
             ", taskContent='" + taskContent + "'" +
+            ", lawContent='" + lawContent + "'" +
             ", description='" + description + "'" +
             '}';
     }

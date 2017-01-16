@@ -35,5 +35,17 @@ public class YYHManagerResource {
         return ResponseEntity.ok().body("ok");
     }
 
+    /**
+     * GET  /managers/search : Search manager list.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the new manager
+     */
+    @GetMapping("/managers/search")
+    @Timed
+    public List<Manager> searchManager(String lawenforceDepartment) {
+        List<Manager> managerList = YYHManagerService.searchManagers(lawenforceDepartment);
+        return managerList;
+    }
+
 
 }

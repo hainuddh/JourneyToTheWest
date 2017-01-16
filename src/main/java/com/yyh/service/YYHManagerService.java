@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -146,6 +147,22 @@ public class YYHManagerService {
             managerList = managerRepository.save(managers);
             managerSearchRepository.save(managers);
         }
+        return managerList;
+    }
+
+    public List<Manager> searchManagers(String lawenforceDepartment) {
+        Manager manager = new Manager();
+        //[抽选条件]执法人员部门
+        if (lawenforceDepartment != null && !lawenforceDepartment.trim().equals("")) {
+            LawenforceDepartment lawenforceDepartmentM = new LawenforceDepartment();
+            lawenforceDepartmentM.setId(Long.valueOf(lawenforceDepartment));
+            manager.setManagerLawenforceDepartment(lawenforceDepartmentM);
+        }
+        //[抽选条件]执法人员姓名
+        /*manager.setManagerName(doubleRandomVM.getDoubleRandomManagerName());
+        ExampleMatcher matcherM = ExampleMatcher.matching().withMatcher("managerName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING).ignoreCase());*/
+        Example<Manager> managerExample = Example.of(manager);
+        List<Manager> managerList = managerRepository.findAll(managerExample);
         return managerList;
     }
 

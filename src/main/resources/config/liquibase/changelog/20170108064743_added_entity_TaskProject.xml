@@ -28,10 +28,6 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="task_project_check_department" type="varchar(256)">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="description" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>

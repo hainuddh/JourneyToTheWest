@@ -27,10 +27,27 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "taskCheckDepartment",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 256
+        },
+        {
             "fieldName": "taskContent",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1024
+        },
+        {
+            "fieldName": "lawContent",
+            "fieldType": "String",
+            "fieldValidateRules": [
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 1024

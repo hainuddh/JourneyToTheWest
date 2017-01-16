@@ -42,9 +42,6 @@ public class TaskProjectResourceIntTest {
     private static final String DEFAULT_TASK_PROJECT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_TASK_PROJECT_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TASK_PROJECT_CHECK_DEPARTMENT = "AAAAAAAAAA";
-    private static final String UPDATED_TASK_PROJECT_CHECK_DEPARTMENT = "BBBBBBBBBB";
-
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
@@ -89,7 +86,6 @@ public class TaskProjectResourceIntTest {
     public static TaskProject createEntity(EntityManager em) {
         TaskProject taskProject = new TaskProject()
                 .taskProjectName(DEFAULT_TASK_PROJECT_NAME)
-                .taskProjectCheckDepartment(DEFAULT_TASK_PROJECT_CHECK_DEPARTMENT)
                 .description(DEFAULT_DESCRIPTION);
         return taskProject;
     }
@@ -117,7 +113,6 @@ public class TaskProjectResourceIntTest {
         assertThat(taskProjectList).hasSize(databaseSizeBeforeCreate + 1);
         TaskProject testTaskProject = taskProjectList.get(taskProjectList.size() - 1);
         assertThat(testTaskProject.getTaskProjectName()).isEqualTo(DEFAULT_TASK_PROJECT_NAME);
-        assertThat(testTaskProject.getTaskProjectCheckDepartment()).isEqualTo(DEFAULT_TASK_PROJECT_CHECK_DEPARTMENT);
         assertThat(testTaskProject.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the TaskProject in ElasticSearch
@@ -165,24 +160,6 @@ public class TaskProjectResourceIntTest {
 
     @Test
     @Transactional
-    public void checkTaskProjectCheckDepartmentIsRequired() throws Exception {
-        int databaseSizeBeforeTest = taskProjectRepository.findAll().size();
-        // set the field null
-        taskProject.setTaskProjectCheckDepartment(null);
-
-        // Create the TaskProject, which fails.
-
-        restTaskProjectMockMvc.perform(post("/api/task-projects")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(taskProject)))
-            .andExpect(status().isBadRequest());
-
-        List<TaskProject> taskProjectList = taskProjectRepository.findAll();
-        assertThat(taskProjectList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllTaskProjects() throws Exception {
         // Initialize the database
         taskProjectRepository.saveAndFlush(taskProject);
@@ -193,7 +170,6 @@ public class TaskProjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(taskProject.getId().intValue())))
             .andExpect(jsonPath("$.[*].taskProjectName").value(hasItem(DEFAULT_TASK_PROJECT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].taskProjectCheckDepartment").value(hasItem(DEFAULT_TASK_PROJECT_CHECK_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -209,7 +185,6 @@ public class TaskProjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(taskProject.getId().intValue()))
             .andExpect(jsonPath("$.taskProjectName").value(DEFAULT_TASK_PROJECT_NAME.toString()))
-            .andExpect(jsonPath("$.taskProjectCheckDepartment").value(DEFAULT_TASK_PROJECT_CHECK_DEPARTMENT.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -233,7 +208,6 @@ public class TaskProjectResourceIntTest {
         TaskProject updatedTaskProject = taskProjectRepository.findOne(taskProject.getId());
         updatedTaskProject
                 .taskProjectName(UPDATED_TASK_PROJECT_NAME)
-                .taskProjectCheckDepartment(UPDATED_TASK_PROJECT_CHECK_DEPARTMENT)
                 .description(UPDATED_DESCRIPTION);
 
         restTaskProjectMockMvc.perform(put("/api/task-projects")
@@ -246,7 +220,6 @@ public class TaskProjectResourceIntTest {
         assertThat(taskProjectList).hasSize(databaseSizeBeforeUpdate);
         TaskProject testTaskProject = taskProjectList.get(taskProjectList.size() - 1);
         assertThat(testTaskProject.getTaskProjectName()).isEqualTo(UPDATED_TASK_PROJECT_NAME);
-        assertThat(testTaskProject.getTaskProjectCheckDepartment()).isEqualTo(UPDATED_TASK_PROJECT_CHECK_DEPARTMENT);
         assertThat(testTaskProject.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the TaskProject in ElasticSearch
@@ -306,7 +279,6 @@ public class TaskProjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(taskProject.getId().intValue())))
             .andExpect(jsonPath("$.[*].taskProjectName").value(hasItem(DEFAULT_TASK_PROJECT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].taskProjectCheckDepartment").value(hasItem(DEFAULT_TASK_PROJECT_CHECK_DEPARTMENT.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
