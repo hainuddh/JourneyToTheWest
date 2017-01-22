@@ -29,23 +29,12 @@ public class Manager implements Serializable {
 
     @NotNull
     @Size(max = 32)
-    @Column(name = "manager_id", length = 32, nullable = false)
-    private String managerId;
-
-    @NotNull
-    @Size(max = 32)
     @Column(name = "manager_name", length = 32, nullable = false)
     private String managerName;
 
-    @NotNull
     @Size(max = 32)
-    @Column(name = "manager_card_id", length = 32, nullable = false)
-    private String managerCardId;
-
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "manager_card_type", length = 64, nullable = false)
-    private String managerCardType;
+    @Column(name = "manager_hn_card", length = 32)
+    private String managerHNCard;
 
     @NotNull
     @Size(max = 32)
@@ -56,6 +45,10 @@ public class Manager implements Serializable {
     @Size(max = 1)
     @Column(name = "manager_sex", length = 1, nullable = false)
     private String managerSex;
+
+    @Size(max = 20)
+    @Column(name = "manager_phone", length = 20)
+    private String managerPhone;
 
     @Size(max = 1)
     @Column(name = "manager_flag", length = 1)
@@ -89,19 +82,6 @@ public class Manager implements Serializable {
         this.id = id;
     }
 
-    public String getManagerId() {
-        return managerId;
-    }
-
-    public Manager managerId(String managerId) {
-        this.managerId = managerId;
-        return this;
-    }
-
-    public void setManagerId(String managerId) {
-        this.managerId = managerId;
-    }
-
     public String getManagerName() {
         return managerName;
     }
@@ -115,30 +95,17 @@ public class Manager implements Serializable {
         this.managerName = managerName;
     }
 
-    public String getManagerCardId() {
-        return managerCardId;
+    public String getManagerHNCard() {
+        return managerHNCard;
     }
 
-    public Manager managerCardId(String managerCardId) {
-        this.managerCardId = managerCardId;
+    public Manager managerHNCard(String managerHNCard) {
+        this.managerHNCard = managerHNCard;
         return this;
     }
 
-    public void setManagerCardId(String managerCardId) {
-        this.managerCardId = managerCardId;
-    }
-
-    public String getManagerCardType() {
-        return managerCardType;
-    }
-
-    public Manager managerCardType(String managerCardType) {
-        this.managerCardType = managerCardType;
-        return this;
-    }
-
-    public void setManagerCardType(String managerCardType) {
-        this.managerCardType = managerCardType;
+    public void setManagerHNCard(String managerHNCard) {
+        this.managerHNCard = managerHNCard;
     }
 
     public String getManagerICCard() {
@@ -165,6 +132,19 @@ public class Manager implements Serializable {
 
     public void setManagerSex(String managerSex) {
         this.managerSex = managerSex;
+    }
+
+    public String getManagerPhone() {
+        return managerPhone;
+    }
+
+    public Manager managerPhone(String managerPhone) {
+        this.managerPhone = managerPhone;
+        return this;
+    }
+
+    public void setManagerPhone(String managerPhone) {
+        this.managerPhone = managerPhone;
     }
 
     public String getManagerFlag() {
@@ -281,12 +261,11 @@ public class Manager implements Serializable {
     public String toString() {
         return "Manager{" +
             "id=" + id +
-            ", managerId='" + managerId + "'" +
             ", managerName='" + managerName + "'" +
-            ", managerCardId='" + managerCardId + "'" +
-            ", managerCardType='" + managerCardType + "'" +
+            ", managerHNCard='" + managerHNCard + "'" +
             ", managerICCard='" + managerICCard + "'" +
             ", managerSex='" + managerSex + "'" +
+            ", managerPhone='" + managerPhone + "'" +
             ", managerFlag='" + managerFlag + "'" +
             ", checkCount='" + checkCount + "'" +
             ", description='" + description + "'" +

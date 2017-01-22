@@ -142,18 +142,30 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.company.companyPhone" for="field_companyPhone">Company Phone</label>
-            <input type="text" class="form-control" name="companyPhone" id="field_companyPhone"
-                    ng-model="vm.company.companyPhone"
-                    required ng-maxlength="32" />
-            <div ng-show="editForm.companyPhone.$invalid">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyStatus" for="field_companyStatus">Company Status</label>
+            <input type="text" class="form-control" name="companyStatus" id="field_companyStatus"
+                    ng-model="vm.company.companyStatus"
+                    required ng-maxlength="1" />
+            <div ng-show="editForm.companyStatus.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.companyPhone.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.companyStatus.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.companyPhone.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
-                    This field cannot be longer than 32 characters.
+                    ng-show="editForm.companyStatus.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1">
+                    This field cannot be longer than 1 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.company.companyPhone" for="field_companyPhone">Company Phone</label>
+            <input type="text" class="form-control" name="companyPhone" id="field_companyPhone"
+                    ng-model="vm.company.companyPhone"
+                    ng-maxlength="20" />
+            <div ng-show="editForm.companyPhone.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.companyPhone.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="20">
+                    This field cannot be longer than 20 characters.
                 </p>
             </div>
         </div>
@@ -170,22 +182,6 @@
                 <p class="help-block"
                     ng-show="editForm.checkCount.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.company.companyStatus" for="field_companyStatus">Company Status</label>
-            <input type="text" class="form-control" name="companyStatus" id="field_companyStatus"
-                    ng-model="vm.company.companyStatus"
-                    required ng-maxlength="32" />
-            <div ng-show="editForm.companyStatus.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.companyStatus.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.companyStatus.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
-                    This field cannot be longer than 32 characters.
                 </p>
             </div>
         </div>

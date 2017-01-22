@@ -136,7 +136,10 @@ public class YYHCompanyService {
                         company.setBusinessAddress(row.getCell(9).getStringCellValue());
                         company.setCompanyDate(row.getCell(10).getStringCellValue());
                         company.setBusinessScope(row.getCell(11).getStringCellValue());
-                        company.setCompanyPhone(String.valueOf(row.getCell(12).getStringCellValue()));
+                        String companyPhone = String.valueOf(row.getCell(12).getStringCellValue());
+                        if (companyPhone.length() <= 20 && companyPhone.length() >= 1) {
+                            company.setCompanyPhone(String.valueOf(row.getCell(12).getStringCellValue()));
+                        }
                         String industryTypeName = row.getCell(13).getStringCellValue();
                         /**
                          * 存储行业类型

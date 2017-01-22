@@ -36,12 +36,11 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="managerId"><span data-translate="journeyToTheWestApp.manager.managerId">Manager Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="managerName"><span data-translate="journeyToTheWestApp.manager.managerName">Manager Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="managerCardId"><span data-translate="journeyToTheWestApp.manager.managerCardId">Manager Card Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="managerCardType"><span data-translate="journeyToTheWestApp.manager.managerCardType">Manager Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="managerHNCard"><span data-translate="journeyToTheWestApp.manager.managerHNCard">Manager HN Card</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="managerICCard"><span data-translate="journeyToTheWestApp.manager.managerICCard">Manager IC Card</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="managerSex"><span data-translate="journeyToTheWestApp.manager.managerSex">Manager Sex</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="managerPhone"><span data-translate="journeyToTheWestApp.manager.managerPhone">Manager Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="managerFlag"><span data-translate="journeyToTheWestApp.manager.managerFlag">Manager Flag</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="checkCount"><span data-translate="journeyToTheWestApp.manager.checkCount">Check Count</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="journeyToTheWestApp.manager.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -53,12 +52,11 @@
             <tbody>
                 <tr ng-repeat="manager in vm.managers track by manager.id">
                     <td><a ui-sref="manager-detail({id:manager.id})">{{manager.id}}</a></td>
-                    <td>{{manager.managerId}}</td>
                     <td>{{manager.managerName}}</td>
-                    <td>{{manager.managerCardId}}</td>
-                    <td>{{manager.managerCardType}}</td>
+                    <td>{{manager.managerHNCard}}</td>
                     <td>{{manager.managerICCard}}</td>
                     <td>{{manager.managerSex}}</td>
+                    <td>{{manager.managerPhone}}</td>
                     <td>{{manager.managerFlag}}</td>
                     <td>{{manager.checkCount}}</td>
                     <td>{{manager.description}}</td>

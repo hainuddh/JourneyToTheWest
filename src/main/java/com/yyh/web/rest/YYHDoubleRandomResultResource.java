@@ -85,7 +85,7 @@ public class YYHDoubleRandomResultResource {
      */
     @GetMapping("/double-random-results/login/{status}")
     @Timed
-    public List<DoubleRandomResult> getAllDoubleRandomResultsByLogin(@PathVariable String status, @RequestParam String check)
+    public List<DoubleRandomResult> getAllDoubleRandomResultsByLogin(@PathVariable String status, String check, String resultDeal, String sign)
         throws URISyntaxException {
         log.debug("REST request to get a page of DoubleRandomResults");
         Manager manager = new Manager();
@@ -97,7 +97,9 @@ public class YYHDoubleRandomResultResource {
         for (DoubleRandomResult drr : doubleRandomResults) {
             if (status.equals("finished")) {
                 if (drr.getFinishDate() != null) {
-                    result.add(drr);
+                    if (drr.getManagers().contains(managerFind)) {
+                        result.add(drr);
+                    }
                 }
             } else if (status.equals("unfinish")) {
                 if (drr.getFinishDate() == null) {
@@ -108,7 +110,7 @@ public class YYHDoubleRandomResultResource {
                             }
                         }
                     } else if (check.equals("checked")) {
-                        if (drr.getCheckDate() != null) {
+                        if (drr.getCheckDate() != null && drr.getResultDeal().equals(resultDeal)) {
                             if (drr.getManagers().contains(managerFind)) {
                                 result.add(drr);
                             }
@@ -116,6 +118,46 @@ public class YYHDoubleRandomResultResource {
                     }
                 }
             }
+        }
+        if (result.size() > 30) {
+            result = result.subList(0, 30);
+        }
+        /**
+         * TODO
+         * 这里问题太大了，效率极其低。
+         * 最好用状态机
+         */
+        return result;
+    }
+
+    /**
+     * GET  /double-random-results/login/redOrYellow : get redOrYellow the doubleRandomResults.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of doubleRandomResults in body
+     * @throws URISyntaxException if there is an error to generate the HTTP headers
+     */
+    @GetMapping("/double-random-results/login/redOrYellow")
+    @Timed
+    public List<DoubleRandomResult> getSignDoubleRandomResultsByLogin()
+        throws URISyntaxException {
+        log.debug("REST request to get a page of DoubleRandomResults");
+        Manager manager = new Manager();
+        manager.setManagerUser(userService.getUserWithAuthorities());
+        Example<Manager> exManager = Example.of(manager);
+        Manager managerFind = managerRepository.findOne(exManager);
+        List<DoubleRandomResult> doubleRandomResults = doubleRandomResultRepository.findAllWithEagerRelationships();
+        List<DoubleRandomResult> result = new ArrayList<>();
+        for (DoubleRandomResult drr : doubleRandomResults) {
+            if (drr.getCheckDate() == null && drr.getFinishDate() == null) {
+                if (drr.getSign() != null && (drr.getSign().getSignName().equals("红牌") || drr.getSign().getSignName().equals("黄牌"))) {
+                    if (drr.getManagers().contains(managerFind)) {
+                        result.add(drr);
+                    }
+                }
+            }
+        }
+        if (result.size() > 10) {
+            result = result.subList(0, 10);
         }
         /**
          * TODO
@@ -144,8 +186,10 @@ public class YYHDoubleRandomResultResource {
         List<DoubleRandomResult> doubleRandomResults = doubleRandomResultRepository.findAllWithEagerRelationships();
         List<DoubleRandomResult> result = new ArrayList<>();
         for (DoubleRandomResult drr : doubleRandomResults) {
-            if (drr.getManagers().contains(managerFind)) {
-                result.add(drr);
+            if (drr.getCheckDate() == null && drr.getFinishDate() == null) {
+                if (drr.getManagers().contains(managerFind)) {
+                    result.add(drr);
+                }
             }
         }
         List<Sign> signs = signRepository.findAll();

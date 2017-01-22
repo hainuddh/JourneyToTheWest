@@ -63,14 +63,14 @@ public class CompanyResourceIntTest {
     private static final String DEFAULT_COMPANY_DATE = "AAAAAAAAAA";
     private static final String UPDATED_COMPANY_DATE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_COMPANY_STATUS = "A";
+    private static final String UPDATED_COMPANY_STATUS = "B";
+
     private static final String DEFAULT_COMPANY_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_COMPANY_PHONE = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_CHECK_COUNT = 10000;
     private static final Integer UPDATED_CHECK_COUNT = 9999;
-
-    private static final String DEFAULT_COMPANY_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_COMPANY_STATUS = "BBBBBBBBBB";
 
     private static final String DEFAULT_LAST_CHECK_DATE = "AAAAAAAAAA";
     private static final String UPDATED_LAST_CHECK_DATE = "BBBBBBBBBB";
@@ -129,9 +129,9 @@ public class CompanyResourceIntTest {
                 .businessScope(DEFAULT_BUSINESS_SCOPE)
                 .companyOwner(DEFAULT_COMPANY_OWNER)
                 .companyDate(DEFAULT_COMPANY_DATE)
+                .companyStatus(DEFAULT_COMPANY_STATUS)
                 .companyPhone(DEFAULT_COMPANY_PHONE)
                 .checkCount(DEFAULT_CHECK_COUNT)
-                .companyStatus(DEFAULT_COMPANY_STATUS)
                 .lastCheckDate(DEFAULT_LAST_CHECK_DATE)
                 .abnormalInfo(DEFAULT_ABNORMAL_INFO)
                 .description(DEFAULT_DESCRIPTION);
@@ -168,9 +168,9 @@ public class CompanyResourceIntTest {
         assertThat(testCompany.getBusinessScope()).isEqualTo(DEFAULT_BUSINESS_SCOPE);
         assertThat(testCompany.getCompanyOwner()).isEqualTo(DEFAULT_COMPANY_OWNER);
         assertThat(testCompany.getCompanyDate()).isEqualTo(DEFAULT_COMPANY_DATE);
+        assertThat(testCompany.getCompanyStatus()).isEqualTo(DEFAULT_COMPANY_STATUS);
         assertThat(testCompany.getCompanyPhone()).isEqualTo(DEFAULT_COMPANY_PHONE);
         assertThat(testCompany.getCheckCount()).isEqualTo(DEFAULT_CHECK_COUNT);
-        assertThat(testCompany.getCompanyStatus()).isEqualTo(DEFAULT_COMPANY_STATUS);
         assertThat(testCompany.getLastCheckDate()).isEqualTo(DEFAULT_LAST_CHECK_DATE);
         assertThat(testCompany.getAbnormalInfo()).isEqualTo(DEFAULT_ABNORMAL_INFO);
         assertThat(testCompany.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -346,24 +346,6 @@ public class CompanyResourceIntTest {
 
     @Test
     @Transactional
-    public void checkCompanyPhoneIsRequired() throws Exception {
-        int databaseSizeBeforeTest = companyRepository.findAll().size();
-        // set the field null
-        company.setCompanyPhone(null);
-
-        // Create the Company, which fails.
-
-        restCompanyMockMvc.perform(post("/api/companies")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(company)))
-            .andExpect(status().isBadRequest());
-
-        List<Company> companyList = companyRepository.findAll();
-        assertThat(companyList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkCompanyStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = companyRepository.findAll().size();
         // set the field null
@@ -399,9 +381,9 @@ public class CompanyResourceIntTest {
             .andExpect(jsonPath("$.[*].businessScope").value(hasItem(DEFAULT_BUSINESS_SCOPE.toString())))
             .andExpect(jsonPath("$.[*].companyOwner").value(hasItem(DEFAULT_COMPANY_OWNER.toString())))
             .andExpect(jsonPath("$.[*].companyDate").value(hasItem(DEFAULT_COMPANY_DATE.toString())))
+            .andExpect(jsonPath("$.[*].companyStatus").value(hasItem(DEFAULT_COMPANY_STATUS.toString())))
             .andExpect(jsonPath("$.[*].companyPhone").value(hasItem(DEFAULT_COMPANY_PHONE.toString())))
             .andExpect(jsonPath("$.[*].checkCount").value(hasItem(DEFAULT_CHECK_COUNT)))
-            .andExpect(jsonPath("$.[*].companyStatus").value(hasItem(DEFAULT_COMPANY_STATUS.toString())))
             .andExpect(jsonPath("$.[*].lastCheckDate").value(hasItem(DEFAULT_LAST_CHECK_DATE.toString())))
             .andExpect(jsonPath("$.[*].abnormalInfo").value(hasItem(DEFAULT_ABNORMAL_INFO.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
@@ -426,9 +408,9 @@ public class CompanyResourceIntTest {
             .andExpect(jsonPath("$.businessScope").value(DEFAULT_BUSINESS_SCOPE.toString()))
             .andExpect(jsonPath("$.companyOwner").value(DEFAULT_COMPANY_OWNER.toString()))
             .andExpect(jsonPath("$.companyDate").value(DEFAULT_COMPANY_DATE.toString()))
+            .andExpect(jsonPath("$.companyStatus").value(DEFAULT_COMPANY_STATUS.toString()))
             .andExpect(jsonPath("$.companyPhone").value(DEFAULT_COMPANY_PHONE.toString()))
             .andExpect(jsonPath("$.checkCount").value(DEFAULT_CHECK_COUNT))
-            .andExpect(jsonPath("$.companyStatus").value(DEFAULT_COMPANY_STATUS.toString()))
             .andExpect(jsonPath("$.lastCheckDate").value(DEFAULT_LAST_CHECK_DATE.toString()))
             .andExpect(jsonPath("$.abnormalInfo").value(DEFAULT_ABNORMAL_INFO.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
@@ -461,9 +443,9 @@ public class CompanyResourceIntTest {
                 .businessScope(UPDATED_BUSINESS_SCOPE)
                 .companyOwner(UPDATED_COMPANY_OWNER)
                 .companyDate(UPDATED_COMPANY_DATE)
+                .companyStatus(UPDATED_COMPANY_STATUS)
                 .companyPhone(UPDATED_COMPANY_PHONE)
                 .checkCount(UPDATED_CHECK_COUNT)
-                .companyStatus(UPDATED_COMPANY_STATUS)
                 .lastCheckDate(UPDATED_LAST_CHECK_DATE)
                 .abnormalInfo(UPDATED_ABNORMAL_INFO)
                 .description(UPDATED_DESCRIPTION);
@@ -485,9 +467,9 @@ public class CompanyResourceIntTest {
         assertThat(testCompany.getBusinessScope()).isEqualTo(UPDATED_BUSINESS_SCOPE);
         assertThat(testCompany.getCompanyOwner()).isEqualTo(UPDATED_COMPANY_OWNER);
         assertThat(testCompany.getCompanyDate()).isEqualTo(UPDATED_COMPANY_DATE);
+        assertThat(testCompany.getCompanyStatus()).isEqualTo(UPDATED_COMPANY_STATUS);
         assertThat(testCompany.getCompanyPhone()).isEqualTo(UPDATED_COMPANY_PHONE);
         assertThat(testCompany.getCheckCount()).isEqualTo(UPDATED_CHECK_COUNT);
-        assertThat(testCompany.getCompanyStatus()).isEqualTo(UPDATED_COMPANY_STATUS);
         assertThat(testCompany.getLastCheckDate()).isEqualTo(UPDATED_LAST_CHECK_DATE);
         assertThat(testCompany.getAbnormalInfo()).isEqualTo(UPDATED_ABNORMAL_INFO);
         assertThat(testCompany.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
@@ -556,9 +538,9 @@ public class CompanyResourceIntTest {
             .andExpect(jsonPath("$.[*].businessScope").value(hasItem(DEFAULT_BUSINESS_SCOPE.toString())))
             .andExpect(jsonPath("$.[*].companyOwner").value(hasItem(DEFAULT_COMPANY_OWNER.toString())))
             .andExpect(jsonPath("$.[*].companyDate").value(hasItem(DEFAULT_COMPANY_DATE.toString())))
+            .andExpect(jsonPath("$.[*].companyStatus").value(hasItem(DEFAULT_COMPANY_STATUS.toString())))
             .andExpect(jsonPath("$.[*].companyPhone").value(hasItem(DEFAULT_COMPANY_PHONE.toString())))
             .andExpect(jsonPath("$.[*].checkCount").value(hasItem(DEFAULT_CHECK_COUNT)))
-            .andExpect(jsonPath("$.[*].companyStatus").value(hasItem(DEFAULT_COMPANY_STATUS.toString())))
             .andExpect(jsonPath("$.[*].lastCheckDate").value(hasItem(DEFAULT_LAST_CHECK_DATE.toString())))
             .andExpect(jsonPath("$.[*].abnormalInfo").value(hasItem(DEFAULT_ABNORMAL_INFO.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));

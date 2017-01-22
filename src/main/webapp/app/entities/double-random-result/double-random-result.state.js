@@ -131,6 +131,7 @@
                                 result: null,
                                 resultDeal: null,
                                 resultStatus: null,
+                                resultDeadline: null,
                                 checkDate: null,
                                 finishDate: null,
                                 id: null

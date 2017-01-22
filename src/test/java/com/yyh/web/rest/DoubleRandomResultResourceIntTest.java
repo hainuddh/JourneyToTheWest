@@ -60,6 +60,9 @@ public class DoubleRandomResultResourceIntTest {
     private static final String DEFAULT_RESULT_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_RESULT_STATUS = "BBBBBBBBBB";
 
+    private static final String DEFAULT_RESULT_DEADLINE = "AAAAAAAAAA";
+    private static final String UPDATED_RESULT_DEADLINE = "BBBBBBBBBB";
+
     private static final String DEFAULT_CHECK_DATE = "AAAAAAAAAA";
     private static final String UPDATED_CHECK_DATE = "BBBBBBBBBB";
 
@@ -113,6 +116,7 @@ public class DoubleRandomResultResourceIntTest {
                 .result(DEFAULT_RESULT)
                 .resultDeal(DEFAULT_RESULT_DEAL)
                 .resultStatus(DEFAULT_RESULT_STATUS)
+                .resultDeadline(DEFAULT_RESULT_DEADLINE)
                 .checkDate(DEFAULT_CHECK_DATE)
                 .finishDate(DEFAULT_FINISH_DATE);
         return doubleRandomResult;
@@ -147,6 +151,7 @@ public class DoubleRandomResultResourceIntTest {
         assertThat(testDoubleRandomResult.getResult()).isEqualTo(DEFAULT_RESULT);
         assertThat(testDoubleRandomResult.getResultDeal()).isEqualTo(DEFAULT_RESULT_DEAL);
         assertThat(testDoubleRandomResult.getResultStatus()).isEqualTo(DEFAULT_RESULT_STATUS);
+        assertThat(testDoubleRandomResult.getResultDeadline()).isEqualTo(DEFAULT_RESULT_DEADLINE);
         assertThat(testDoubleRandomResult.getCheckDate()).isEqualTo(DEFAULT_CHECK_DATE);
         assertThat(testDoubleRandomResult.getFinishDate()).isEqualTo(DEFAULT_FINISH_DATE);
 
@@ -265,6 +270,7 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.[*].result").value(hasItem(DEFAULT_RESULT.toString())))
             .andExpect(jsonPath("$.[*].resultDeal").value(hasItem(DEFAULT_RESULT_DEAL.toString())))
             .andExpect(jsonPath("$.[*].resultStatus").value(hasItem(DEFAULT_RESULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].resultDeadline").value(hasItem(DEFAULT_RESULT_DEADLINE.toString())))
             .andExpect(jsonPath("$.[*].checkDate").value(hasItem(DEFAULT_CHECK_DATE.toString())))
             .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())));
     }
@@ -287,6 +293,7 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.result").value(DEFAULT_RESULT.toString()))
             .andExpect(jsonPath("$.resultDeal").value(DEFAULT_RESULT_DEAL.toString()))
             .andExpect(jsonPath("$.resultStatus").value(DEFAULT_RESULT_STATUS.toString()))
+            .andExpect(jsonPath("$.resultDeadline").value(DEFAULT_RESULT_DEADLINE.toString()))
             .andExpect(jsonPath("$.checkDate").value(DEFAULT_CHECK_DATE.toString()))
             .andExpect(jsonPath("$.finishDate").value(DEFAULT_FINISH_DATE.toString()));
     }
@@ -317,6 +324,7 @@ public class DoubleRandomResultResourceIntTest {
                 .result(UPDATED_RESULT)
                 .resultDeal(UPDATED_RESULT_DEAL)
                 .resultStatus(UPDATED_RESULT_STATUS)
+                .resultDeadline(UPDATED_RESULT_DEADLINE)
                 .checkDate(UPDATED_CHECK_DATE)
                 .finishDate(UPDATED_FINISH_DATE);
 
@@ -336,6 +344,7 @@ public class DoubleRandomResultResourceIntTest {
         assertThat(testDoubleRandomResult.getResult()).isEqualTo(UPDATED_RESULT);
         assertThat(testDoubleRandomResult.getResultDeal()).isEqualTo(UPDATED_RESULT_DEAL);
         assertThat(testDoubleRandomResult.getResultStatus()).isEqualTo(UPDATED_RESULT_STATUS);
+        assertThat(testDoubleRandomResult.getResultDeadline()).isEqualTo(UPDATED_RESULT_DEADLINE);
         assertThat(testDoubleRandomResult.getCheckDate()).isEqualTo(UPDATED_CHECK_DATE);
         assertThat(testDoubleRandomResult.getFinishDate()).isEqualTo(UPDATED_FINISH_DATE);
 
@@ -402,6 +411,7 @@ public class DoubleRandomResultResourceIntTest {
             .andExpect(jsonPath("$.[*].result").value(hasItem(DEFAULT_RESULT.toString())))
             .andExpect(jsonPath("$.[*].resultDeal").value(hasItem(DEFAULT_RESULT_DEAL.toString())))
             .andExpect(jsonPath("$.[*].resultStatus").value(hasItem(DEFAULT_RESULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].resultDeadline").value(hasItem(DEFAULT_RESULT_DEADLINE.toString())))
             .andExpect(jsonPath("$.[*].checkDate").value(hasItem(DEFAULT_CHECK_DATE.toString())))
             .andExpect(jsonPath("$.[*].finishDate").value(hasItem(DEFAULT_FINISH_DATE.toString())));
     }

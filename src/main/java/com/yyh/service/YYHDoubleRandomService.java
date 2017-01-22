@@ -101,7 +101,8 @@ public class YYHDoubleRandomService {
         for (String taskId : doubleRandomVM.getTasksString().split("\\|")) {
             Task task = taskRepository.getOne(Long.valueOf(taskId));
             taskSet.add(task);
-            taskString = taskString + task.getTaskName();
+            String tr = "【" + task.getTaskName() + "】";
+            taskString = taskString + tr;
         }
         doubleRandom.setDoubleRandomTaskContent(taskString);
         /**TODO

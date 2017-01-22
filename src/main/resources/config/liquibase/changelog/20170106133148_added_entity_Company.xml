@@ -56,16 +56,16 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="company_phone" type="varchar(32)">
+            <column name="company_status" type="varchar(1)">
                 <constraints nullable="false" />
+            </column>
+            
+            <column name="company_phone" type="varchar(20)">
+                <constraints nullable="true" />
             </column>
             
             <column name="check_count" type="integer">
                 <constraints nullable="true" />
-            </column>
-            
-            <column name="company_status" type="varchar(32)">
-                <constraints nullable="false" />
             </column>
             
             <column name="last_check_date" type="varchar(32)">

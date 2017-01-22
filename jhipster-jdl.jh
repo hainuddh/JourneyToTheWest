@@ -1,12 +1,11 @@
 entity Manager {
-    managerId String required maxlength(32),
     managerName String required maxlength(32),
-    managerCardId String required maxlength(32),
-    managerCardType String required maxlength(64),
+    managerHNCard String maxlength(32),
     managerICCard String required maxlength(32),
     managerSex String required maxlength(1),
+    managerPhone String maxlength(20),
     managerFlag String maxlength(1),
-    checkCount Integer max(10000)
+    checkCount Integer max(10000),
     description String maxlength(4069)
 }
 
@@ -19,9 +18,9 @@ entity Company {
     businessScope String required maxlength(4069),
     companyOwner String required maxlength(32),
     companyDate String required maxlength(32),
-    companyPhone String required maxlength(32),
+    companyStatus String required maxlength(1),
+    companyPhone String maxlength(20),
     checkCount Integer max(10000),
-    companyStatus String required maxlength(32),
     lastCheckDate String maxlength(32),
     abnormalInfo String maxlength(4069),
     description String maxlength(4069)
@@ -66,6 +65,7 @@ entity DoubleRandomResult {
     result String maxlength(64),
     resultDeal String maxlength(64),
     resultStatus String maxlength(64),
+    resultDeadline String maxlength(64),
     checkDate String maxlength(64),
     finishDate String maxlength(64)
 }

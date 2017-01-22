@@ -58,7 +58,10 @@ public class YYHDoubleRandomResource {
     @Timed
     public DoubleRandom recentDoubleRandom() throws URISyntaxException {
         List<DoubleRandom> doubleRandomList = doubleRandomRepository.findAll();
-        DoubleRandom result = doubleRandomList.get(doubleRandomList.size() - 1);
+        DoubleRandom result = new DoubleRandom();
+        if (doubleRandomList.size() > 1) {
+            result = doubleRandomList.get(doubleRandomList.size() - 1);
+        }
         return result;
     }
 
