@@ -114,6 +114,18 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.resultDeadline" for="field_resultDeadline">Result Deadline</label>
+            <input type="text" class="form-control" name="resultDeadline" id="field_resultDeadline"
+                    ng-model="vm.doubleRandomResult.resultDeadline"
+                    ng-maxlength="64" />
+            <div ng-show="editForm.resultDeadline.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.resultDeadline.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
+                    This field cannot be longer than 64 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.doubleRandomResult.checkDate" for="field_checkDate">Check Date</label>
             <input type="text" class="form-control" name="checkDate" id="field_checkDate"
                     ng-model="vm.doubleRandomResult.checkDate"

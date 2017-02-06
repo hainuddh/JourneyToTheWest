@@ -106,13 +106,21 @@
             "fieldValidateRulesMaxlength": 32
         },
         {
-            "fieldName": "companyPhone",
+            "fieldName": "companyStatus",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": 32
+            "fieldValidateRulesMaxlength": 1
+        },
+        {
+            "fieldName": "companyPhone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
         },
         {
             "fieldName": "checkCount",
@@ -121,15 +129,6 @@
                 "max"
             ],
             "fieldValidateRulesMax": 10000
-        },
-        {
-            "fieldName": "companyStatus",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required",
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 32
         },
         {
             "fieldName": "lastCheckDate",

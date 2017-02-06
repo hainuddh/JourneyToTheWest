@@ -68,18 +68,17 @@ public class Company implements Serializable {
     private String companyDate;
 
     @NotNull
-    @Size(max = 32)
-    @Column(name = "company_phone", length = 32, nullable = false)
+    @Size(max = 1)
+    @Column(name = "company_status", length = 1, nullable = false)
+    private String companyStatus;
+
+    @Size(max = 20)
+    @Column(name = "company_phone", length = 20)
     private String companyPhone;
 
     @Max(value = 10000)
     @Column(name = "check_count")
     private Integer checkCount;
-
-    @NotNull
-    @Size(max = 32)
-    @Column(name = "company_status", length = 32, nullable = false)
-    private String companyStatus;
 
     @Size(max = 32)
     @Column(name = "last_check_date", length = 32)
@@ -224,6 +223,19 @@ public class Company implements Serializable {
         this.companyDate = companyDate;
     }
 
+    public String getCompanyStatus() {
+        return companyStatus;
+    }
+
+    public Company companyStatus(String companyStatus) {
+        this.companyStatus = companyStatus;
+        return this;
+    }
+
+    public void setCompanyStatus(String companyStatus) {
+        this.companyStatus = companyStatus;
+    }
+
     public String getCompanyPhone() {
         return companyPhone;
     }
@@ -248,19 +260,6 @@ public class Company implements Serializable {
 
     public void setCheckCount(Integer checkCount) {
         this.checkCount = checkCount;
-    }
-
-    public String getCompanyStatus() {
-        return companyStatus;
-    }
-
-    public Company companyStatus(String companyStatus) {
-        this.companyStatus = companyStatus;
-        return this;
-    }
-
-    public void setCompanyStatus(String companyStatus) {
-        this.companyStatus = companyStatus;
     }
 
     public String getLastCheckDate() {
@@ -423,9 +422,9 @@ public class Company implements Serializable {
             ", businessScope='" + businessScope + "'" +
             ", companyOwner='" + companyOwner + "'" +
             ", companyDate='" + companyDate + "'" +
+            ", companyStatus='" + companyStatus + "'" +
             ", companyPhone='" + companyPhone + "'" +
             ", checkCount='" + checkCount + "'" +
-            ", companyStatus='" + companyStatus + "'" +
             ", lastCheckDate='" + lastCheckDate + "'" +
             ", abnormalInfo='" + abnormalInfo + "'" +
             ", description='" + description + "'" +

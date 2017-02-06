@@ -2,7 +2,7 @@ package com.yyh.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.yyh.config.Constants;
-import com.yyh.domain.Company;
+import com.yyh.domain.*;
 import com.yyh.repository.CompanyRepository;
 import com.yyh.service.CompanyService;
 import com.yyh.service.YYHCompanyService;
@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -147,6 +148,36 @@ public class YYHCompanyResource {
         Example<Company> ex = Example.of(company);
         Page<Company> page = companyRepository.findAll(ex, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/abnormal");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /companies/search : get the search companies.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/companies/search")
+    @Timed
+    public ResponseEntity<?> searchCompanies(@ApiParam Pageable pageable, String companyName, Long industryTypeId, Long companyTypeId, Long companySupervisoryId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Companies");
+        Company company = new Company();
+        company.setCompanyName(companyName);
+        IndustryType industryType = new IndustryType();
+        industryType.setId(industryTypeId);
+        company.setIndustryType(industryType);
+        CompanyType companyType = new CompanyType();
+        companyType.setId(companyTypeId);
+        company.setCompanyType(companyType);
+        LawenforceDepartment lawenforceDepartment = new LawenforceDepartment();
+        lawenforceDepartment.setId(companySupervisoryId);
+        company.setCompanySupervisory(lawenforceDepartment);
+        ExampleMatcher matcherC = ExampleMatcher.matching().withMatcher("companyName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING).ignoreCase());
+        Example<Company> companyExample = Example.of(company, matcherC);
+        Page<Company> page = companyRepository.findAll(companyExample, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/search");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

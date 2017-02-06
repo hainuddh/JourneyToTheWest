@@ -124,12 +124,11 @@
                     resolve: {
                         entity: function () {
                             return {
-                                managerId: null,
                                 managerName: null,
-                                managerCardId: null,
-                                managerCardType: null,
+                                managerHNCard: null,
                                 managerICCard: null,
                                 managerSex: null,
+                                managerPhone: null,
                                 managerFlag: null,
                                 checkCount: null,
                                 description: null,

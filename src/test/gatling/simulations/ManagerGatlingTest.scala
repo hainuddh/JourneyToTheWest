@@ -68,7 +68,7 @@ class ManagerGatlingTest extends Simulation {
             .exec(http("Create new manager")
             .post("/api/managers")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "managerId":"SAMPLE_TEXT", "managerName":"SAMPLE_TEXT", "managerCardId":"SAMPLE_TEXT", "managerCardType":"SAMPLE_TEXT", "managerICCard":"SAMPLE_TEXT", "managerSex":"SAMPLE_TEXT", "managerFlag":"SAMPLE_TEXT", "checkCount":"0", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "managerName":"SAMPLE_TEXT", "managerHNCard":"SAMPLE_TEXT", "managerICCard":"SAMPLE_TEXT", "managerSex":"SAMPLE_TEXT", "managerPhone":"SAMPLE_TEXT", "managerFlag":"SAMPLE_TEXT", "checkCount":"0", "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_manager_url"))).exitHereIfFailed
             .pause(10)

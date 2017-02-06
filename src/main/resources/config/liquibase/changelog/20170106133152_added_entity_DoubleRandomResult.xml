@@ -52,6 +52,10 @@
                 <constraints nullable="true" />
             </column>
             
+            <column name="result_deadline" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+            
             <column name="check_date" type="varchar(64)">
                 <constraints nullable="true" />
             </column>

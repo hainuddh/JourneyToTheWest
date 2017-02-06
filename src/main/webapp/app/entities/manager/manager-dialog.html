@@ -14,22 +14,6 @@
                     ng-model="vm.manager.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.manager.managerId" for="field_managerId">Manager Id</label>
-            <input type="text" class="form-control" name="managerId" id="field_managerId"
-                    ng-model="vm.manager.managerId"
-                    required ng-maxlength="32" />
-            <div ng-show="editForm.managerId.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.managerId.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.managerId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
-                    This field cannot be longer than 32 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label" data-translate="journeyToTheWestApp.manager.managerName" for="field_managerName">Manager Name</label>
             <input type="text" class="form-control" name="managerName" id="field_managerName"
                     ng-model="vm.manager.managerName"
@@ -46,34 +30,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.manager.managerCardId" for="field_managerCardId">Manager Card Id</label>
-            <input type="text" class="form-control" name="managerCardId" id="field_managerCardId"
-                    ng-model="vm.manager.managerCardId"
-                    required ng-maxlength="32" />
-            <div ng-show="editForm.managerCardId.$invalid">
+            <label class="control-label" data-translate="journeyToTheWestApp.manager.managerHNCard" for="field_managerHNCard">Manager HN Card</label>
+            <input type="text" class="form-control" name="managerHNCard" id="field_managerHNCard"
+                    ng-model="vm.manager.managerHNCard"
+                    ng-maxlength="32" />
+            <div ng-show="editForm.managerHNCard.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.managerCardId.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.managerCardId.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
+                    ng-show="editForm.managerHNCard.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="32">
                     This field cannot be longer than 32 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="journeyToTheWestApp.manager.managerCardType" for="field_managerCardType">Manager Card Type</label>
-            <input type="text" class="form-control" name="managerCardType" id="field_managerCardType"
-                    ng-model="vm.manager.managerCardType"
-                    required ng-maxlength="64" />
-            <div ng-show="editForm.managerCardType.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.managerCardType.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.managerCardType.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="64">
-                    This field cannot be longer than 64 characters.
                 </p>
             </div>
         </div>
@@ -106,6 +70,18 @@
                 <p class="help-block"
                     ng-show="editForm.managerSex.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="1">
                     This field cannot be longer than 1 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="journeyToTheWestApp.manager.managerPhone" for="field_managerPhone">Manager Phone</label>
+            <input type="text" class="form-control" name="managerPhone" id="field_managerPhone"
+                    ng-model="vm.manager.managerPhone"
+                    ng-maxlength="20" />
+            <div ng-show="editForm.managerPhone.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.managerPhone.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="20">
+                    This field cannot be longer than 20 characters.
                 </p>
             </div>
         </div>

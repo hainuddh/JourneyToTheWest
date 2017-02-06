@@ -116,7 +116,6 @@ public class YYHManagerService {
                         manager.setManagerUser(user);
                         userMap.put(login, user);
                         manager.setManagerICCard(login);
-                        manager.setManagerId(String.valueOf((int) row.getCell(0).getNumericCellValue()));
                         manager.setManagerName(row.getCell(1).getStringCellValue());
                         String departmentName = row.getCell(2).getStringCellValue();
                         /**
@@ -132,8 +131,7 @@ public class YYHManagerService {
                             lawenforceDepartmentMap.put(result.getDepartmentName(), result);
                             manager.setManagerLawenforceDepartment(result);
                         }
-                        manager.setManagerCardType(row.getCell(5).getStringCellValue());
-                        manager.setManagerCardId(row.getCell(6).getStringCellValue());
+                        manager.setManagerHNCard(row.getCell(6).getStringCellValue());
                         manager.setManagerSex("/");
                         managers.add(manager);
                     }

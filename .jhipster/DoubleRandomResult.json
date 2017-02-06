@@ -98,6 +98,14 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "resultDeadline",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
             "fieldName": "checkDate",
             "fieldType": "String",
             "fieldValidateRules": [

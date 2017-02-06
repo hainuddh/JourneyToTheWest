@@ -16,12 +16,11 @@
             "detail": {
                 "title": "Manager"
             },
-            "managerId": "Manager Id",
             "managerName": "Manager Name",
-            "managerCardId": "Manager Card Id",
-            "managerCardType": "Manager Card Type",
+            "managerHNCard": "Manager HN Card",
             "managerICCard": "Manager IC Card",
             "managerSex": "Manager Sex",
+            "managerPhone": "Manager Phone",
             "managerFlag": "Manager Flag",
             "checkCount": "Check Count",
             "description": "Description",

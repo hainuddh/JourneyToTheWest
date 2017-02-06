@@ -59,6 +59,10 @@ public class DoubleRandomResult implements Serializable {
     private String resultStatus;
 
     @Size(max = 64)
+    @Column(name = "result_deadline", length = 64)
+    private String resultDeadline;
+
+    @Size(max = 64)
     @Column(name = "check_date", length = 64)
     private String checkDate;
 
@@ -183,6 +187,19 @@ public class DoubleRandomResult implements Serializable {
 
     public void setResultStatus(String resultStatus) {
         this.resultStatus = resultStatus;
+    }
+
+    public String getResultDeadline() {
+        return resultDeadline;
+    }
+
+    public DoubleRandomResult resultDeadline(String resultDeadline) {
+        this.resultDeadline = resultDeadline;
+        return this;
+    }
+
+    public void setResultDeadline(String resultDeadline) {
+        this.resultDeadline = resultDeadline;
     }
 
     public String getCheckDate() {
@@ -319,6 +336,7 @@ public class DoubleRandomResult implements Serializable {
             ", result='" + result + "'" +
             ", resultDeal='" + resultDeal + "'" +
             ", resultStatus='" + resultStatus + "'" +
+            ", resultDeadline='" + resultDeadline + "'" +
             ", checkDate='" + checkDate + "'" +
             ", finishDate='" + finishDate + "'" +
             '}';
